@@ -60,7 +60,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! ImageViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ImageViewCell
         //let cell = tableView.dequeueReusableCell(withIdentifier:"cell", for: indexPath)
         cell.textLabel?.text = models[indexPath.row].title
         
