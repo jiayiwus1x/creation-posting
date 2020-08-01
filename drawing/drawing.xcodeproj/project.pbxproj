@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		629AD2DE387F66D0F650FD3E /* Pods_drawing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A8BB05181198D6D2B1D587B /* Pods_drawing.framework */; };
+		AD553A1824D4710A001D04C4 /* SMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD553A1724D4710A001D04C4 /* SMViewController.swift */; };
+		AD553A1B24D4848F001D04C4 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD553A1924D4848F001D04C4 /* PostTableViewCell.swift */; };
+		AD553A1C24D4848F001D04C4 /* PostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD553A1A24D4848F001D04C4 /* PostTableViewCell.xib */; };
 		ADA6DC3624C6115D003E4FD8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA6DC3524C6115D003E4FD8 /* AppDelegate.swift */; };
 		ADA6DC3824C6115D003E4FD8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA6DC3724C6115D003E4FD8 /* SceneDelegate.swift */; };
 		ADA6DC3A24C6115D003E4FD8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA6DC3924C6115D003E4FD8 /* ViewController.swift */; };
@@ -25,6 +28,9 @@
 /* Begin PBXFileReference section */
 		2A8BB05181198D6D2B1D587B /* Pods_drawing.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_drawing.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		828CA72D41DD24798F2FFBB6 /* Pods-drawing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-drawing.release.xcconfig"; path = "Target Support Files/Pods-drawing/Pods-drawing.release.xcconfig"; sourceTree = "<group>"; };
+		AD553A1724D4710A001D04C4 /* SMViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMViewController.swift; sourceTree = "<group>"; };
+		AD553A1924D4848F001D04C4 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
+		AD553A1A24D4848F001D04C4 /* PostTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostTableViewCell.xib; sourceTree = "<group>"; };
 		ADA6DC3224C6115D003E4FD8 /* drawing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = drawing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADA6DC3524C6115D003E4FD8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ADA6DC3724C6115D003E4FD8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -78,6 +84,7 @@
 				ADA6DC3524C6115D003E4FD8 /* AppDelegate.swift */,
 				ADA6DC3724C6115D003E4FD8 /* SceneDelegate.swift */,
 				ADA6DC3924C6115D003E4FD8 /* ViewController.swift */,
+				AD553A1724D4710A001D04C4 /* SMViewController.swift */,
 				ADA6DC4C24C61909003E4FD8 /* CanvasView.swift */,
 				ADA6DC3B24C6115D003E4FD8 /* Main.storyboard */,
 				ADA6DC4124C6115E003E4FD8 /* Assets.xcassets */,
@@ -88,6 +95,8 @@
 				ADA6DC5024C64726003E4FD8 /* NewViewController.swift */,
 				ADA6DC5224C647B6003E4FD8 /* ListViewController.swift */,
 				ADA6DC5624C8C6AB003E4FD8 /* ImageViewCell.swift */,
+				AD553A1924D4848F001D04C4 /* PostTableViewCell.swift */,
+				AD553A1A24D4848F001D04C4 /* PostTableViewCell.xib */,
 			);
 			path = drawing;
 			sourceTree = "<group>";
@@ -172,6 +181,7 @@
 				ADA6DC4524C6115E003E4FD8 /* LaunchScreen.storyboard in Resources */,
 				ADA6DC4224C6115E003E4FD8 /* Assets.xcassets in Resources */,
 				ADA6DC3D24C6115D003E4FD8 /* Main.storyboard in Resources */,
+				AD553A1C24D4848F001D04C4 /* PostTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,8 +234,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD553A1B24D4848F001D04C4 /* PostTableViewCell.swift in Sources */,
 				ADA6DC4024C6115D003E4FD8 /* drawing.xcdatamodeld in Sources */,
 				ADA6DC5724C8C6AB003E4FD8 /* ImageViewCell.swift in Sources */,
+				AD553A1824D4710A001D04C4 /* SMViewController.swift in Sources */,
 				ADA6DC3A24C6115D003E4FD8 /* ViewController.swift in Sources */,
 				ADA6DC5124C64726003E4FD8 /* NewViewController.swift in Sources */,
 				ADA6DC4D24C61909003E4FD8 /* CanvasView.swift in Sources */,

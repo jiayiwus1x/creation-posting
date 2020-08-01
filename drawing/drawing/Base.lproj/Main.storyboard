@@ -42,6 +42,11 @@
                         <viewLayoutGuide key="safeArea" id="zex-EO-Kzi"/>
                     </view>
                     <navigationItem key="navigationItem" title="Projects" id="dVn-MY-c4Q">
+                        <barButtonItem key="leftBarButtonItem" image="person.3.fill" catalog="system" id="VQk-H8-g78">
+                            <connections>
+                                <segue destination="Tak-YY-aeu" kind="show" id="pvz-Pd-kPQ"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="yVg-i3-O5t">
                             <connections>
                                 <action selector="didTapAddButton" destination="vR8-8q-zOh" id="BwH-po-mca"/>
@@ -270,6 +275,38 @@
             </objects>
             <point key="canvasLocation" x="2455.072463768116" y="134.59821428571428"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="gjH-w5-Bhp">
+            <objects>
+                <viewController id="Tak-YY-aeu" customClass="SMViewController" customModule="drawing" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="875-Ft-Pnh">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hW1-Z9-orf">
+                                <rect key="frame" x="0.0" y="140" width="414" height="722"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="amZ-eT-9Jl" firstAttribute="bottom" secondItem="hW1-Z9-orf" secondAttribute="bottom" id="629-Xr-12V"/>
+                            <constraint firstItem="hW1-Z9-orf" firstAttribute="top" secondItem="amZ-eT-9Jl" secondAttribute="top" id="CrQ-xQ-oqt"/>
+                            <constraint firstItem="hW1-Z9-orf" firstAttribute="top" secondItem="amZ-eT-9Jl" secondAttribute="top" id="GBb-1a-o4S"/>
+                            <constraint firstItem="hW1-Z9-orf" firstAttribute="leading" secondItem="amZ-eT-9Jl" secondAttribute="leading" id="Yxj-ne-1MI"/>
+                            <constraint firstItem="amZ-eT-9Jl" firstAttribute="trailing" secondItem="hW1-Z9-orf" secondAttribute="trailing" id="pKC-dk-6Dk"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="amZ-eT-9Jl"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="UoU-1l-HuM"/>
+                    <connections>
+                        <outlet property="table" destination="hW1-Z9-orf" id="dpJ-1X-fLG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gug-Op-EuC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="765" y="135"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="iyo-RD-Wj1">
             <objects>
@@ -286,7 +323,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5yr-5s-s2v" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="891" y="135"/>
+            <point key="canvasLocation" x="1638" y="820"/>
         </scene>
         <!--New View Controller-->
         <scene sceneID="a9L-qI-43W">
@@ -508,6 +545,7 @@
         <image name="arrow.counterclockwise" catalog="system" width="115" height="128"/>
         <image name="arrowshape.turn.up.left" catalog="system" width="128" height="106"/>
         <image name="circle.lefthalf.fill" catalog="system" width="128" height="121"/>
+        <image name="person.3.fill" catalog="system" width="128" height="61"/>
         <image name="scribble" catalog="system" width="128" height="109"/>
         <image name="square.and.arrow.down" catalog="system" width="121" height="128"/>
         <image name="up-arrow" width="32" height="32"/>
