@@ -1,2 +1,2 @@
 # creation-posting
-create an creating app with a commity
+create an drawing and texting app with a commity
