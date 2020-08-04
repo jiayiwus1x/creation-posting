@@ -9,10 +9,14 @@
 import UIKit
 import RealmSwift
 
+
 class NewViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource{
     
     // saving
-    private let realm = try! Realm()
+    //private let realm = try! Realm()
+    lazy var realm:Realm = {
+        return try! Realm()
+    }()
     public var completionHandler: (() -> Void)?
     
     // drawing
@@ -64,8 +68,22 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
             let newItem = SavedItem()
             newItem.title = "New Project"
             newItem.project = project
-            print(newItem)
             realm.add(newItem)
+            //let linewidth = List<Float>()
+            //let lineop = List<Float>()
+            
+            for line in canvasView.lines {
+                newItem.linecolor.append(line.color!.codedString!)
+                newItem.linewidth.append(Float(line.width!))
+                newItem.lineop.append(Float(line.opacity!))
+                for (i, position) in (line.points?.enumerated())! {
+                    newItem.pos.append(NSCoder.string(for: position))
+                    print(i)
+                }
+                newItem.ind.append(line.points!.count)
+            }
+            
+            print(newItem)
             try! realm.commitWrite()
 
             completionHandler?()
@@ -127,3 +145,28 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
 
 }
 
+public extension UIColor{
+
+    var codedString: String?{
+        do{
+            let data = try NSKeyedArchiver.archivedData(withRootObject: self, requiringSecureCoding: true)
+
+            return data.base64EncodedString()
+
+        }
+        catch let error{
+            print("Error converting color to coded string: \(error)")
+            return nil
+        }
+    }
+
+
+    static func color(withCodedString string: String) -> UIColor?{
+        guard let data = Data(base64Encoded: string) else{
+            return nil
+        }
+
+        return try? NSKeyedUnarchiver.unarchivedObject(ofClass: UIColor.self, from: data)
+
+    }
+}

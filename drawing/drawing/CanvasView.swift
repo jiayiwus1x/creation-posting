@@ -69,6 +69,7 @@ class CanvasView: UIView {
         setNeedsDisplay()
     }
     
+
     func clearCanvasView() {
         lines.removeAll()
         setNeedsDisplay()

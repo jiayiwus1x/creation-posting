@@ -15,8 +15,11 @@ class NoteViewController: UIViewController, UICollectionViewDelegate, UICollecti
     public var deletionHandler: (() -> Void)?
 
     @IBOutlet var project: UIImage!
-
-    private let realm = try! Realm()
+    lazy var realm:Realm = {
+        return try! Realm()
+    }()
+    //private let realm = try! Realm()
+    
 
     static let dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
@@ -37,14 +40,41 @@ class NoteViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         collectionView.delegate = self
         collectionView.dataSource = self
         if let imageData = item?.project, !imageData.isEmpty{
         project = UIImage(data: imageData)
-        let imageView = UIImageView(image: project!)
-        let screenSize: CGRect = UIScreen.main.bounds
-        imageView.frame = CGRect(x: 0, y: 0, width: screenSize.width, height: screenSize.height - 59)
-            self.view.addSubview(imageView)}
+
+//        let imageView = UIImageView(image: project!)
+//
+//        let screenSize: CGRect = UIScreen.main.bounds
+        var lines = [TouchPointsAndColor]()
+        print("number of pos", item?.pos.count ?? 0)
+        print("number of linecolor", item?.linecolor.count ?? 0)
+        var firstind = Int(0)
+        var secondind = Int(0)
+        for (i, _) in (item?.linewidth.enumerated())! {
+            var points = Array<CGPoint>()
+            if i > 0{
+                firstind += item?.ind[i-1] ?? 0
+            }
+            secondind = firstind + (item?.ind[i])!
+            print(firstind, secondind )
+            for j in Range(uncheckedBounds: (firstind , secondind)){
+                points.append(NSCoder.cgPoint(for: (item?.pos[j])!))
+            }
+            
+            var line = TouchPointsAndColor(color: UIColor.color(withCodedString: (item?.linecolor[i])!)!, points: points)
+                
+            line.width = CGFloat((item?.linewidth[i])!)
+            line.opacity = CGFloat((item?.lineop[i])!)
+            lines.append(line)
+        }
+        canvasView.lines = lines
+            
+        }
 
         
         opacitySlider.tintColor = .red

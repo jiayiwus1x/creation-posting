@@ -12,15 +12,31 @@ import RealmSwift
 class SavedItem: Object {
     @objc dynamic var title: String = ""
     @objc dynamic var project: Data = Data()
-    
-}
+    let linecolor = List<String>()
+    let linewidth = List<Float>()
+    let lineop = List<Float>()
+    let pos = List<String>()
+    let ind = List<Int>()
 
+    //@objc dynamic var lines: Data = Data()
+    //@objc dynamic var lines: AnyClass = [TouchPointsAndColor]()
+}
+//class SavedLines: Object{
+//    let linecolor = List<String>()
+//    let linewidth = List<Float>()
+//    let lineop = List<Float>()
+//    let pos = List<String>()
+//}
 class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     @IBOutlet var table: UITableView!
     @IBOutlet var label: UILabel!
     // saving
     private var models = [SavedItem]()
-    private let realm = try! Realm()
+    //private var drawings = [CanvasView]()
+    lazy var realm:Realm = {
+        return try! Realm()
+    }()
+    // private let realm = try! Realm()
     
     
     override func viewDidLoad() {
@@ -30,6 +46,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         table.delegate = self
         table.dataSource = self
         models = realm.objects(SavedItem.self).map({ $0 })
+        
         title = "Projects"
         // Do any additional setup after loading the view.
     }
@@ -48,14 +65,14 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func refresh() {
         models = realm.objects(SavedItem.self).map({ $0 })
-        print("did refreshed,\n", models)
+        print("did refreshed,\n", SavedItem.self)
         table.reloadData()
     }
     
     // tables
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(models.count)
+        
         return models.count
     }
     
@@ -74,7 +91,6 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.deselectRow(at: indexPath, animated: true)
         
         let model = models[indexPath.row]
-        print("tableView3 \n", model)
         // Show note controller
         guard let vc = storyboard?.instantiateViewController(identifier: "note") as? NoteViewController else {
             return
