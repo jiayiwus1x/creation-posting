@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class SMViewController: UIViewController,UITableViewDataSource, UITableViewDelegate {
     private var collectionView: UICollectionView?
     @IBOutlet var table: UITableView!
