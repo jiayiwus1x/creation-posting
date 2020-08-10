@@ -78,6 +78,14 @@
                                         <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" backgroundImage="square.and.arrow.up" catalog="system"/>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fL7-mf-RfI">
+                                        <rect key="frame" x="128" y="10" width="28" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="28" id="3Cy-Cv-2eo"/>
+                                        </constraints>
+                                        <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" image="hand.draw" catalog="system"/>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="9nK-gx-d9l"/>
@@ -88,6 +96,8 @@
                                     <constraint firstItem="kZ7-y9-Okt" firstAttribute="top" secondItem="IUG-GU-r2C" secondAttribute="top" constant="10" id="MXm-HQ-6iZ"/>
                                     <constraint firstItem="m0U-il-q0h" firstAttribute="top" secondItem="IUG-GU-r2C" secondAttribute="top" constant="10" id="WpS-56-YuO"/>
                                     <constraint firstAttribute="bottom" secondItem="m0U-il-q0h" secondAttribute="bottom" constant="8" id="es7-IY-MWl"/>
+                                    <constraint firstItem="fL7-mf-RfI" firstAttribute="leading" secondItem="1Bc-HL-CJ1" secondAttribute="trailing" constant="18" id="fOF-qd-db7"/>
+                                    <constraint firstItem="fL7-mf-RfI" firstAttribute="top" secondItem="IUG-GU-r2C" secondAttribute="top" constant="10" id="hyT-xG-C4Z"/>
                                     <constraint firstItem="m0U-il-q0h" firstAttribute="leading" secondItem="IUG-GU-r2C" secondAttribute="leading" constant="5" id="uUE-n1-B6D"/>
                                     <constraint firstAttribute="bottom" secondItem="kZ7-y9-Okt" secondAttribute="bottom" constant="5" id="wg6-RP-mIu"/>
                                 </constraints>
@@ -139,6 +149,7 @@
     </objects>
     <resources>
         <image name="ellipses.bubble" catalog="system" width="128" height="110"/>
+        <image name="hand.draw" catalog="system" width="128" height="108"/>
         <image name="head_1" width="276" height="183"/>
         <image name="heart" catalog="system" width="128" height="109"/>
         <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>

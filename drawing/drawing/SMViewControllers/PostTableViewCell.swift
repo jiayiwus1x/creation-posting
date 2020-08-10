@@ -14,6 +14,7 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet var postImageView: UIImageView!
     @IBOutlet var usernameLabel: UILabel!
     @IBOutlet var likesLabel: UILabel!
+    @IBOutlet var collButton: UIButton!
     
     static let identifier = "PostTableViewCell"
     static func nib() -> UINib {
