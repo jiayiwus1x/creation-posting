@@ -31,7 +31,7 @@ class PostTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     func configure(with model: CreationPost){
-        self.likesLabel.text = "\(model.numberOfLikes) Likes"
+        self.likesLabel.text = "\(model.numberOfRecreate) ReCreate"
         self.usernameLabel.text = model.username
         self.userImageView.image =  UIImage(named: model.userImageName)
         self.postImageView.image =  UIImage(named: model.postImageName)

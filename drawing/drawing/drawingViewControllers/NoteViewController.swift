@@ -47,7 +47,6 @@ class NoteViewController: UIViewController, UICollectionViewDelegate, UICollecti
         if let imageData = item?.project, !imageData.isEmpty{
         project = UIImage(data: imageData)
 
-
         var lines = [TouchPointsAndColor]()
 
         var firstind = Int(0)

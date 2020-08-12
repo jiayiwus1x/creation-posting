@@ -103,7 +103,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12 likes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lHh-WY-5kp">
-                                <rect key="frame" x="10" y="44" width="569" height="12"/>
+                                <rect key="frame" x="90" y="44" width="489" height="12"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -116,7 +116,7 @@
                             <constraint firstItem="IUG-GU-r2C" firstAttribute="leading" secondItem="qNt-qV-RnK" secondAttribute="leadingMargin" id="K9S-MX-776"/>
                             <constraint firstAttribute="trailing" secondItem="IUG-GU-r2C" secondAttribute="trailing" constant="154" id="QXf-7a-gZo"/>
                             <constraint firstItem="lHh-WY-5kp" firstAttribute="top" secondItem="IUG-GU-r2C" secondAttribute="bottom" constant="-4" id="YLL-fd-Mic"/>
-                            <constraint firstItem="lHh-WY-5kp" firstAttribute="leading" secondItem="qNt-qV-RnK" secondAttribute="leading" constant="10" id="hAZ-Wz-x9F"/>
+                            <constraint firstItem="lHh-WY-5kp" firstAttribute="leading" secondItem="qNt-qV-RnK" secondAttribute="leading" constant="90" id="hAZ-Wz-x9F"/>
                         </constraints>
                     </view>
                 </subviews>

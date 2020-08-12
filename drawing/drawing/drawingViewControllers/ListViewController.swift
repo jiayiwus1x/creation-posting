@@ -25,6 +25,9 @@ class SavedItem: Object {
 class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     @IBOutlet var table: UITableView!
     @IBOutlet var label: UILabel!
+    @IBOutlet var AddButton: UIBarButtonItem!
+    
+    @IBOutlet var PostButton: UIBarButtonItem!
     // saving
     private var models = [SavedItem]()
     //private var drawings = [CanvasView]()
@@ -35,6 +38,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavigationController()
         table.register(ImageViewCell.self, forCellReuseIdentifier: "cell")
         
         table.delegate = self
@@ -44,7 +48,18 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         title = "Projects"
         // Do any additional setup after loading the view.
     }
-    
+   private func setupNavigationController(){
+        
+//        let titleImageView = UIImageView(image: UIImage(named: "yuch"))
+//
+//        titleImageView.frame = CGRect(x: 20, y: 20, width: 0, height: 5)
+//        titleImageView.contentMode = .scaleAspectFit
+//        titleImageView.layer.cornerRadius = 12
+//        titleImageView.clipsToBounds = true
+//        navigationItem.titleView = titleImageView
+    navigationItem.rightBarButtonItems = [AddButton, PostButton]
+    }
+
     @IBAction func didTapAddButton() {
         guard let vc = storyboard?.instantiateViewController(identifier: "enter") as? NewViewController else {
             return
@@ -56,6 +71,20 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         vc.navigationItem.largeTitleDisplayMode = .never
         navigationController?.pushViewController(vc, animated: true)
     }
+    
+    @IBAction func didTapPostButton() {
+           print("in the didTapPost func")
+           guard let vc = storyboard?.instantiateViewController(identifier: "share") as? NewViewController else {
+               return
+           }
+           vc.completionHandler = { [weak self] in
+               self?.refresh()
+           }
+           vc.title = "Sharing"
+           vc.navigationItem.largeTitleDisplayMode = .never
+           navigationController?.pushViewController(vc, animated: true)
+       }
+      
    
     func refresh() {
         models = realm.objects(SavedItem.self).map({ $0 })

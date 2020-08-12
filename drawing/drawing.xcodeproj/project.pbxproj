@@ -14,6 +14,7 @@
 		AD318B8F24DF0C790041472F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD318B8D24DF0C790041472F /* Constants.swift */; };
 		AD318B9024DF0C790041472F /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD318B8E24DF0C790041472F /* Utilities.swift */; };
 		AD318B9424E1B5020041472F /* extensionfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD318B9324E1B5020041472F /* extensionfile.swift */; };
+		AD318B9624E316B20041472F /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD318B9524E316B20041472F /* ShareViewController.swift */; };
 		AD553A1824D4710A001D04C4 /* SMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD553A1724D4710A001D04C4 /* SMViewController.swift */; };
 		AD553A1B24D4848F001D04C4 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD553A1924D4848F001D04C4 /* PostTableViewCell.swift */; };
 		AD553A1C24D4848F001D04C4 /* PostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD553A1A24D4848F001D04C4 /* PostTableViewCell.xib */; };
@@ -40,6 +41,7 @@
 		AD318B8D24DF0C790041472F /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		AD318B8E24DF0C790041472F /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		AD318B9324E1B5020041472F /* extensionfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensionfile.swift; sourceTree = "<group>"; };
+		AD318B9524E316B20041472F /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
 		AD553A1724D4710A001D04C4 /* SMViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMViewController.swift; sourceTree = "<group>"; };
 		AD553A1924D4848F001D04C4 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		AD553A1A24D4848F001D04C4 /* PostTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostTableViewCell.xib; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				AD553A1724D4710A001D04C4 /* SMViewController.swift */,
 				AD553A1924D4848F001D04C4 /* PostTableViewCell.swift */,
 				AD553A1A24D4848F001D04C4 /* PostTableViewCell.xib */,
+				AD318B9524E316B20041472F /* ShareViewController.swift */,
 			);
 			path = SMViewControllers;
 			sourceTree = "<group>";
@@ -301,6 +304,7 @@
 				ADA6DC4F24C64715003E4FD8 /* NoteViewController.swift in Sources */,
 				ADA6DC5324C647B6003E4FD8 /* ListViewController.swift in Sources */,
 				ADA6DC3824C6115D003E4FD8 /* SceneDelegate.swift in Sources */,
+				AD318B9624E316B20041472F /* ShareViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

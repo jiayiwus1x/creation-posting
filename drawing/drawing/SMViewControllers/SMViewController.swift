@@ -22,9 +22,11 @@ class SMViewController: UIViewController,UITableViewDataSource, UITableViewDeleg
         table.delegate = self
         table.dataSource = self
         //fake data need be replaced
-        models.append(CreationPost(numberOfLikes: 200, username: "Yuchen", userImageName:"yuch", postImageName: "post_1"))
+        models.append(CreationPost(numberOfRecreate: 100, username: "Yuchen", userImageName:"yuch", postImageName: "post_1"))
         
-        models.append(CreationPost(numberOfLikes: 50, username: "Jiayi", userImageName:"head_2", postImageName: "post_2"))
+        models.append(CreationPost(numberOfRecreate: 120, username: "Vishal", userImageName:"head_1", postImageName: "post_3"))
+        
+        models.append(CreationPost(numberOfRecreate: 50, username: "Jiayi", userImageName:"head_2", postImageName: "post_2"))
  
     }
     
@@ -51,7 +53,7 @@ class SMViewController: UIViewController,UITableViewDataSource, UITableViewDeleg
 }
 
 struct CreationPost {
-    let numberOfLikes: Int
+    let numberOfRecreate: Int
     let username: String
     let userImageName: String
     let postImageName: String
