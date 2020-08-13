@@ -16,3 +16,51 @@ bin-release/
 # Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
 # should NOT be excluded as they contain compiler settings and other important
 # information for Eclipse / Flash Builder.
+
+Last login: Wed Aug 12 19:07:18 on ttys005
+
+The default interactive shell is now zsh.
+To update your account to use zsh, please run `chsh -s /bin/zsh`.
+For more details, please visit https://support.apple.com/kb/HT208050.
+(base) Jiayis-MBP:creation-posting jiayiwu$ cd /Users/jiayiwu/projects/githubs/heroku-chinese-character 
+(base) Jiayis-MBP:heroku-chinese-character jiayiwu$ vim .gitignore
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Packages #
+############
+# it's better to unpack these files and commit the raw source
+# git has its own built in compression methods
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+*.idea
+
+
