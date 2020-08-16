@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -39,7 +39,7 @@
                         </constraints>
                     </view>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rCy-zK-dEw">
-                        <rect key="frame" x="0.0" y="110" width="579" height="754"/>
+                        <rect key="frame" x="0.0" y="110" width="579" height="685"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="@Jiayi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ydb-vz-GZY">
                         <rect key="frame" x="95" y="32" width="412" height="20.5"/>
@@ -119,6 +119,16 @@
                             <constraint firstItem="lHh-WY-5kp" firstAttribute="leading" secondItem="qNt-qV-RnK" secondAttribute="leading" constant="90" id="hAZ-Wz-x9F"/>
                         </constraints>
                     </view>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="4TS-de-Vnl">
+                        <rect key="frame" x="0.0" y="795" width="579" height="69"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="69" id="OSB-Gt-sUw"/>
+                        </constraints>
+                        <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    </textView>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottomMargin" secondItem="qNt-qV-RnK" secondAttribute="bottom" id="06d-39-IeG"/>
@@ -127,24 +137,28 @@
                     <constraint firstAttribute="trailing" secondItem="bLd-Ve-r9M" secondAttribute="trailing" id="9BE-jv-2dv"/>
                     <constraint firstAttribute="trailing" secondItem="qNt-qV-RnK" secondAttribute="trailing" id="CYE-bV-DyV"/>
                     <constraint firstItem="bLd-Ve-r9M" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="E9R-OA-b0t"/>
+                    <constraint firstItem="4TS-de-Vnl" firstAttribute="trailing" secondItem="qNt-qV-RnK" secondAttribute="trailing" id="FNd-sQ-aZE"/>
                     <constraint firstAttribute="trailing" secondItem="rCy-zK-dEw" secondAttribute="trailing" id="GtM-rr-Zxb"/>
                     <constraint firstItem="bLd-Ve-r9M" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="L7H-9s-aY5"/>
                     <constraint firstItem="rCy-zK-dEw" firstAttribute="top" secondItem="bLd-Ve-r9M" secondAttribute="bottom" id="P0O-LS-70H"/>
                     <constraint firstAttribute="bottomMargin" secondItem="qNt-qV-RnK" secondAttribute="bottom" id="RjR-Jv-DHt"/>
+                    <constraint firstItem="qNt-qV-RnK" firstAttribute="top" secondItem="4TS-de-Vnl" secondAttribute="bottom" id="Tjw-ex-r3W"/>
                     <constraint firstItem="rCy-zK-dEw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="W9i-le-GYV"/>
                     <constraint firstAttribute="trailing" secondItem="rCy-zK-dEw" secondAttribute="trailing" id="bOz-r7-VHa"/>
-                    <constraint firstItem="qNt-qV-RnK" firstAttribute="top" secondItem="rCy-zK-dEw" secondAttribute="bottom" id="eZ8-SD-elL"/>
+                    <constraint firstItem="4TS-de-Vnl" firstAttribute="top" secondItem="rCy-zK-dEw" secondAttribute="bottom" id="eZ8-SD-elL"/>
+                    <constraint firstItem="4TS-de-Vnl" firstAttribute="leading" secondItem="qNt-qV-RnK" secondAttribute="leading" id="psF-Dv-Utx"/>
                     <constraint firstItem="rCy-zK-dEw" firstAttribute="top" secondItem="bLd-Ve-r9M" secondAttribute="bottom" id="sIY-V2-lgt"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="descriptiontext" destination="4TS-de-Vnl" id="cBd-5G-Qcd"/>
                 <outlet property="likesLabel" destination="lHh-WY-5kp" id="ePI-jR-Ppo"/>
                 <outlet property="postImageView" destination="rCy-zK-dEw" id="i4E-BY-hKv"/>
                 <outlet property="userImageView" destination="6Rp-lP-f6r" id="pvb-Uy-1ka"/>
                 <outlet property="usernameLabel" destination="Ydb-vz-GZY" id="fc7-Pc-ySf"/>
             </connections>
-            <point key="canvasLocation" x="-144" y="194"/>
+            <point key="canvasLocation" x="-144.20289855072465" y="193.86160714285714"/>
         </tableViewCell>
     </objects>
     <resources>

@@ -228,6 +228,9 @@ PODS:
     - FirebaseAnalytics (= 6.7.0)
   - Firebase/CoreOnly (6.29.0):
     - FirebaseCore (= 6.9.2)
+  - Firebase/Database (6.29.0):
+    - Firebase/CoreOnly
+    - FirebaseDatabase (~> 6.4.0)
   - Firebase/Firestore (6.29.0):
     - Firebase/CoreOnly
     - FirebaseFirestore (~> 1.16.3)
@@ -257,6 +260,9 @@ PODS:
     - GoogleUtilities/Environment (~> 6.7)
     - GoogleUtilities/Logger (~> 6.7)
     - nanopb (~> 1.30905.0)
+  - FirebaseDatabase (6.4.0):
+    - FirebaseCore (~> 6.8)
+    - leveldb-library (~> 1.22)
   - FirebaseFirestore (1.16.3):
     - abseil/algorithm (= 0.20200225.0)
     - abseil/base (= 0.20200225.0)
@@ -335,6 +341,7 @@ PODS:
     - nanopb/encode (= 1.30905.0)
   - nanopb/decode (1.30905.0)
   - nanopb/encode (1.30905.0)
+  - ProgressHUD (13.4)
   - PromisesObjC (1.2.9)
   - Realm (5.3.1):
     - Realm/Headers (= 5.3.1)
@@ -346,8 +353,10 @@ DEPENDENCIES:
   - Firebase/Analytics
   - Firebase/Auth
   - Firebase/Core
+  - Firebase/Database
   - Firebase/Firestore
   - Firebase/Storage
+  - ProgressHUD
   - RealmSwift
 
 SPEC REPOS:
@@ -359,6 +368,7 @@ SPEC REPOS:
     - FirebaseAuth
     - FirebaseCore
     - FirebaseCoreDiagnostics
+    - FirebaseDatabase
     - FirebaseFirestore
     - FirebaseInstallations
     - FirebaseStorage
@@ -370,6 +380,7 @@ SPEC REPOS:
     - GTMSessionFetcher
     - leveldb-library
     - nanopb
+    - ProgressHUD
     - PromisesObjC
     - Realm
     - RealmSwift
@@ -382,6 +393,7 @@ SPEC CHECKSUMS:
   FirebaseAuth: a818d73466d51db897d3bf3c0f3baa3dae7fd4c0
   FirebaseCore: 7930a1946517d94256d857f97371ed993b55f7bd
   FirebaseCoreDiagnostics: 7535fe695737f8c5b350584292a70b7f8ff0357b
+  FirebaseDatabase: 55e69fe802ccb438d9c6ee51eb32fd425d5409d3
   FirebaseFirestore: 5ea7b0878363f9ec66bdcee0c29ad875d1b511ac
   FirebaseInstallations: 3c520c951305cbf9ca54eb891ff9e6d1fd384881
   FirebaseStorage: 3ef81ca5fa7817f85451ca09d516a34d2c7542a7
@@ -393,10 +405,11 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 6f5c8abbab8a9bce4bb3f057e317728ec6182b10
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
+  ProgressHUD: 137a7fc677487c5581668f4490563124fb35c232
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
   Realm: 8ec860dc0c3079f7cab1085d95661a06f162d487
   RealmSwift: ca9d0df752157befb8c28034301f988a56ce91eb
 
-PODFILE CHECKSUM: 1db9f87dc45a5ef27fd9d8124f2a8afcb37bdd01
+PODFILE CHECKSUM: 2254eb88596874d7902919079f56c3dea68246ac
 
 COCOAPODS: 1.9.3

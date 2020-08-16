@@ -15,6 +15,7 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet var usernameLabel: UILabel!
     @IBOutlet var likesLabel: UILabel!
     @IBOutlet var collButton: UIButton!
+    @IBOutlet var descriptiontext: UITextView!
     
     static let identifier = "PostTableViewCell"
     static func nib() -> UINib {
@@ -34,6 +35,7 @@ class PostTableViewCell: UITableViewCell {
         self.likesLabel.text = "\(model.numberOfRecreate) ReCreate"
         self.usernameLabel.text = model.username
         self.userImageView.image =  UIImage(named: model.userImageName)
-        self.postImageView.image =  UIImage(named: model.postImageName)
+        self.postImageView.image = model.postImage
+        self.descriptiontext.text = model.descriptiontext
     }
 }

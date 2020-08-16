@@ -18,6 +18,7 @@
 		AD553A1824D4710A001D04C4 /* SMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD553A1724D4710A001D04C4 /* SMViewController.swift */; };
 		AD553A1B24D4848F001D04C4 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD553A1924D4848F001D04C4 /* PostTableViewCell.swift */; };
 		AD553A1C24D4848F001D04C4 /* PostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD553A1A24D4848F001D04C4 /* PostTableViewCell.xib */; };
+		AD96AACD24E6D84300A80DB6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD96AACC24E6D84300A80DB6 /* ProfileViewController.swift */; };
 		ADA6DC3624C6115D003E4FD8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA6DC3524C6115D003E4FD8 /* AppDelegate.swift */; };
 		ADA6DC3824C6115D003E4FD8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA6DC3724C6115D003E4FD8 /* SceneDelegate.swift */; };
 		ADA6DC3D24C6115D003E4FD8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADA6DC3B24C6115D003E4FD8 /* Main.storyboard */; };
@@ -45,6 +46,7 @@
 		AD553A1724D4710A001D04C4 /* SMViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMViewController.swift; sourceTree = "<group>"; };
 		AD553A1924D4848F001D04C4 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		AD553A1A24D4848F001D04C4 /* PostTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostTableViewCell.xib; sourceTree = "<group>"; };
+		AD96AACC24E6D84300A80DB6 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		ADA6DC3224C6115D003E4FD8 /* drawing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = drawing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADA6DC3524C6115D003E4FD8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ADA6DC3724C6115D003E4FD8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 		AD318B8324DF0B6B0041472F /* LoginViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				AD96AACC24E6D84300A80DB6 /* ProfileViewController.swift */,
 				AD318B8424DF0B6B0041472F /* SignupViewController.swift */,
 				AD318B8524DF0B6B0041472F /* ViewController.swift */,
 				AD318B8724DF0B6B0041472F /* LoginViewController.swift */,
@@ -294,6 +297,7 @@
 				AD318B8B24DF0B6B0041472F /* LoginViewController.swift in Sources */,
 				AD553A1824D4710A001D04C4 /* SMViewController.swift in Sources */,
 				AD318B8F24DF0C790041472F /* Constants.swift in Sources */,
+				AD96AACD24E6D84300A80DB6 /* ProfileViewController.swift in Sources */,
 				ADA6DC5124C64726003E4FD8 /* NewViewController.swift in Sources */,
 				AD318B8824DF0B6B0041472F /* SignupViewController.swift in Sources */,
 				AD318B9024DF0C790041472F /* Utilities.swift in Sources */,

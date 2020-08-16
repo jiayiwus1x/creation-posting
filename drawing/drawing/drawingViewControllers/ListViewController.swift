@@ -28,6 +28,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet var AddButton: UIBarButtonItem!
     
     @IBOutlet var PostButton: UIBarButtonItem!
+    @IBOutlet var ProfileButton: UIBarButtonItem!
     // saving
     private var models = [SavedItem]()
     //private var drawings = [CanvasView]()
@@ -38,6 +39,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        ProfileButton.image = UIImage(named: "head_1")
         setupNavigationController()
         table.register(ImageViewCell.self, forCellReuseIdentifier: "cell")
         
@@ -49,17 +51,28 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         // Do any additional setup after loading the view.
     }
    private func setupNavigationController(){
-        
-//        let titleImageView = UIImageView(image: UIImage(named: "yuch"))
-//
-//        titleImageView.frame = CGRect(x: 20, y: 20, width: 0, height: 5)
-//        titleImageView.contentMode = .scaleAspectFit
-//        titleImageView.layer.cornerRadius = 12
-//        titleImageView.clipsToBounds = true
-//        navigationItem.titleView = titleImageView
-    navigationItem.rightBarButtonItems = [AddButton, PostButton]
+//        let button = UIButton.init(type: .custom)
+//        //set image for button
+//        button.setImage(UIImage(named: "head_1"), for: .normal)
+//        button.addTarget(self, action: #selector(didTapProfile), for: UIControl.Event.touchUpInside)
+//        button.frame = CGRect(x: 0, y: 0, width: 53, height: 51)
+//        button.imageView?.contentMode = .scaleAspectFit
+//        let ProfileButton = UIBarButtonItem(customView: button)
+        navigationItem.rightBarButtonItems = [AddButton, PostButton, ProfileButton]
     }
-
+    
+    @IBAction func didTapProfile() {
+        guard let vc = storyboard?.instantiateViewController(identifier: "profile") as? ProfileViewController else {
+            return
+        }
+        vc.completionHandler = { [weak self] in
+            self?.refresh()
+        }
+        vc.title = "Jiayi"
+        vc.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
     @IBAction func didTapAddButton() {
         guard let vc = storyboard?.instantiateViewController(identifier: "enter") as? NewViewController else {
             return
