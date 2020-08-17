@@ -26,7 +26,7 @@ class SignupViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         
         setUpElements()
@@ -60,7 +60,7 @@ class SignupViewController: UIViewController {
         }
         return nil
     }
-
+    
     @IBAction func signUpTapped(_ sender: Any) {
         //validate fields
         let error = validateFields()
@@ -86,19 +86,35 @@ class SignupViewController: UIViewController {
                 }
                 else {
                     // User was created successfully, now store first and last name
-                    let db = Firestore.firestore()
-                   
-                    db.collection("users").addDocument(data: ["firstname":firstName, "lastname":lastName, "uid": result!.user.uid ]) { (error) in
-                        
-                        if error != nil {
-                            //show error
-                            self.showError("error saving user data,")
-                        }
-                    }
+                    //                    let db = Firestore.firestore()
                     
-                    //transition to the home screen
-
-                    self.transitionToHome()
+                    //                    db.collection("users").addDocument(data: ["firstname":firstName, "lastname":lastName, "uid": result!.user.uid ]) { (error) in
+                    //
+                    //                        if error != nil {
+                    //                            //show error
+                    //                            self.showError("error saving user data,")
+                    //                        }
+                    //                    }
+                    UserDefaults.standard.setValue(email, forKey: "email")
+                    UserDefaults.standard.setValue("\(firstName) \(lastName)", forKey: "name")
+                    DatabaseManager.shared.userExists(with: email, completion: {exists in
+                        guard !exists else{
+                            self.alertUserLoginError(message: "email exist, try login")
+                            return
+                        }
+                        let appuser = UserDescription(firstName: firstName, lastName: lastName, emailAddress: email)
+                        DatabaseManager.shared.insertUser(with: appuser
+                            , completion: { success in
+                                if success {
+                                    
+                                }
+                                
+                        })
+                        //transition to the home screen
+                        
+                        self.transitionToHome()
+                    })
+                    
                 }
             }
         }
@@ -108,16 +124,16 @@ class SignupViewController: UIViewController {
         errorLabel.text = message
         errorLabel.alpha = 1
     }
+    func alertUserLoginError(message: String){
+        let alert = UIAlertController(title:"Woops", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+        present(alert, animated: true)
+    }
     
     func transitionToHome(){
         
-//        let homeViewController = storyboard?.instantiateViewController(identifier: Constants.Storyboard.homeViewController) as? HomeViewController
-//
-//        view.window?.rootViewController = homeViewController
         let listViewController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.listViewController ) as! ListViewController
         self.navigationController?.pushViewController(listViewController, animated: true)
-//        self.view.window?.rootViewController = listViewController
-//        view.window?.makeKeyAndVisible()
         
     }
     

@@ -13,7 +13,7 @@ import RealmSwift
 class NewViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource{
     
     // saving
-    //private let realm = try! Realm()
+    
     lazy var realm:Realm = {
         return try! Realm()
     }()

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="zpt-D5-6KW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="XWZ-nK-bUl">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -56,7 +56,6 @@
                             <barButtonItem systemItem="compose" id="6Dj-jL-H7m">
                                 <connections>
                                     <action selector="didTapPostButton" destination="vR8-8q-zOh" id="8E1-1l-aJy"/>
-                                    <segue destination="OpJ-ws-mzq" kind="push" id="zRG-rM-gox"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem systemItem="camera" id="kdk-vO-vUZ">
@@ -87,12 +86,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="head_3" translatesAutoresizingMaskIntoConstraints="NO" id="oXe-GD-PWR">
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="head_3" translatesAutoresizingMaskIntoConstraints="NO" id="oXe-GD-PWR">
                                 <rect key="frame" x="20" y="165" width="149" height="149"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="oXe-GD-PWR" secondAttribute="height" multiplier="100:100" id="wYR-gh-EG9"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="CornerRadius">
+                                        <integer key="value" value="75"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="XHi-WA-Dtj" appends="YES" id="4Dq-fB-UuL"/>
                                 </connections>
@@ -137,6 +141,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="eHY-aZ-w9O"/>
                     <connections>
+                        <outlet property="Username" destination="1RB-RF-Rl4" id="VyT-oS-BKs"/>
+                        <outlet property="email" destination="fhx-YA-QaL" id="SjV-k6-GiR"/>
                         <outlet property="profilepic" destination="oXe-GD-PWR" id="UHe-Nr-Lbh"/>
                     </connections>
                 </viewController>
@@ -158,26 +164,26 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eq6-oC-zmg">
-                                <rect key="frame" x="20" y="140" width="374" height="300"/>
+                                <rect key="frame" x="20" y="44" width="374" height="300"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="300" id="Giu-4V-CeZ"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MFG-Q8-dBd">
-                                <rect key="frame" x="20" y="590" width="374" height="30"/>
+                                <rect key="frame" x="20" y="494" width="374" height="30"/>
                                 <state key="normal" title="Post"/>
                                 <connections>
                                     <action selector="didTapShare" destination="OpJ-ws-mzq" eventType="touchUpInside" id="Y4M-w1-LQW"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Project Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8K2-Fl-vTW">
-                                <rect key="frame" x="20" y="441" width="147" height="21"/>
+                                <rect key="frame" x="20" y="345" width="147" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.40000000000000002" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="IOc-NU-EMQ">
-                                <rect key="frame" x="20" y="465" width="374" height="100"/>
+                                <rect key="frame" x="20" y="369" width="374" height="100"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="G2a-3h-Bar"/>
@@ -794,12 +800,12 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="gFg-Xg-9Hg">
                                 <rect key="frame" x="40" y="180" width="334" height="235.5"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eRo-sh-ffc">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="test1@gmail.com" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eRo-sh-ffc">
                                         <rect key="frame" x="0.0" y="0.0" width="334" height="50"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Jwd-eP-BiT">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="test1@gmailcom" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Jwd-eP-BiT">
                                         <rect key="frame" x="0.0" y="70" width="334" height="50"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>

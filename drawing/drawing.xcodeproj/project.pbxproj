@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		629AD2DE387F66D0F650FD3E /* Pods_drawing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A8BB05181198D6D2B1D587B /* Pods_drawing.framework */; };
+		AD21F3B124EAEBEC0023889D /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD21F3B024EAEBEC0023889D /* DatabaseManager.swift */; };
 		AD318B8824DF0B6B0041472F /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD318B8424DF0B6B0041472F /* SignupViewController.swift */; };
 		AD318B8924DF0B6B0041472F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD318B8524DF0B6B0041472F /* ViewController.swift */; };
 		AD318B8B24DF0B6B0041472F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD318B8724DF0B6B0041472F /* LoginViewController.swift */; };
@@ -36,6 +37,7 @@
 /* Begin PBXFileReference section */
 		2A8BB05181198D6D2B1D587B /* Pods_drawing.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_drawing.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		828CA72D41DD24798F2FFBB6 /* Pods-drawing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-drawing.release.xcconfig"; path = "Target Support Files/Pods-drawing/Pods-drawing.release.xcconfig"; sourceTree = "<group>"; };
+		AD21F3B024EAEBEC0023889D /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		AD318B8424DF0B6B0041472F /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		AD318B8524DF0B6B0041472F /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		AD318B8724DF0B6B0041472F /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -76,6 +78,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AD21F3AF24EAE98D0023889D /* DataBase */ = {
+			isa = PBXGroup;
+			children = (
+				AD21F3B024EAEBEC0023889D /* DatabaseManager.swift */,
+			);
+			path = DataBase;
+			sourceTree = "<group>";
+		};
 		AD318B8324DF0B6B0041472F /* LoginViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -145,6 +155,7 @@
 				AD318B8324DF0B6B0041472F /* LoginViewControllers */,
 				AD318B9124E0A2750041472F /* drawingViewControllers */,
 				AD318B9224E0A2AA0041472F /* SMViewControllers */,
+				AD21F3AF24EAE98D0023889D /* DataBase */,
 				ADA6DC3524C6115D003E4FD8 /* AppDelegate.swift */,
 				ADA6DC3724C6115D003E4FD8 /* SceneDelegate.swift */,
 				ADA6DC3B24C6115D003E4FD8 /* Main.storyboard */,
@@ -305,6 +316,7 @@
 				AD318B8924DF0B6B0041472F /* ViewController.swift in Sources */,
 				AD318B9424E1B5020041472F /* extensionfile.swift in Sources */,
 				ADA6DC3624C6115D003E4FD8 /* AppDelegate.swift in Sources */,
+				AD21F3B124EAEBEC0023889D /* DatabaseManager.swift in Sources */,
 				ADA6DC4F24C64715003E4FD8 /* NoteViewController.swift in Sources */,
 				ADA6DC5324C647B6003E4FD8 /* ListViewController.swift in Sources */,
 				ADA6DC3824C6115D003E4FD8 /* SceneDelegate.swift in Sources */,
