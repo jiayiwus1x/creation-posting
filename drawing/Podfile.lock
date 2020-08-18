@@ -348,6 +348,9 @@ PODS:
   - Realm/Headers (5.3.1)
   - RealmSwift (5.3.1):
     - Realm (= 5.3.1)
+  - SDWebImage (5.8.4):
+    - SDWebImage/Core (= 5.8.4)
+  - SDWebImage/Core (5.8.4)
 
 DEPENDENCIES:
   - Firebase/Analytics
@@ -358,6 +361,7 @@ DEPENDENCIES:
   - Firebase/Storage
   - ProgressHUD
   - RealmSwift
+  - SDWebImage
 
 SPEC REPOS:
   trunk:
@@ -384,6 +388,7 @@ SPEC REPOS:
     - PromisesObjC
     - Realm
     - RealmSwift
+    - SDWebImage
 
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
@@ -409,7 +414,8 @@ SPEC CHECKSUMS:
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
   Realm: 8ec860dc0c3079f7cab1085d95661a06f162d487
   RealmSwift: ca9d0df752157befb8c28034301f988a56ce91eb
+  SDWebImage: cf6922231e95550934da2ada0f20f2becf2ceba9
 
-PODFILE CHECKSUM: 2254eb88596874d7902919079f56c3dea68246ac
+PODFILE CHECKSUM: 80ffa74551464d16904cb8ec60e128100c2c9b69
 
 COCOAPODS: 1.9.3

@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseAuth
 import Firebase
+import SDWebImage
 
 class ProfileViewController: UIViewController,  UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
     public var completionHandler: (() -> Void)?
@@ -22,6 +23,18 @@ class ProfileViewController: UIViewController,  UIImagePickerControllerDelegate,
         
         email.text = user?.email
         Username.text = UserDefaults.standard.value(forKey:"name") as? String ?? "No Name"
+        let safeEmail = DatabaseManager.safeEmail(emailAddress: user?.email ?? "No_email")
+        let filename = safeEmail + "_profile_pic"
+        let path = "images/profileImg/"+filename
+        print(path)
+        StorageManager.shared.downloadURL(for: path, completion: { result in
+                   switch result {
+                   case .success(let url):
+                    self.profilepic.sd_setImage(with: url, completed: nil)
+                   case .failure(let error):
+                       print("Failed to get download url: \(error)")
+                   }
+        })
         // Do any additional setup after loading the view.
     }
     private func validateAuth(){

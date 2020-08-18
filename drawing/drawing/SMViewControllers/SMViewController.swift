@@ -8,6 +8,7 @@
 import UIKit
 import FirebaseStorage
 import FirebaseDatabase
+import SDWebImage
 
 class SMViewController: UIViewController,UITableViewDataSource, UITableViewDelegate {
     private var collectionView: UICollectionView?
@@ -27,13 +28,6 @@ class SMViewController: UIViewController,UITableViewDataSource, UITableViewDeleg
         fetchdata()
         
         
-//        models.append(CreationPost(numberOfRecreate: 100, username: "Yuchen", userImageName:"yuch", postImage: UIImage(named: "post_1")!))
-//
-//        models.append(CreationPost(numberOfRecreate: 120, username: "Vishal", userImageName:"head_1", postImage: UIImage(named: "post_3")!))
-//
-//        models.append(CreationPost(numberOfRecreate: 50, username: "Jiayi", userImageName:"head_2", postImage: UIImage(named: "post_2")!))
-//        print(models.count)
-        
     }
     func fetchdata(){
         db.child("posting").observeSingleEvent(of: .value, with: {snapshot in guard let
@@ -47,7 +41,8 @@ class SMViewController: UIViewController,UITableViewDataSource, UITableViewDeleg
             
             let data = try? Data(contentsOf: url)
             let image = UIImage(data: data!)!
-            let model = CreationPost(numberOfRecreate: 0, username: value["userID"] as! String, userImageName:"yuch", postImage: image, descriptiontext: value["Description"] as! String)
+         
+            let model = CreationPost(numberOfRecreate: 0, username: value["userID"] as! String, email: value["email"] as! String, postImage: image, descriptiontext: value["Description"] as! String)
             self.models.append(model)
             print(self.models)
             self.table.reloadData()
@@ -82,7 +77,7 @@ class SMViewController: UIViewController,UITableViewDataSource, UITableViewDeleg
 struct CreationPost {
     let numberOfRecreate: Int
     let username: String
-    let userImageName: String
+    let email: String
     let postImage: UIImage
     let descriptiontext: String
     

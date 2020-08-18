@@ -17,6 +17,7 @@ class ShareViewController: UIViewController {
     @IBOutlet var sharingImage: UIImageView!
     @IBOutlet var PostButton: UIButton!
     @IBOutlet var textfield: UITextView!
+    
     private let storage = Storage.storage().reference()
     private let db = Database.database().reference()
     
@@ -70,8 +71,10 @@ class ShareViewController: UIViewController {
         formatter.timeStyle = .long
         
         let object: [String: Any] = [
-            "userID": "Jiayi",
+            "email": UserDefaults.standard.value(forKey:"email") as? String ?? "No email",
+            "userID": UserDefaults.standard.value(forKey:"name") as? String ?? "No Name",
             "ImageURL": urlString,
+            
             "Description": text,
             "Time": formatter.string(from: now),
             "numberOfRecreate": 0

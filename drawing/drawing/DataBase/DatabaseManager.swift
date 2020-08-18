@@ -33,7 +33,6 @@ extension DatabaseManager{
                 return
             }
             
-            
             completion(true)
         })
     }
@@ -110,6 +109,17 @@ extension DatabaseManager {
             completion(.success(value))
         }
     }
+    /// Gets all users from database
+    public func getAllUsers(completion: @escaping (Result<[[String: String]], Error>) -> Void) {
+        database.child("users").observeSingleEvent(of: .value, with: { snapshot in
+            guard let value = snapshot.value as? [[String: String]] else {
+                completion(.failure(DatabaseError.failedToFetch))
+                return
+            }
+
+            completion(.success(value))
+        })
+    }
 
 }
 
@@ -123,6 +133,9 @@ struct UserDescription{
         safeEmail = safeEmail.replacingOccurrences(of: "@", with: "-")
         return safeEmail
     }
-    //let profilePictureUrl: String
+    
+    var profilePictureUrl: String {
+        return "/profileImg/\(safeEmail)_profile_pic"
+    }
 }
 

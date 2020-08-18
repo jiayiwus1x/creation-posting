@@ -106,7 +106,20 @@ class SignupViewController: UIViewController {
                         DatabaseManager.shared.insertUser(with: appuser
                             , completion: { success in
                                 if success {
-                                    
+                                    guard let image = UIImage(named: "head_1"), let data = image.pngData() else{
+                                        return
+                                        
+                                    }
+                                    let fileName = appuser.profilePictureUrl
+                                    StorageManager.shared.uploadProfilePicture(with: data, fileName: fileName, completion: { result in
+                                        switch result {
+                                        case .success(let downloadUrl):
+                                            UserDefaults.standard.set(downloadUrl, forKey: "profile_picture_url")
+                                            print(downloadUrl)
+                                        case .failure(let error):
+                                            print("Storage maanger error: \(error)")
+                                        }
+                                    })
                                 }
                                 
                         })
