@@ -1,5 +1,0 @@
-#import <Foundation/Foundation.h>
-@interface PodsDummy_Pods_firebase_app_tutorial_firebase_app_tutorialUITests : NSObject
-@end
-@implementation PodsDummy_Pods_firebase_app_tutorial_firebase_app_tutorialUITests
-@end
