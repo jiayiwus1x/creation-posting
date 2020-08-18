@@ -10,7 +10,7 @@ import UIKit
 import RealmSwift
 import FirebaseStorage
 import FirebaseDatabase
-
+import FirebaseAuth
 class ShareViewController: UIViewController {
     public var completionHandler: (() -> Void)?
     
@@ -40,15 +40,20 @@ class ShareViewController: UIViewController {
             return
         }
         let textdata = textfield.text!
+        let user = Auth.auth().currentUser
+        let safeEmail = DatabaseManager.safeEmail(emailAddress: user?.email ?? "No_email")
+        let filename = safeEmail + "_post_pic" + String(Int.random(in: 0..<10000))
+
+        let path = "images/"+filename
         
-        storage.child("images/file.png").putData(imageData,
+        storage.child(path).putData(imageData,
                                                  metadata: nil,
                                                  completion: { _, error in
                                                     guard error == nil else {
                                                         print("Failed to Upload")
                                                         return
                                                     }
-                                                    self.storage.child("images/file.png").downloadURL(completion: {url, erro in guard let url = url, error == nil else{
+                                                    self.storage.child(path).downloadURL(completion: {url, erro in guard let url = url, error == nil else{
                                                         return
                                                         }
                                                         
@@ -65,23 +70,44 @@ class ShareViewController: UIViewController {
     
     @objc private func addposting(urlString: String, text: String){
         let now = Date()
-
+        let order = 0 - Int(now.timeIntervalSince1970)
         let formatter = DateFormatter()
-        formatter.dateStyle = .full
-        formatter.timeStyle = .long
+        formatter.dateStyle = .short
+        formatter.timeStyle = .short
         
         let object: [String: Any] = [
             "email": UserDefaults.standard.value(forKey:"email") as? String ?? "No email",
             "userID": UserDefaults.standard.value(forKey:"name") as? String ?? "No Name",
             "ImageURL": urlString,
-            
             "Description": text,
             "Time": formatter.string(from: now),
-            "numberOfRecreate": 0
+            "numberOfRecreate": 0,
+            "order": order
             
         ]
         
-        db.child("posting").setValue(object)
+        db.child("latest_posting").setValue(object)
+        db.child("postings").observeSingleEvent(of: .value, with: { snapshot in
+            if var usersCollection = snapshot.value as? [[String: Any]]{
+                
+                usersCollection.append(object)
+                self.db.child("postings").setValue(usersCollection, withCompletionBlock: {error, _ in
+                    guard error == nil else{
+                        return
+                    }
+                })
+            }
+            else{
+                let newCollection: [[String: Any]] = [
+                    object] as [[String : Any]]
+                
+                self.db.child("postings").setValue(newCollection, withCompletionBlock: {error, _ in
+                    guard error == nil else{
+                        return
+                    }
+                })
+            }
+        })
     }
 }
 

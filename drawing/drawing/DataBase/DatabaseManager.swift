@@ -14,10 +14,10 @@ final class DatabaseManager{
     static let shared = DatabaseManager()
     private let database = Database.database().reference()
     static func safeEmail(emailAddress: String) -> String {
-           var safeEmail = emailAddress.replacingOccurrences(of: ".", with: "-")
-           safeEmail = safeEmail.replacingOccurrences(of: "@", with: "-")
-           return safeEmail
-       }
+        var safeEmail = emailAddress.replacingOccurrences(of: ".", with: "-")
+        safeEmail = safeEmail.replacingOccurrences(of: "@", with: "-")
+        return safeEmail
+    }
     
 }
 
@@ -42,50 +42,109 @@ extension DatabaseManager{
         database.child(user.safeEmail).setValue([
             "first_name": user.firstName,
             "last_name": user.lastName
-        ], withCompletionBlock: { error, _ in
-            guard error == nil else {print("failed to write to database")
-                completion(false)
-                return
-            }
-            
-            self.database.child("users").observeSingleEvent(of: .value, with: { snapshot in
-                if var usersCollection = snapshot.value as? [[String: String]]{
-                    let newElement = [
-                        "name": user.firstName + " " + user.lastName,
-                        "email": user.safeEmail
+            ], withCompletionBlock: { error, _ in
+                guard error == nil else {print("failed to write to database")
+                    completion(false)
+                    return
+                }
+                
+                self.database.child("users").observeSingleEvent(of: .value, with: { snapshot in
+                    if var usersCollection = snapshot.value as? [[String: String]]{
+                        let newElement = [
+                            "name": user.firstName + " " + user.lastName,
+                            "email": user.safeEmail
                         ]
                         usersCollection.append(newElement)
                         self.database.child("users").setValue(usersCollection, withCompletionBlock: {error, _ in
-                        guard error == nil else{
-                            return
-                        }
-                        completion(true)
-                    })
-                }
-            else{
-                let newCollection: [[String: String]] = [
-                    [
-                    "name": user.firstName + " " + user.lastName,
-                    "email": user.safeEmail
-                    ]]
-                
-                    self.database.child("users").setValue(newCollection, withCompletionBlock: {error, _ in
-                    guard error == nil else{
-                        return
+                            guard error == nil else{
+                                return
+                            }
+                            completion(true)
+                        })
                     }
-                    completion(true)
+                    else{
+                        let newCollection: [[String: String]] = [
+                            [
+                                "name": user.firstName + " " + user.lastName,
+                                "email": user.safeEmail
+                            ]]
+                        
+                        self.database.child("users").setValue(newCollection, withCompletionBlock: {error, _ in
+                            guard error == nil else{
+                                return
+                            }
+                            completion(true)
+                        })
+                    }
+                    
+                    
                 })
-            }
                 
-            
         })
         
-        })
     }
     
+    public func insertPosting(with posting: Posting, completion: @escaping (Bool) -> Void){
+        database.child("latest_posting").setValue([
+            "email": posting.emailAddress,
+            "userID": posting.userID,
+            "ImageURL": posting.ImagURL,
+            "Description": posting.discription,
+            "Time": posting.time,
+            "numberOfRecreate": posting.numberOfRecreate
+            ], withCompletionBlock: { error, _ in
+                guard error == nil else {print("failed to write to database")
+                    completion(false)
+                    return
+                }
+                
+                self.database.child("posting").observeSingleEvent(of: .value, with: { snapshot in
+                    if var usersCollection = snapshot.value as? [[String: Any]]{
+                        let newElement = [
+                           "email": posting.emailAddress,
+                            "userID": posting.userID,
+                            "ImageURL": posting.ImagURL,
+                            "Description": posting.discription,
+                            "Time": posting.time,
+                            "numberOfRecreate": posting.numberOfRecreate
+                            ] as [String : Any]
+                        usersCollection.append(newElement)
+                        self.database.child("posting").setValue(usersCollection, withCompletionBlock: {error, _ in
+                            guard error == nil else{
+                                return
+                            }
+                            completion(true)
+                        })
+                    }
+                    else{
+                        let newCollection: [[String: Any]] = [
+                            [
+                                "email": posting.emailAddress,
+                                "userID": posting.userID,
+                                "ImageURL": posting.ImagURL,
+                                "Description": posting.discription,
+                                "Time": posting.time,
+                                "numberOfRecreate": posting.numberOfRecreate
+                            ]] as [[String : Any]]
+                        
+                        self.database.child("postings").setValue(newCollection, withCompletionBlock: {error, _ in
+                            guard error == nil else{
+                                return
+                            }
+                            completion(true)
+                        })
+                    }
+                    
+                    
+                })
+                
+        })
+        
+    }
+   
     public enum DatabaseError: Error {
         case failedToFetch
-
+        
         public var localizedDescription: String {
             switch self {
             case .failedToFetch:
@@ -93,12 +152,12 @@ extension DatabaseManager{
             }
         }
     }
-
+    
 }
 
 // fetch data
 extension DatabaseManager {
-
+    
     /// Returns dictionary node at child path
     public func getDataFor(path: String, completion: @escaping (Result<Any, Error>) -> Void) {
         database.child("\(path)").observeSingleEvent(of: .value) { snapshot in
@@ -116,14 +175,14 @@ extension DatabaseManager {
                 completion(.failure(DatabaseError.failedToFetch))
                 return
             }
-
+            
             completion(.success(value))
         })
     }
-
+    
 }
 
-
+//data structure for individual post
 struct UserDescription{
     let firstName: String
     let lastName: String
@@ -139,3 +198,19 @@ struct UserDescription{
     }
 }
 
+
+struct Posting{
+    let emailAddress: String
+    let userID: String
+    let ImagURL: String
+    let discription: String
+    let time: String
+    let numberOfRecreate: Int
+    var safeEmail: String{
+        var safeEmail = emailAddress.replacingOccurrences(of: ".", with: "-")
+        safeEmail = safeEmail.replacingOccurrences(of: "@", with: "-")
+        return safeEmail
+    }
+    
+    
+}

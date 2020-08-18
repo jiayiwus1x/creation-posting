@@ -25,30 +25,32 @@ class SMViewController: UIViewController,UITableViewDataSource, UITableViewDeleg
         table.dataSource = self
         //fake data need be replaced
         
-        fetchdata()
+        fetchpostings()
         
         
     }
-    func fetchdata(){
-        db.child("posting").observeSingleEvent(of: .value, with: {snapshot in guard let
-            value = snapshot.value as? [String: Any] else {
-                return
+  
+    func fetchpostings(){
+        db.child("postings").queryOrdered(byChild: "order").observe(.childAdded, with: {
+            (snapshot) in guard let
+                value = snapshot.value as? [String: Any] else {
+                    return
             }
             
             guard let urlString = value["ImageURL"]  as? String, let url = URL(string: urlString) else{
                 return
             }
-            
             let data = try? Data(contentsOf: url)
             let image = UIImage(data: data!)!
-         
-            let model = CreationPost(numberOfRecreate: 0, username: value["userID"] as! String, email: value["email"] as! String, postImage: image, descriptiontext: value["Description"] as! String)
+            
+            let model = CreationPost(numberOfRecreate: 0, username: value["userID"] as! String, email: value["email"] as! String, postImage: image, descriptiontext: value["Description"] as! String, timestamp: value["Time"] as! String)
             self.models.append(model)
-            print(self.models)
             self.table.reloadData()
             
             
-        })
+            
+        }
+        )
         
     }
    
@@ -80,5 +82,6 @@ struct CreationPost {
     let email: String
     let postImage: UIImage
     let descriptiontext: String
+    let timestamp: String
     
 }

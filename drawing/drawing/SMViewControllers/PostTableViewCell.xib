@@ -31,11 +31,20 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tzg-GE-dRW">
+                                <rect key="frame" x="95" y="68" width="474" height="14.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <constraints>
                             <constraint firstItem="6Rp-lP-f6r" firstAttribute="top" secondItem="bLd-Ve-r9M" secondAttribute="top" constant="15" id="Ahd-8z-Hdu"/>
                             <constraint firstItem="6Rp-lP-f6r" firstAttribute="leading" secondItem="bLd-Ve-r9M" secondAttribute="leading" constant="5" id="HIa-Gd-0Jg"/>
+                            <constraint firstItem="Tzg-GE-dRW" firstAttribute="top" secondItem="bLd-Ve-r9M" secondAttribute="top" constant="68" id="OBj-X9-GFE"/>
                             <constraint firstAttribute="height" constant="110" id="QiJ-sw-Ure"/>
+                            <constraint firstAttribute="trailing" secondItem="Tzg-GE-dRW" secondAttribute="trailing" constant="10" id="TYF-5u-YYM"/>
+                            <constraint firstItem="Tzg-GE-dRW" firstAttribute="leading" secondItem="6Rp-lP-f6r" secondAttribute="trailing" constant="10" id="biP-73-qsG"/>
                         </constraints>
                     </view>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rCy-zK-dEw">
@@ -155,6 +164,7 @@
                 <outlet property="descriptiontext" destination="4TS-de-Vnl" id="cBd-5G-Qcd"/>
                 <outlet property="likesLabel" destination="lHh-WY-5kp" id="ePI-jR-Ppo"/>
                 <outlet property="postImageView" destination="rCy-zK-dEw" id="i4E-BY-hKv"/>
+                <outlet property="timestamp" destination="Tzg-GE-dRW" id="mqB-iU-src"/>
                 <outlet property="userImageView" destination="6Rp-lP-f6r" id="pvb-Uy-1ka"/>
                 <outlet property="usernameLabel" destination="Ydb-vz-GZY" id="fc7-Pc-ySf"/>
             </connections>

@@ -16,6 +16,7 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet var likesLabel: UILabel!
     @IBOutlet var collButton: UIButton!
     @IBOutlet var descriptiontext: UITextView!
+    @IBOutlet weak var timestamp: UILabel!
     
     static let identifier = "PostTableViewCell"
     static func nib() -> UINib {
@@ -39,8 +40,8 @@ class PostTableViewCell: UITableViewCell {
         
         let safeEmail = DatabaseManager.safeEmail(emailAddress: model.email )
         let filename = safeEmail + "_profile_pic"
+        self.timestamp.text = model.timestamp
         let path = "images/profileImg/"+filename
-        print(path)
         StorageManager.shared.downloadURL(for: path, completion: { result in
                    switch result {
                    case .success(let url):
