@@ -6,12 +6,14 @@
 //
 
 import UIKit
-
+import FirebaseStorage
+import FirebaseDatabase
+import SDWebImage
 
 class SMViewController: UIViewController,UITableViewDataSource, UITableViewDelegate {
     private var collectionView: UICollectionView?
     @IBOutlet var table: UITableView!
-    
+    private let db = Database.database().reference()
     var models = [CreationPost]()
     
     override func viewDidLoad() {
@@ -22,14 +24,34 @@ class SMViewController: UIViewController,UITableViewDataSource, UITableViewDeleg
         table.delegate = self
         table.dataSource = self
         //fake data need be replaced
-        models.append(CreationPost(numberOfRecreate: 100, username: "Yuchen", userImageName:"yuch", postImageName: "post_1"))
         
-        models.append(CreationPost(numberOfRecreate: 120, username: "Vishal", userImageName:"head_1", postImageName: "post_3"))
+        fetchdata()
         
-        models.append(CreationPost(numberOfRecreate: 50, username: "Jiayi", userImageName:"head_2", postImageName: "post_2"))
- 
+        
     }
-    
+    func fetchdata(){
+        db.child("posting").observeSingleEvent(of: .value, with: {snapshot in guard let
+            value = snapshot.value as? [String: Any] else {
+                return
+            }
+            
+            guard let urlString = value["ImageURL"]  as? String, let url = URL(string: urlString) else{
+                return
+            }
+            
+            let data = try? Data(contentsOf: url)
+            let image = UIImage(data: data!)!
+         
+            let model = CreationPost(numberOfRecreate: 0, username: value["userID"] as! String, email: value["email"] as! String, postImage: image, descriptiontext: value["Description"] as! String)
+            self.models.append(model)
+            print(self.models)
+            self.table.reloadData()
+            
+            
+        })
+        
+    }
+   
     func numberOfSections (in tableView: UITableView) ->Int{
         return 1
     }
@@ -55,7 +77,8 @@ class SMViewController: UIViewController,UITableViewDataSource, UITableViewDeleg
 struct CreationPost {
     let numberOfRecreate: Int
     let username: String
-    let userImageName: String
-    let postImageName: String
+    let email: String
+    let postImage: UIImage
+    let descriptiontext: String
     
 }
