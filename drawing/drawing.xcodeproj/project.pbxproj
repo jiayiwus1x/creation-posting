@@ -8,12 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		629AD2DE387F66D0F650FD3E /* Pods_drawing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A8BB05181198D6D2B1D587B /* Pods_drawing.framework */; };
+		AD318B8824DF0B6B0041472F /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD318B8424DF0B6B0041472F /* SignupViewController.swift */; };
+		AD318B8924DF0B6B0041472F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD318B8524DF0B6B0041472F /* ViewController.swift */; };
+		AD318B8B24DF0B6B0041472F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD318B8724DF0B6B0041472F /* LoginViewController.swift */; };
+		AD318B8F24DF0C790041472F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD318B8D24DF0C790041472F /* Constants.swift */; };
+		AD318B9024DF0C790041472F /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD318B8E24DF0C790041472F /* Utilities.swift */; };
+		AD318B9424E1B5020041472F /* extensionfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD318B9324E1B5020041472F /* extensionfile.swift */; };
+		AD318B9624E316B20041472F /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD318B9524E316B20041472F /* ShareViewController.swift */; };
 		AD553A1824D4710A001D04C4 /* SMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD553A1724D4710A001D04C4 /* SMViewController.swift */; };
 		AD553A1B24D4848F001D04C4 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD553A1924D4848F001D04C4 /* PostTableViewCell.swift */; };
 		AD553A1C24D4848F001D04C4 /* PostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD553A1A24D4848F001D04C4 /* PostTableViewCell.xib */; };
 		ADA6DC3624C6115D003E4FD8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA6DC3524C6115D003E4FD8 /* AppDelegate.swift */; };
 		ADA6DC3824C6115D003E4FD8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA6DC3724C6115D003E4FD8 /* SceneDelegate.swift */; };
-		ADA6DC3A24C6115D003E4FD8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA6DC3924C6115D003E4FD8 /* ViewController.swift */; };
 		ADA6DC3D24C6115D003E4FD8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADA6DC3B24C6115D003E4FD8 /* Main.storyboard */; };
 		ADA6DC4024C6115D003E4FD8 /* drawing.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ADA6DC3E24C6115D003E4FD8 /* drawing.xcdatamodeld */; };
 		ADA6DC4224C6115E003E4FD8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADA6DC4124C6115E003E4FD8 /* Assets.xcassets */; };
@@ -23,18 +29,25 @@
 		ADA6DC5124C64726003E4FD8 /* NewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA6DC5024C64726003E4FD8 /* NewViewController.swift */; };
 		ADA6DC5324C647B6003E4FD8 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA6DC5224C647B6003E4FD8 /* ListViewController.swift */; };
 		ADA6DC5724C8C6AB003E4FD8 /* ImageViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA6DC5624C8C6AB003E4FD8 /* ImageViewCell.swift */; };
+		ADB0088524DEFFFC00248BB7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ADB0088424DEFFFC00248BB7 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2A8BB05181198D6D2B1D587B /* Pods_drawing.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_drawing.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		828CA72D41DD24798F2FFBB6 /* Pods-drawing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-drawing.release.xcconfig"; path = "Target Support Files/Pods-drawing/Pods-drawing.release.xcconfig"; sourceTree = "<group>"; };
+		AD318B8424DF0B6B0041472F /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		AD318B8524DF0B6B0041472F /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		AD318B8724DF0B6B0041472F /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		AD318B8D24DF0C790041472F /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		AD318B8E24DF0C790041472F /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		AD318B9324E1B5020041472F /* extensionfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensionfile.swift; sourceTree = "<group>"; };
+		AD318B9524E316B20041472F /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
 		AD553A1724D4710A001D04C4 /* SMViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMViewController.swift; sourceTree = "<group>"; };
 		AD553A1924D4848F001D04C4 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		AD553A1A24D4848F001D04C4 /* PostTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostTableViewCell.xib; sourceTree = "<group>"; };
 		ADA6DC3224C6115D003E4FD8 /* drawing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = drawing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADA6DC3524C6115D003E4FD8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ADA6DC3724C6115D003E4FD8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		ADA6DC3924C6115D003E4FD8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		ADA6DC3C24C6115D003E4FD8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		ADA6DC3F24C6115D003E4FD8 /* drawing.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = drawing.xcdatamodel; sourceTree = "<group>"; };
 		ADA6DC4124C6115E003E4FD8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -45,6 +58,7 @@
 		ADA6DC5024C64726003E4FD8 /* NewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewViewController.swift; sourceTree = "<group>"; };
 		ADA6DC5224C647B6003E4FD8 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		ADA6DC5624C8C6AB003E4FD8 /* ImageViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewCell.swift; sourceTree = "<group>"; };
+		ADB0088424DEFFFC00248BB7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		BB183430B8069B612443D627 /* Pods-drawing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-drawing.debug.xcconfig"; path = "Target Support Files/Pods-drawing/Pods-drawing.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -60,6 +74,49 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AD318B8324DF0B6B0041472F /* LoginViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				AD318B8424DF0B6B0041472F /* SignupViewController.swift */,
+				AD318B8524DF0B6B0041472F /* ViewController.swift */,
+				AD318B8724DF0B6B0041472F /* LoginViewController.swift */,
+			);
+			path = LoginViewControllers;
+			sourceTree = "<group>";
+		};
+		AD318B8C24DF0C790041472F /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				AD318B8D24DF0C790041472F /* Constants.swift */,
+				AD318B8E24DF0C790041472F /* Utilities.swift */,
+				AD318B9324E1B5020041472F /* extensionfile.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		AD318B9124E0A2750041472F /* drawingViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				ADA6DC4E24C64715003E4FD8 /* NoteViewController.swift */,
+				ADA6DC5024C64726003E4FD8 /* NewViewController.swift */,
+				ADA6DC5224C647B6003E4FD8 /* ListViewController.swift */,
+				ADA6DC5624C8C6AB003E4FD8 /* ImageViewCell.swift */,
+				ADA6DC4C24C61909003E4FD8 /* CanvasView.swift */,
+			);
+			path = drawingViewControllers;
+			sourceTree = "<group>";
+		};
+		AD318B9224E0A2AA0041472F /* SMViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				AD553A1724D4710A001D04C4 /* SMViewController.swift */,
+				AD553A1924D4848F001D04C4 /* PostTableViewCell.swift */,
+				AD553A1A24D4848F001D04C4 /* PostTableViewCell.xib */,
+				AD318B9524E316B20041472F /* ShareViewController.swift */,
+			);
+			path = SMViewControllers;
+			sourceTree = "<group>";
+		};
 		ADA6DC2924C6115D003E4FD8 = {
 			isa = PBXGroup;
 			children = (
@@ -81,22 +138,18 @@
 		ADA6DC3424C6115D003E4FD8 /* drawing */ = {
 			isa = PBXGroup;
 			children = (
+				AD318B8C24DF0C790041472F /* Helpers */,
+				AD318B8324DF0B6B0041472F /* LoginViewControllers */,
+				AD318B9124E0A2750041472F /* drawingViewControllers */,
+				AD318B9224E0A2AA0041472F /* SMViewControllers */,
 				ADA6DC3524C6115D003E4FD8 /* AppDelegate.swift */,
 				ADA6DC3724C6115D003E4FD8 /* SceneDelegate.swift */,
-				ADA6DC3924C6115D003E4FD8 /* ViewController.swift */,
-				AD553A1724D4710A001D04C4 /* SMViewController.swift */,
-				ADA6DC4C24C61909003E4FD8 /* CanvasView.swift */,
 				ADA6DC3B24C6115D003E4FD8 /* Main.storyboard */,
 				ADA6DC4124C6115E003E4FD8 /* Assets.xcassets */,
 				ADA6DC4324C6115E003E4FD8 /* LaunchScreen.storyboard */,
 				ADA6DC4624C6115E003E4FD8 /* Info.plist */,
 				ADA6DC3E24C6115D003E4FD8 /* drawing.xcdatamodeld */,
-				ADA6DC4E24C64715003E4FD8 /* NoteViewController.swift */,
-				ADA6DC5024C64726003E4FD8 /* NewViewController.swift */,
-				ADA6DC5224C647B6003E4FD8 /* ListViewController.swift */,
-				ADA6DC5624C8C6AB003E4FD8 /* ImageViewCell.swift */,
-				AD553A1924D4848F001D04C4 /* PostTableViewCell.swift */,
-				AD553A1A24D4848F001D04C4 /* PostTableViewCell.xib */,
+				ADB0088424DEFFFC00248BB7 /* GoogleService-Info.plist */,
 			);
 			path = drawing;
 			sourceTree = "<group>";
@@ -180,6 +233,7 @@
 			files = (
 				ADA6DC4524C6115E003E4FD8 /* LaunchScreen.storyboard in Resources */,
 				ADA6DC4224C6115E003E4FD8 /* Assets.xcassets in Resources */,
+				ADB0088524DEFFFC00248BB7 /* GoogleService-Info.plist in Resources */,
 				ADA6DC3D24C6115D003E4FD8 /* Main.storyboard in Resources */,
 				AD553A1C24D4848F001D04C4 /* PostTableViewCell.xib in Resources */,
 			);
@@ -237,14 +291,20 @@
 				AD553A1B24D4848F001D04C4 /* PostTableViewCell.swift in Sources */,
 				ADA6DC4024C6115D003E4FD8 /* drawing.xcdatamodeld in Sources */,
 				ADA6DC5724C8C6AB003E4FD8 /* ImageViewCell.swift in Sources */,
+				AD318B8B24DF0B6B0041472F /* LoginViewController.swift in Sources */,
 				AD553A1824D4710A001D04C4 /* SMViewController.swift in Sources */,
-				ADA6DC3A24C6115D003E4FD8 /* ViewController.swift in Sources */,
+				AD318B8F24DF0C790041472F /* Constants.swift in Sources */,
 				ADA6DC5124C64726003E4FD8 /* NewViewController.swift in Sources */,
+				AD318B8824DF0B6B0041472F /* SignupViewController.swift in Sources */,
+				AD318B9024DF0C790041472F /* Utilities.swift in Sources */,
 				ADA6DC4D24C61909003E4FD8 /* CanvasView.swift in Sources */,
+				AD318B8924DF0B6B0041472F /* ViewController.swift in Sources */,
+				AD318B9424E1B5020041472F /* extensionfile.swift in Sources */,
 				ADA6DC3624C6115D003E4FD8 /* AppDelegate.swift in Sources */,
 				ADA6DC4F24C64715003E4FD8 /* NoteViewController.swift in Sources */,
 				ADA6DC5324C647B6003E4FD8 /* ListViewController.swift in Sources */,
 				ADA6DC3824C6115D003E4FD8 /* SceneDelegate.swift in Sources */,
+				AD318B9624E316B20041472F /* ShareViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
