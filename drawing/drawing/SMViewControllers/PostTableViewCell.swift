@@ -15,6 +15,7 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet var usernameLabel: UILabel!
     @IBOutlet var likesLabel: UILabel!
     @IBOutlet var collButton: UIButton!
+    @IBOutlet var descriptiontext: UITextView!
     
     static let identifier = "PostTableViewCell"
     static func nib() -> UINib {
@@ -33,7 +34,20 @@ class PostTableViewCell: UITableViewCell {
     func configure(with model: CreationPost){
         self.likesLabel.text = "\(model.numberOfRecreate) ReCreate"
         self.usernameLabel.text = model.username
-        self.userImageView.image =  UIImage(named: model.userImageName)
-        self.postImageView.image =  UIImage(named: model.postImageName)
+        self.postImageView.image = model.postImage
+        self.descriptiontext.text = model.descriptiontext
+        
+        let safeEmail = DatabaseManager.safeEmail(emailAddress: model.email )
+        let filename = safeEmail + "_profile_pic"
+        let path = "images/profileImg/"+filename
+        print(path)
+        StorageManager.shared.downloadURL(for: path, completion: { result in
+                   switch result {
+                   case .success(let url):
+                    self.userImageView.sd_setImage(with: url, completed: nil)
+                   case .failure(let error):
+                       print("Failed to get download url: \(error)")
+                   }
+        })
     }
 }

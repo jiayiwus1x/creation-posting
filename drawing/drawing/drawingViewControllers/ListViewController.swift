@@ -8,7 +8,7 @@
 
 import UIKit
 import RealmSwift
-
+import FirebaseAuth
 class SavedItem: Object {
     @objc dynamic var title: String = ""
     @objc dynamic var project: Data = Data()
@@ -17,7 +17,7 @@ class SavedItem: Object {
     let lineop = List<Float>()
     let pos = List<String>()
     let ind = List<Int>()
-
+    
     //@objc dynamic var lines: Data = Data()
     //@objc dynamic var lines: AnyClass = [TouchPointsAndColor]()
 }
@@ -28,6 +28,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet var AddButton: UIBarButtonItem!
     
     @IBOutlet var PostButton: UIBarButtonItem!
+    @IBOutlet var ProfileButton: UIBarButtonItem!
     // saving
     private var models = [SavedItem]()
     //private var drawings = [CanvasView]()
@@ -38,6 +39,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        ProfileButton.image = UIImage(named: "head_1")
         setupNavigationController()
         table.register(ImageViewCell.self, forCellReuseIdentifier: "cell")
         
@@ -46,20 +48,42 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         models = realm.objects(SavedItem.self).map({ $0 })
         
         title = "Projects"
+        // DatabaseManager.shared.test()
         // Do any additional setup after loading the view.
     }
-   private func setupNavigationController(){
-        
-//        let titleImageView = UIImageView(image: UIImage(named: "yuch"))
-//
-//        titleImageView.frame = CGRect(x: 20, y: 20, width: 0, height: 5)
-//        titleImageView.contentMode = .scaleAspectFit
-//        titleImageView.layer.cornerRadius = 12
-//        titleImageView.clipsToBounds = true
-//        navigationItem.titleView = titleImageView
-    navigationItem.rightBarButtonItems = [AddButton, PostButton]
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        validateAuth()
     }
-
+    private func validateAuth(){
+        if FirebaseAuth.Auth.auth().currentUser == nil {
+            let vc = ViewController()
+            let nav = UINavigationController(rootViewController: vc)
+            nav.modalPresentationStyle = .fullScreen
+            present(nav, animated: false)
+            
+        }
+        
+        
+    }
+    private func setupNavigationController(){
+        
+        navigationItem.rightBarButtonItems = [AddButton, PostButton, ProfileButton]
+    }
+    
+    @IBAction func didTapProfile() {
+        guard let vc = storyboard?.instantiateViewController(identifier: "profile") as? ProfileViewController else {
+            return
+        }
+        vc.completionHandler = { [weak self] in
+            self?.refresh()
+        }
+        vc.title = "Jiayi"
+        vc.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
     @IBAction func didTapAddButton() {
         guard let vc = storyboard?.instantiateViewController(identifier: "enter") as? NewViewController else {
             return
@@ -73,19 +97,29 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     @IBAction func didTapPostButton() {
-           print("in the didTapPost func")
-           guard let vc = storyboard?.instantiateViewController(identifier: "share") as? NewViewController else {
-               return
-           }
-           vc.completionHandler = { [weak self] in
-               self?.refresh()
-           }
-           vc.title = "Sharing"
-           vc.navigationItem.largeTitleDisplayMode = .never
-           navigationController?.pushViewController(vc, animated: true)
-       }
-      
-   
+        print("in the didTapPost func")
+        print(models)
+        print("/n")
+        print("/n")
+        if models.isEmpty {
+            print("Found model is empty")
+            let alert = UIAlertController(title: "No project is selected!", message: "Create Something to post", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Got it", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
+        guard let vc = storyboard?.instantiateViewController(identifier: "share") as? ShareViewController else {
+            return
+        }
+        vc.completionHandler = { [weak self] in
+            self?.refresh()
+        }
+        vc.title = "Sharing"
+        vc.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    
     func refresh() {
         models = realm.objects(SavedItem.self).map({ $0 })
         print("did refreshed,\n", SavedItem.self)
@@ -101,7 +135,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ImageViewCell
-    
+        
         cell.textLabel?.text = models[indexPath.row].title
         
         let imagedata = models[indexPath.row].project

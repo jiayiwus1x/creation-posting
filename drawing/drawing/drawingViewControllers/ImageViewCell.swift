@@ -17,6 +17,8 @@ class ImageViewCell: UITableViewCell {
     }()
     var imageViewHeight = NSLayoutConstraint()
     var imageRatioWidth = CGFloat()
+    @IBOutlet var sharebutton: UIButton!
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.addSubview(mainImageView)
