@@ -11,6 +11,8 @@ import RealmSwift
 import FirebaseStorage
 import FirebaseDatabase
 import FirebaseAuth
+
+
 class ShareViewController: UIViewController {
     public var completionHandler: (() -> Void)?
     
@@ -44,7 +46,7 @@ class ShareViewController: UIViewController {
         let safeEmail = DatabaseManager.safeEmail(emailAddress: user?.email ?? "No_email")
         let filename = safeEmail + "_post_pic" + String(Int.random(in: 0..<10000))
 
-        let path = "images/"+filename
+        let path = "images/post_images/"+filename
         
         storage.child(path).putData(imageData,
                                                  metadata: nil,
@@ -86,7 +88,7 @@ class ShareViewController: UIViewController {
             
         ]
         
-        db.child("latest_posting").setValue(object)
+        //db.child("latest_posting").setValue(object)
         db.child("postings").observeSingleEvent(of: .value, with: { snapshot in
             if var usersCollection = snapshot.value as? [[String: Any]]{
                 

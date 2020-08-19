@@ -76,12 +76,3 @@ class SMViewController: UIViewController,UITableViewDataSource, UITableViewDeleg
     }
 }
 
-struct CreationPost {
-    let numberOfRecreate: Int
-    let username: String
-    let email: String
-    let postImage: UIImage
-    let descriptiontext: String
-    let timestamp: String
-    
-}

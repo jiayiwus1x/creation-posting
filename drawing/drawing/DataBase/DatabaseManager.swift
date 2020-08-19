@@ -84,63 +84,9 @@ extension DatabaseManager{
         
     }
     
-    public func insertPosting(with posting: Posting, completion: @escaping (Bool) -> Void){
-        database.child("latest_posting").setValue([
-            "email": posting.emailAddress,
-            "userID": posting.userID,
-            "ImageURL": posting.ImagURL,
-            "Description": posting.discription,
-            "Time": posting.time,
-            "numberOfRecreate": posting.numberOfRecreate
-            ], withCompletionBlock: { error, _ in
-                guard error == nil else {print("failed to write to database")
-                    completion(false)
-                    return
-                }
-                
-                self.database.child("posting").observeSingleEvent(of: .value, with: { snapshot in
-                    if var usersCollection = snapshot.value as? [[String: Any]]{
-                        let newElement = [
-                           "email": posting.emailAddress,
-                            "userID": posting.userID,
-                            "ImageURL": posting.ImagURL,
-                            "Description": posting.discription,
-                            "Time": posting.time,
-                            "numberOfRecreate": posting.numberOfRecreate
-                            ] as [String : Any]
-                        usersCollection.append(newElement)
-                        self.database.child("posting").setValue(usersCollection, withCompletionBlock: {error, _ in
-                            guard error == nil else{
-                                return
-                            }
-                            completion(true)
-                        })
-                    }
-                    else{
-                        let newCollection: [[String: Any]] = [
-                            [
-                                "email": posting.emailAddress,
-                                "userID": posting.userID,
-                                "ImageURL": posting.ImagURL,
-                                "Description": posting.discription,
-                                "Time": posting.time,
-                                "numberOfRecreate": posting.numberOfRecreate
-                            ]] as [[String : Any]]
-                        
-                        self.database.child("postings").setValue(newCollection, withCompletionBlock: {error, _ in
-                            guard error == nil else{
-                                return
-                            }
-                            completion(true)
-                        })
-                    }
-                    
-                    
-                })
-                
-        })
-        
-    }
+//    public func insertPosting(with posting: Posting, completion: @escaping (Bool) -> Void){
+
+//    }
    
     public enum DatabaseError: Error {
         case failedToFetch
@@ -182,14 +128,13 @@ extension DatabaseManager {
     
 }
 
-//data structure for individual post
+//data objects for profile/postings/projects/
 struct UserDescription{
     let firstName: String
     let lastName: String
     let emailAddress: String
     var safeEmail: String{
-        var safeEmail = emailAddress.replacingOccurrences(of: ".", with: "-")
-        safeEmail = safeEmail.replacingOccurrences(of: "@", with: "-")
+        let safeEmail = DatabaseManager.safeEmail(emailAddress: emailAddress)
         return safeEmail
     }
     
@@ -199,18 +144,25 @@ struct UserDescription{
 }
 
 
-struct Posting{
-    let emailAddress: String
-    let userID: String
-    let ImagURL: String
-    let discription: String
-    let time: String
+struct Project{
+    let Image: Data
+    let linecolor: [String]
+    let lineop: [Float]
+    let linewidth: [Float]
+    let pos: [String]
+    let ind: [Int]
+   
+}
+
+struct CreationPost {
     let numberOfRecreate: Int
-    var safeEmail: String{
-        var safeEmail = emailAddress.replacingOccurrences(of: ".", with: "-")
-        safeEmail = safeEmail.replacingOccurrences(of: "@", with: "-")
-        return safeEmail
+    let username: String
+    let email: String
+    let postImage: UIImage
+    let descriptiontext: String
+    let timestamp: String
+    var profilePictureUrl: String {
+        let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
+        return "/profileImg/\(safeEmail)_profile_pic"
     }
-    
-    
 }

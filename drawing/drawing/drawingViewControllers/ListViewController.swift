@@ -97,10 +97,6 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     @IBAction func didTapPostButton() {
-        print("in the didTapPost func")
-        print(models)
-        print("/n")
-        print("/n")
         if models.isEmpty {
             print("Found model is empty")
             let alert = UIAlertController(title: "No project is selected!", message: "Create Something to post", preferredStyle: .alert)
@@ -126,7 +122,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         table.reloadData()
     }
     
-    // tables
+    //mark: tables
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -148,7 +144,6 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.deselectRow(at: indexPath, animated: true)
         
         let model = models[indexPath.row]
-        // Show note controller
         guard let vc = storyboard?.instantiateViewController(identifier: "note") as? NoteViewController else {
             return
         }

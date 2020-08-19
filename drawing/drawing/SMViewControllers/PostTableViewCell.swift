@@ -37,11 +37,9 @@ class PostTableViewCell: UITableViewCell {
         self.usernameLabel.text = model.username
         self.postImageView.image = model.postImage
         self.descriptiontext.text = model.descriptiontext
-        
-        let safeEmail = DatabaseManager.safeEmail(emailAddress: model.email )
-        let filename = safeEmail + "_profile_pic"
+
         self.timestamp.text = model.timestamp
-        let path = "images/profileImg/"+filename
+        let path = model.profilePictureUrl
         StorageManager.shared.downloadURL(for: path, completion: { result in
                    switch result {
                    case .success(let url):
