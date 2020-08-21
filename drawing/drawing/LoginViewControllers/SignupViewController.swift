@@ -92,7 +92,7 @@ class SignupViewController: UIViewController {
                             self.alertUserLoginError(message: "email exist, try login")
                             return
                         }
-                        let appuser = UserDescription(firstName: firstName, lastName: lastName, emailAddress: email)
+                        let appuser = UserDescription(firstName: firstName, lastName: lastName, emailAddress: email, follower: [email], following: [email], creato: 0)
                         DatabaseManager.shared.insertUser(with: appuser
                             , completion: { success in
                                 if success {

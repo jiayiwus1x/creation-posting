@@ -7,9 +7,12 @@
 //
 
 import UIKit
-
+protocol PostTableViewCellDelegate: AnyObject {
+    func didTapButton (with title: String)
+}
 class PostTableViewCell: UITableViewCell {
     
+    weak var delegate: PostTableViewCellDelegate?
     @IBOutlet var userImageView: UIImageView!
     @IBOutlet var postImageView: UIImageView!
     @IBOutlet var usernameLabel: UILabel!
@@ -27,11 +30,15 @@ class PostTableViewCell: UITableViewCell {
         // Initialization code
     }
 
+    @IBAction func didTapButton(_ sender: Any) {
+        delegate?.didTapButton(with: "it works!")
+    }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
+    
     func configure(with model: CreationPost){
         self.likesLabel.text = "\(model.numberOfRecreate) ReCreate"
         self.usernameLabel.text = model.username

@@ -87,8 +87,7 @@ class ShareViewController: UIViewController {
             "order": order
             
         ]
-        
-        //db.child("latest_posting").setValue(object)
+
         db.child("postings").observeSingleEvent(of: .value, with: { snapshot in
             if var usersCollection = snapshot.value as? [[String: Any]]{
                 

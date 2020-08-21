@@ -41,7 +41,10 @@ extension DatabaseManager{
     public func insertUser(with user: UserDescription, completion: @escaping (Bool) -> Void){
         database.child(user.safeEmail).setValue([
             "first_name": user.firstName,
-            "last_name": user.lastName
+            "last_name": user.lastName,
+            "follower": user.follower,
+            "following": user.following,
+            "creato": user.creato
             ], withCompletionBlock: { error, _ in
                 guard error == nil else {print("failed to write to database")
                     completion(false)
@@ -53,6 +56,7 @@ extension DatabaseManager{
                         let newElement = [
                             "name": user.firstName + " " + user.lastName,
                             "email": user.safeEmail
+                            
                         ]
                         usersCollection.append(newElement)
                         self.database.child("users").setValue(usersCollection, withCompletionBlock: {error, _ in
@@ -133,14 +137,18 @@ struct UserDescription{
     let firstName: String
     let lastName: String
     let emailAddress: String
+    let follower: [String]
+    let following: [String]
+    let creato: Int
     var safeEmail: String{
         let safeEmail = DatabaseManager.safeEmail(emailAddress: emailAddress)
         return safeEmail
     }
     
     var profilePictureUrl: String {
-        return "/profileImg/\(safeEmail)_profile_pic"
+        return "images/profileImg/\(safeEmail)_profile_pic"
     }
+   
 }
 
 
@@ -163,6 +171,11 @@ struct CreationPost {
     let timestamp: String
     var profilePictureUrl: String {
         let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
-        return "/profileImg/\(safeEmail)_profile_pic"
+        return "images/profileImg/\(safeEmail)_profile_pic"
     }
+}
+
+struct SearchResult {
+    let name: String
+    let email: String
 }

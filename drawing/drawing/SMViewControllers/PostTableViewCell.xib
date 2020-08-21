@@ -21,6 +21,7 @@
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="head_1" translatesAutoresizingMaskIntoConstraints="NO" id="6Rp-lP-f6r">
                                 <rect key="frame" x="5" y="15" width="80" height="80"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="FUB-je-56K"/>
                                     <constraint firstAttribute="width" constant="80" id="nqR-fr-R2E"/>
@@ -70,6 +71,9 @@
                                         </constraints>
                                         <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" backgroundImage="heart" catalog="system"/>
+                                        <connections>
+                                            <action selector="didTapButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="afe-JX-A7d"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kZ7-y9-Okt">
                                         <rect key="frame" x="40" y="10" width="40" height="25"/>

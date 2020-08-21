@@ -17,5 +17,6 @@ target 'drawing' do
 	pod 'Firebase/Firestore'
 	pod 'Firebase/Storage'
 	pod 'ProgressHUD'
+	pod 'JGProgressHUD'
 	pod 'SDWebImage'
 end

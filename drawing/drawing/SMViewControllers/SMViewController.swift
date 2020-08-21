@@ -29,7 +29,7 @@ class SMViewController: UIViewController,UITableViewDataSource, UITableViewDeleg
         
         
     }
-  
+    
     func fetchpostings(){
         db.child("postings").queryOrdered(byChild: "order").observe(.childAdded, with: {
             (snapshot) in guard let
@@ -53,7 +53,7 @@ class SMViewController: UIViewController,UITableViewDataSource, UITableViewDeleg
         )
         
     }
-   
+    
     func numberOfSections (in tableView: UITableView) ->Int{
         return 1
     }
@@ -69,6 +69,7 @@ class SMViewController: UIViewController,UITableViewDataSource, UITableViewDeleg
         let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as! PostTableViewCell
         
         cell.configure(with: models[indexPath.row])
+        cell.delegate = self
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
@@ -76,3 +77,8 @@ class SMViewController: UIViewController,UITableViewDataSource, UITableViewDeleg
     }
 }
 
+extension SMViewController: PostTableViewCellDelegate{
+    func didTapButton(with title: String) {
+        print("\(title)")
+    }
+}
