@@ -84,12 +84,12 @@
                                         <state key="normal" image="ellipses.bubble" catalog="system"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Bc-HL-CJ1">
-                                        <rect key="frame" x="90" y="9" width="20" height="21"/>
+                                        <rect key="frame" x="90" y="8" width="20" height="23.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="20" id="0Xh-Wi-PGt"/>
                                         </constraints>
                                         <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" backgroundImage="square.and.arrow.up" catalog="system"/>
+                                        <state key="normal" backgroundImage="doc.on.doc" catalog="system"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fL7-mf-RfI">
                                         <rect key="frame" x="128" y="10" width="28" height="22"/>
@@ -121,14 +121,25 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="oOx-Tb-red">
+                                <rect key="frame" x="0.0" y="61" width="579" height="79"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="oOx-Tb-red" secondAttribute="bottom" id="9C6-hP-u5N"/>
                             <constraint firstAttribute="height" constant="140" id="AKE-35-gca"/>
                             <constraint firstAttribute="trailing" secondItem="lHh-WY-5kp" secondAttribute="trailing" id="GVc-Hh-LLc"/>
                             <constraint firstItem="IUG-GU-r2C" firstAttribute="top" secondItem="qNt-qV-RnK" secondAttribute="topMargin" id="HLm-y6-T7D"/>
                             <constraint firstItem="IUG-GU-r2C" firstAttribute="leading" secondItem="qNt-qV-RnK" secondAttribute="leadingMargin" id="K9S-MX-776"/>
+                            <constraint firstItem="oOx-Tb-red" firstAttribute="top" secondItem="lHh-WY-5kp" secondAttribute="bottom" constant="5" id="Mtw-KM-HSt"/>
+                            <constraint firstAttribute="trailing" secondItem="oOx-Tb-red" secondAttribute="trailing" id="OrN-xu-0gp"/>
                             <constraint firstAttribute="trailing" secondItem="IUG-GU-r2C" secondAttribute="trailing" constant="154" id="QXf-7a-gZo"/>
                             <constraint firstItem="lHh-WY-5kp" firstAttribute="top" secondItem="IUG-GU-r2C" secondAttribute="bottom" constant="-4" id="YLL-fd-Mic"/>
+                            <constraint firstItem="oOx-Tb-red" firstAttribute="leading" secondItem="qNt-qV-RnK" secondAttribute="leading" id="aZu-f9-61f"/>
                             <constraint firstItem="lHh-WY-5kp" firstAttribute="leading" secondItem="qNt-qV-RnK" secondAttribute="leading" constant="90" id="hAZ-Wz-x9F"/>
                         </constraints>
                     </view>
@@ -176,10 +187,10 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="doc.on.doc" catalog="system" width="117" height="128"/>
         <image name="ellipses.bubble" catalog="system" width="128" height="110"/>
         <image name="hand.draw" catalog="system" width="128" height="108"/>
         <image name="head_1" width="276" height="183"/>
         <image name="heart" catalog="system" width="128" height="109"/>
-        <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
     </resources>
 </document>

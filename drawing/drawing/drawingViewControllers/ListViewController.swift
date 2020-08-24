@@ -9,6 +9,7 @@
 import UIKit
 import RealmSwift
 import FirebaseAuth
+
 class SavedItem: Object {
     @objc dynamic var title: String = ""
     @objc dynamic var project: Data = Data()
@@ -173,6 +174,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 }
 
 extension ListViewController: ListViewCellDelegate{
+
     func didTapShare(with item: SavedItem) {
         if item.project.isEmpty {
             print("something went wrong")
@@ -192,4 +194,5 @@ extension ListViewController: ListViewCellDelegate{
         }
         
     }
+    
 }

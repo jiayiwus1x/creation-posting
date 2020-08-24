@@ -9,6 +9,7 @@
 import UIKit
 protocol PostTableViewCellDelegate: AnyObject {
     func didTapButton (with title: String)
+    func didTapProfile(with item: String)
 }
 class PostTableViewCell: UITableViewCell {
     
@@ -21,6 +22,7 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet var descriptiontext: UITextView!
     @IBOutlet weak var timestamp: UILabel!
     
+    var model: CreationPost!
     static let identifier = "PostTableViewCell"
     static func nib() -> UINib {
         return UINib(nibName: "PostTableViewCell", bundle: nil)
@@ -28,6 +30,8 @@ class PostTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        userImageView.isUserInteractionEnabled = true
+        userImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.didTapProfile)))
     }
 
     @IBAction func didTapButton(_ sender: Any) {
@@ -55,5 +59,9 @@ class PostTableViewCell: UITableViewCell {
                        print("Failed to get download url: \(error)")
                    }
         })
+        self.model = model
     }
+    @objc func didTapProfile(){
+        delegate?.didTapProfile(with: self.model.email)
+       }
 }

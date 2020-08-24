@@ -20,6 +20,8 @@
 		AD318B9024DF0C790041472F /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD318B8E24DF0C790041472F /* Utilities.swift */; };
 		AD318B9424E1B5020041472F /* extensionfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD318B9324E1B5020041472F /* extensionfile.swift */; };
 		AD318B9624E316B20041472F /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD318B9524E316B20041472F /* ShareViewController.swift */; };
+		AD4FA0B824F4266300863DD5 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4FA0B724F4266300863DD5 /* FriendsViewController.swift */; };
+		AD4FA0BA24F4531A00863DD5 /* OthersFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4FA0B924F4531A00863DD5 /* OthersFeedViewController.swift */; };
 		AD553A1824D4710A001D04C4 /* SMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD553A1724D4710A001D04C4 /* SMViewController.swift */; };
 		AD553A1B24D4848F001D04C4 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD553A1924D4848F001D04C4 /* PostTableViewCell.swift */; };
 		AD553A1C24D4848F001D04C4 /* PostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD553A1A24D4848F001D04C4 /* PostTableViewCell.xib */; };
@@ -53,6 +55,8 @@
 		AD318B8E24DF0C790041472F /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		AD318B9324E1B5020041472F /* extensionfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensionfile.swift; sourceTree = "<group>"; };
 		AD318B9524E316B20041472F /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		AD4FA0B724F4266300863DD5 /* FriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
+		AD4FA0B924F4531A00863DD5 /* OthersFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OthersFeedViewController.swift; sourceTree = "<group>"; };
 		AD553A1724D4710A001D04C4 /* SMViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMViewController.swift; sourceTree = "<group>"; };
 		AD553A1924D4848F001D04C4 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		AD553A1A24D4848F001D04C4 /* PostTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostTableViewCell.xib; sourceTree = "<group>"; };
@@ -99,6 +103,8 @@
 			isa = PBXGroup;
 			children = (
 				AD96AACC24E6D84300A80DB6 /* ProfileViewController.swift */,
+				AD4FA0B924F4531A00863DD5 /* OthersFeedViewController.swift */,
+				AD4FA0B724F4266300863DD5 /* FriendsViewController.swift */,
 				AD21F3C324F02A690023889D /* SearchViewController.swift */,
 			);
 			path = profile_search;
@@ -129,10 +135,9 @@
 			children = (
 				ADA6DC4E24C64715003E4FD8 /* NoteViewController.swift */,
 				ADA6DC5024C64726003E4FD8 /* NewViewController.swift */,
+				ADA6DC5224C647B6003E4FD8 /* ListViewController.swift */,
 				AD21F3BE24ED61560023889D /* ListViewCell.swift */,
 				AD21F3BF24ED61560023889D /* ListViewCell.xib */,
-				ADA6DC5224C647B6003E4FD8 /* ListViewController.swift */,
-				ADA6DC5624C8C6AB003E4FD8 /* ImageViewCell.swift */,
 				ADA6DC4C24C61909003E4FD8 /* CanvasView.swift */,
 			);
 			path = drawingViewControllers;
@@ -142,11 +147,19 @@
 			isa = PBXGroup;
 			children = (
 				AD553A1724D4710A001D04C4 /* SMViewController.swift */,
+				AD318B9524E316B20041472F /* ShareViewController.swift */,
 				AD553A1924D4848F001D04C4 /* PostTableViewCell.swift */,
 				AD553A1A24D4848F001D04C4 /* PostTableViewCell.xib */,
-				AD318B9524E316B20041472F /* ShareViewController.swift */,
 			);
 			path = SMViewControllers;
+			sourceTree = "<group>";
+		};
+		AD4FA0B624F4255E00863DD5 /* Design */ = {
+			isa = PBXGroup;
+			children = (
+				ADA6DC5624C8C6AB003E4FD8 /* ImageViewCell.swift */,
+			);
+			path = Design;
 			sourceTree = "<group>";
 		};
 		ADA6DC2924C6115D003E4FD8 = {
@@ -170,6 +183,7 @@
 		ADA6DC3424C6115D003E4FD8 /* drawing */ = {
 			isa = PBXGroup;
 			children = (
+				AD4FA0B624F4255E00863DD5 /* Design */,
 				AD318B8C24DF0C790041472F /* Helpers */,
 				AD21F3C224F02A210023889D /* profile_search */,
 				AD318B8324DF0B6B0041472F /* LoginViewControllers */,
@@ -324,6 +338,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD553A1B24D4848F001D04C4 /* PostTableViewCell.swift in Sources */,
+				AD4FA0BA24F4531A00863DD5 /* OthersFeedViewController.swift in Sources */,
 				ADA6DC4024C6115D003E4FD8 /* drawing.xcdatamodeld in Sources */,
 				ADA6DC5724C8C6AB003E4FD8 /* ImageViewCell.swift in Sources */,
 				AD318B8B24DF0B6B0041472F /* LoginViewController.swift in Sources */,
@@ -338,6 +353,7 @@
 				AD21F3C424F02A690023889D /* SearchViewController.swift in Sources */,
 				AD318B8924DF0B6B0041472F /* ViewController.swift in Sources */,
 				AD21F3C024ED61560023889D /* ListViewCell.swift in Sources */,
+				AD4FA0B824F4266300863DD5 /* FriendsViewController.swift in Sources */,
 				AD318B9424E1B5020041472F /* extensionfile.swift in Sources */,
 				ADA6DC3624C6115D003E4FD8 /* AppDelegate.swift in Sources */,
 				AD21F3B124EAEBEC0023889D /* DatabaseManager.swift in Sources */,

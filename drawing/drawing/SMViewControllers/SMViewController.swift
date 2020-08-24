@@ -74,18 +74,22 @@ class SMViewController: UIViewController,UITableViewDataSource, UITableViewDeleg
 }
 
 extension SMViewController: PostTableViewCellDelegate{
+    func didTapProfile(with item: String) {
+        
+        print("tap registered with email", item)
+        guard let vc = storyboard?.instantiateViewController(identifier: "OthersFeed") as? OthersFeedViewController else {
+            return
+        }
+        
+        vc.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(vc, animated: true)
+        UserDefaults.standard.setValue(item, forKey: "feedemail")
+        
+    }
+    
     func didTapButton(with title: String) {
         print("\(title)")
     }
-    func didTapprofile(with email: String){
-        
-       guard let vc = storyboard?.instantiateViewController(identifier: "profile") as? ProfileViewController else {
-           return
-       }
- 
-       vc.navigationItem.largeTitleDisplayMode = .never
-       navigationController?.pushViewController(vc, animated: true)
-       
-        
-    }
+    
+    
 }

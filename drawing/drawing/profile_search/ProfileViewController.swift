@@ -34,7 +34,6 @@ class ProfileViewController: UIViewController,  UIImagePickerControllerDelegate,
         Username.text = UserDefaults.standard.value(forKey:"name") as? String ?? "No Name"
       
         let path = GetImgPath()
-     
         StorageManager.shared.downloadURL(for: path, completion: { result in
                    switch result {
                    case .success(let url):

@@ -18,7 +18,11 @@ final class DatabaseManager{
         safeEmail = safeEmail.replacingOccurrences(of: "@", with: "-")
         return safeEmail
     }
-    
+    static func GetImgPath(email: String) -> String{
+           let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
+           let path = "images/profileImg/" + safeEmail + "_profile_pic"
+           return path
+       }
 }
 
 // Mark: - Account Management
@@ -131,8 +135,9 @@ extension DatabaseManager {
             completion(.success(value as! [[String : String]]))
         })
     }
-    
+   
 }
+
 
 //data objects for profile/postings/projects/
 struct UserDescription{

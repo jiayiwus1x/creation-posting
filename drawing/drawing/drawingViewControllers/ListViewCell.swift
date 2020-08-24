@@ -24,6 +24,7 @@ class ListViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
     }
 
     func configure(with model: SavedItem){
@@ -38,4 +39,5 @@ class ListViewCell: UITableViewCell {
     @IBAction func didTapShare(_ sender: Any) {
         delegate?.didTapShare(with: self.model)
     }
+  
 }
