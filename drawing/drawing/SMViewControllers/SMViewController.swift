@@ -46,11 +46,7 @@ class SMViewController: UIViewController,UITableViewDataSource, UITableViewDeleg
             let model = CreationPost(numberOfRecreate: 0, username: value["userID"] as! String, email: value["email"] as! String, postImage: image, descriptiontext: value["Description"] as! String, timestamp: value["Time"] as! String)
             self.models.append(model)
             self.table.reloadData()
-            
-            
-            
-        }
-        )
+        })
         
     }
     
@@ -80,5 +76,16 @@ class SMViewController: UIViewController,UITableViewDataSource, UITableViewDeleg
 extension SMViewController: PostTableViewCellDelegate{
     func didTapButton(with title: String) {
         print("\(title)")
+    }
+    func didTapprofile(with email: String){
+        
+       guard let vc = storyboard?.instantiateViewController(identifier: "profile") as? ProfileViewController else {
+           return
+       }
+ 
+       vc.navigationItem.largeTitleDisplayMode = .never
+       navigationController?.pushViewController(vc, animated: true)
+       
+        
     }
 }

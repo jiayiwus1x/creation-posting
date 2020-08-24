@@ -7,9 +7,17 @@
 //
 
 import UIKit
+protocol ListViewCellDelegate: AnyObject {
+    func didTapShare (with item: SavedItem)
+}
 
 class ListViewCell: UITableViewCell {
     static let identifier = "ListViewCell"
+    weak var delegate: ListViewCellDelegate?
+    var model = SavedItem()
+    @IBOutlet weak var ImageView: UIImageView!
+    @IBOutlet weak var share: UIButton!
+    @IBOutlet weak var addcollebrators: UIButton!
     static func nib() -> UINib {
         return UINib(nibName: "ListViewCell", bundle: nil)
     }
@@ -18,10 +26,16 @@ class ListViewCell: UITableViewCell {
         // Initialization code
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    func configure(with model: SavedItem){
+        
+        if model.project.isEmpty{
+        return
+        } else{
+            self.ImageView.image = UIImage(data: model.project)!
+            self.model = model
+        }
     }
-    
+    @IBAction func didTapShare(_ sender: Any) {
+        delegate?.didTapShare(with: self.model)
+    }
 }

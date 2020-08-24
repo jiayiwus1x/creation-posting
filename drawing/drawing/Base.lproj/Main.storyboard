@@ -19,11 +19,11 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="808"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="261" id="Srk-aS-gKU">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="261"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="Srk-aS-gKU">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Srk-aS-gKU" id="4oE-cO-GL9">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="261"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -122,20 +122,39 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oJP-4x-bna">
-                                <rect key="frame" x="20" y="322" width="62" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Chf-IE-6O3">
+                                <rect key="frame" x="0.0" y="355" width="414" height="507"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Gx3-Ad-mTg">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Gx3-Ad-mTg" id="PsF-EP-K05">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oJP-4x-bna">
+                                <rect key="frame" x="177" y="285" width="62" height="30"/>
                                 <state key="normal" title="following"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="gXm-kx-nxi" firstAttribute="trailing" secondItem="ce9-WI-782" secondAttribute="trailing" id="6wi-CM-d1n"/>
+                            <constraint firstItem="gXm-kx-nxi" firstAttribute="trailing" secondItem="Chf-IE-6O3" secondAttribute="trailing" id="B7R-31-riJ"/>
+                            <constraint firstItem="gXm-kx-nxi" firstAttribute="bottom" secondItem="Chf-IE-6O3" secondAttribute="bottom" id="Itq-u1-9bX"/>
+                            <constraint firstItem="Chf-IE-6O3" firstAttribute="leading" secondItem="gXm-kx-nxi" secondAttribute="leading" id="Iv5-QE-YHc"/>
                             <constraint firstItem="oXe-GD-PWR" firstAttribute="leading" secondItem="gXm-kx-nxi" secondAttribute="leading" constant="20" id="JOK-Qn-e6E"/>
+                            <constraint firstItem="oJP-4x-bna" firstAttribute="top" secondItem="ce9-WI-782" secondAttribute="bottom" constant="5" id="Mhi-Xa-drE"/>
+                            <constraint firstItem="Chf-IE-6O3" firstAttribute="top" secondItem="oJP-4x-bna" secondAttribute="bottom" constant="40" id="Ycf-XZ-Ona"/>
                             <constraint firstItem="oXe-GD-PWR" firstAttribute="top" secondItem="gXm-kx-nxi" secondAttribute="top" constant="25" id="cNh-zk-3UA"/>
                             <constraint firstItem="ce9-WI-782" firstAttribute="leading" secondItem="g0v-hc-tjk" secondAttribute="leading" constant="177" id="jwg-vb-XEz"/>
                             <constraint firstItem="ce9-WI-782" firstAttribute="leading" secondItem="oXe-GD-PWR" secondAttribute="trailing" constant="8" symbolic="YES" id="u2B-gZ-mzN"/>
                             <constraint firstItem="ce9-WI-782" firstAttribute="top" secondItem="gXm-kx-nxi" secondAttribute="top" constant="49" id="uL9-Eg-jAX"/>
+                            <constraint firstItem="oJP-4x-bna" firstAttribute="leading" secondItem="oXe-GD-PWR" secondAttribute="trailing" constant="8" id="yw2-Q9-ytH"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="gXm-kx-nxi"/>
                     </view>
@@ -150,7 +169,9 @@
                     </navigationItem>
                     <connections>
                         <outlet property="Username" destination="1RB-RF-Rl4" id="VyT-oS-BKs"/>
+                        <outlet property="creato" destination="xvR-4a-jRF" id="U5g-Ch-vcp"/>
                         <outlet property="email" destination="fhx-YA-QaL" id="SjV-k6-GiR"/>
+                        <outlet property="my_feed" destination="Chf-IE-6O3" id="v8G-Dd-daP"/>
                         <outlet property="profilepic" destination="oXe-GD-PWR" id="UHe-Nr-Lbh"/>
                     </connections>
                 </viewController>
@@ -281,7 +302,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VBe-MK-uPC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2423" y="89"/>
+            <point key="canvasLocation" x="941" y="74"/>
         </scene>
         <!--Note View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -495,7 +516,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3333" y="-494"/>
+            <point key="canvasLocation" x="3997" y="-658"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="gjH-w5-Bhp">
@@ -526,7 +547,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gug-Op-EuC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="765" y="135"/>
+            <point key="canvasLocation" x="941" y="732"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="iyo-RD-Wj1">
@@ -760,7 +781,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X2r-KN-bTs" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3961" y="-494"/>
+            <point key="canvasLocation" x="4626" y="-658"/>
         </scene>
         <!--Signup View Controller-->
         <scene sceneID="8RX-gg-AmU">

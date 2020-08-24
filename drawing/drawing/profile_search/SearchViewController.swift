@@ -36,8 +36,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var data = [String]()
     var filtereddata = [String]()
 
-    private var hasFetched = false
-    private let spinner = JGProgressHUD(style: .dark)
+//    private var hasFetched = false
+//    private let spinner = JGProgressHUD(style: .dark)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,7 +68,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 }
                 self?.table.reloadData()
             case .failure(let error):
-                print("Failed to get usres: \(error)")
+                print("Failed to get users: \(error)")
             }
         })
     }

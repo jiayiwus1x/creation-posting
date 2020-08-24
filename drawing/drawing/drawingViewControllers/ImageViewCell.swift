@@ -17,7 +17,7 @@ class ImageViewCell: UITableViewCell {
     }()
     var imageViewHeight = NSLayoutConstraint()
     var imageRatioWidth = CGFloat()
-    @IBOutlet var sharebutton: UIButton!
+    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -26,6 +26,7 @@ class ImageViewCell: UITableViewCell {
         mainImageView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
         mainImageView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         mainImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

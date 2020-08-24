@@ -107,7 +107,7 @@ class SignupViewController: UIViewController {
                                             UserDefaults.standard.set(downloadUrl, forKey: "profile_picture_url")
                                             print(downloadUrl)
                                         case .failure(let error):
-                                            print("Storage maanger error: \(error)")
+                                            print("Storage manger error: \(error)")
                                         }
                                     })
                                 }

@@ -39,23 +39,23 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        ProfileButton.image = UIImage(named: "head_1")
+        //ProfileButton.image = UIImage(named: "head_1")
         setupNavigationController()
-        table.register(ImageViewCell.self, forCellReuseIdentifier: "cell")
+        table.register(ListViewCell.nib(), forCellReuseIdentifier: ListViewCell.identifier)
         
         table.delegate = self
         table.dataSource = self
         models = realm.objects(SavedItem.self).map({ $0 })
         
         title = "Projects"
-        // DatabaseManager.shared.test()
-        // Do any additional setup after loading the view.
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         validateAuth()
     }
+    
     private func validateAuth(){
         if FirebaseAuth.Auth.auth().currentUser == nil {
             let vc = ViewController()
@@ -79,7 +79,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         vc.completionHandler = { [weak self] in
             self?.refresh()
         }
-        vc.title = "Jiayi"
+        
         vc.navigationItem.largeTitleDisplayMode = .never
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -125,18 +125,14 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     //mark: tables
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return models.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ImageViewCell
         
-        cell.textLabel?.text = models[indexPath.row].title
-        
-        let imagedata = models[indexPath.row].project
-        cell.mainImageView.image = UIImage(data: imagedata)
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: ListViewCell.identifier, for: indexPath) as! ListViewCell
+        cell.configure(with: models[indexPath.row])
+        cell.delegate = self
         return cell
     }
     
@@ -154,13 +150,11 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         vc.navigationItem.largeTitleDisplayMode = .never
         vc.title = model.title
         navigationController?.pushViewController(vc, animated: true)
+    
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let imagedata = models[indexPath.row].project
-        let currentImage =  UIImage(data: imagedata)
-        guard let imageRatio = currentImage?.getImageRatio() else { return 50 }
-        return tableView.frame.width / imageRatio
+        return 500
     }
     
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
@@ -178,3 +172,24 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 }
 
+extension ListViewController: ListViewCellDelegate{
+    func didTapShare(with item: SavedItem) {
+        if item.project.isEmpty {
+            print("something went wrong")
+        }
+        else{
+            UserDefaults.standard.set(item.project, forKey: "share_item")
+            guard let vc = storyboard?.instantiateViewController(identifier: "share") as? ShareViewController else {
+                return
+            }
+            vc.completionHandler = { [weak self] in
+                self?.refresh()
+            }
+            vc.title = "Sharing"
+            vc.navigationItem.largeTitleDisplayMode = .never
+            navigationController?.pushViewController(vc, animated: true)
+            
+        }
+        
+    }
+}

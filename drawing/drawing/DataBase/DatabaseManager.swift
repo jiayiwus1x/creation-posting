@@ -53,9 +53,13 @@ extension DatabaseManager{
                 
                 self.database.child("users").observeSingleEvent(of: .value, with: { snapshot in
                     if var usersCollection = snapshot.value as? [[String: String]]{
+                        let formatter = DateFormatter()
+                        formatter.dateStyle = .short
+                        formatter.timeStyle = .short
                         let newElement = [
                             "name": user.firstName + " " + user.lastName,
-                            "email": user.safeEmail
+                            "email": user.safeEmail,
+                            "creation date": formatter.string(from: Date())
                             
                         ]
                         usersCollection.append(newElement)
@@ -88,10 +92,7 @@ extension DatabaseManager{
         
     }
     
-//    public func insertPosting(with posting: Posting, completion: @escaping (Bool) -> Void){
-
-//    }
-   
+    
     public enum DatabaseError: Error {
         case failedToFetch
         
@@ -121,12 +122,13 @@ extension DatabaseManager {
     /// Gets all users from database
     public func getAllUsers(completion: @escaping (Result<[[String: String]], Error>) -> Void) {
         database.child("users").observeSingleEvent(of: .value, with: { snapshot in
-            guard let value = snapshot.value as? [[String: String]] else {
+            guard let value = snapshot.value else {
+                
                 completion(.failure(DatabaseError.failedToFetch))
                 return
             }
             
-            completion(.success(value))
+            completion(.success(value as! [[String : String]]))
         })
     }
     
@@ -148,9 +150,8 @@ struct UserDescription{
     var profilePictureUrl: String {
         return "images/profileImg/\(safeEmail)_profile_pic"
     }
-   
+    
 }
-
 
 struct Project{
     let Image: Data
@@ -159,7 +160,7 @@ struct Project{
     let linewidth: [Float]
     let pos: [String]
     let ind: [Int]
-   
+    
 }
 
 struct CreationPost {

@@ -33,7 +33,9 @@ class ShareViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         models = realm.objects(SavedItem.self).map({ $0 })
-        sharingImage.image = UIImage(data: models.last!.project)
+        let model = UserDefaults.standard.value(forKey:"share_item") as?    Data ?? models.last!.project
+        
+        sharingImage.image = UIImage(data: model)
         // Do any additional setup after loading the view.
     }
     
@@ -99,6 +101,7 @@ class ShareViewController: UIViewController {
                 })
             }
             else{
+                print("database not exists!")
                 let newCollection: [[String: Any]] = [
                     object] as [[String : Any]]
                 
