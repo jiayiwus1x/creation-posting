@@ -28,7 +28,6 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet var label: UILabel!
     @IBOutlet var AddButton: UIBarButtonItem!
     
-    @IBOutlet var PostButton: UIBarButtonItem!
     @IBOutlet var ProfileButton: UIBarButtonItem!
     // saving
     private var models = [SavedItem]()
@@ -70,7 +69,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     private func setupNavigationController(){
         
-        navigationItem.rightBarButtonItems = [AddButton, PostButton, ProfileButton]
+        navigationItem.rightBarButtonItems = [AddButton, ProfileButton]
     }
     
     @IBAction func didTapProfile() {
@@ -97,26 +96,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    @IBAction func didTapPostButton() {
-        if models.isEmpty {
-            print("Found model is empty")
-            let alert = UIAlertController(title: "No project is selected!", message: "Create Something to post", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Got it", style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-            return
-        }
-        guard let vc = storyboard?.instantiateViewController(identifier: "share") as? ShareViewController else {
-            return
-        }
-        vc.completionHandler = { [weak self] in
-            self?.refresh()
-        }
-        vc.title = "Sharing"
-        vc.navigationItem.largeTitleDisplayMode = .never
-        navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    
+
     func refresh() {
         models = realm.objects(SavedItem.self).map({ $0 })
         print("did refreshed,\n", SavedItem.self)

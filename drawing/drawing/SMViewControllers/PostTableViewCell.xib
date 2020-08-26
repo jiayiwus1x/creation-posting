@@ -143,7 +143,7 @@
                             <constraint firstItem="lHh-WY-5kp" firstAttribute="leading" secondItem="qNt-qV-RnK" secondAttribute="leading" constant="90" id="hAZ-Wz-x9F"/>
                         </constraints>
                     </view>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="4TS-de-Vnl">
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="4TS-de-Vnl">
                         <rect key="frame" x="0.0" y="795" width="579" height="69"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
