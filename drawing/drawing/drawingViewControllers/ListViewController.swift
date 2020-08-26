@@ -7,45 +7,35 @@
 //
 
 import UIKit
-import RealmSwift
 import FirebaseAuth
-
-class SavedItem: Object {
-    @objc dynamic var title: String = ""
-    @objc dynamic var project: Data = Data()
-    let linecolor = List<String>()
-    let linewidth = List<Float>()
-    let lineop = List<Float>()
-    let pos = List<String>()
-    let ind = List<Int>()
-    
-    //@objc dynamic var lines: Data = Data()
-    //@objc dynamic var lines: AnyClass = [TouchPointsAndColor]()
-}
+import FirebaseDatabase
 
 class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     @IBOutlet var table: UITableView!
     @IBOutlet var label: UILabel!
     @IBOutlet var AddButton: UIBarButtonItem!
     
+    @IBOutlet weak var RefreshButton: UIBarButtonItem!
     @IBOutlet var ProfileButton: UIBarButtonItem!
     // saving
-    private var models = [SavedItem]()
-    //private var drawings = [CanvasView]()
-    lazy var realm:Realm = {
-        return try! Realm()
-    }()
-    // private let realm = try! Realm()
+    private var models = [Project]()
+    //Database.database().isPersistenceEnabled = true
+    private let db = Database.database().reference()
+    var safeEmail: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        db.keepSynced(true)
         //ProfileButton.image = UIImage(named: "head_1")
         setupNavigationController()
         table.register(ListViewCell.nib(), forCellReuseIdentifier: ListViewCell.identifier)
         
         table.delegate = self
         table.dataSource = self
-        models = realm.objects(SavedItem.self).map({ $0 })
+        //models = realm.objects(Project.self).map({ $0 })
+        let user = Auth.auth().currentUser
+        safeEmail = DatabaseManager.safeEmail(emailAddress: user?.email ?? "No_email")
+        fetchprojects(safe_email: safeEmail)
         
         title = "Projects"
         
@@ -58,18 +48,46 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     private func validateAuth(){
         if FirebaseAuth.Auth.auth().currentUser == nil {
-            let vc = ViewController()
-            let nav = UINavigationController(rootViewController: vc)
+            //let vc = ViewController()
+            let nav = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "loginNav")
             nav.modalPresentationStyle = .fullScreen
-            present(nav, animated: false)
+            self.present(nav, animated: true, completion: nil)
             
         }
         
+    }
+    
+    func fetchprojects(safe_email: String){
+        print("fetching", safe_email + "-projects")
+        var index = 0
+        db.child(safe_email + "-projects").queryOrdered(byChild: "last modified").observe(.childAdded, with: {
+            (snapshot) in guard let
+                value = snapshot.value as? [String: Any] else {
+                    print("value not exists")
+                    return
+            }
+            
+            guard let urlString = value["imageurl"]  as? String, let url = URL(string: urlString) else{
+                print("image url not exist")
+                return
+            }
+            
+            let data = try? Data(contentsOf: url)
+            let id = value["ID"] ?? UUID().uuidString
+            print(id)
+            let model = Project(Id: id as! String, Image: data!, linecolor: value["linecolor"] as! [String], lineop: value["lineop"] as! [Float], linewidth: value["linewidth"] as! [Float], pos: value["pos"] as! [String], ind: value["ind"] as! [Int], colind: index, imageurl: value["imageurl"] as! String)
+            index += 1
+            self.models.append(model)
+            DispatchQueue.main.async {
+                self.table.reloadData()
+                
+            }
+        })
         
     }
     private func setupNavigationController(){
         
-        navigationItem.rightBarButtonItems = [AddButton, ProfileButton]
+        navigationItem.rightBarButtonItems = [AddButton, ProfileButton, RefreshButton]
     }
     
     @IBAction func didTapProfile() {
@@ -84,6 +102,11 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         navigationController?.pushViewController(vc, animated: true)
     }
     
+    @IBAction func refreshbutton(_ sender: Any) {
+        self.models = [Project]()
+        fetchprojects(safe_email: safeEmail)
+        
+    }
     @IBAction func didTapAddButton() {
         guard let vc = storyboard?.instantiateViewController(identifier: "enter") as? NewViewController else {
             return
@@ -96,10 +119,10 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         navigationController?.pushViewController(vc, animated: true)
     }
     
-
+    
     func refresh() {
-        models = realm.objects(SavedItem.self).map({ $0 })
-        print("did refreshed,\n", SavedItem.self)
+        self.models = [Project]()
+        fetchprojects(safe_email: safeEmail)
         table.reloadData()
     }
     
@@ -129,9 +152,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             self?.refresh()
         }
         vc.navigationItem.largeTitleDisplayMode = .never
-        vc.title = model.title
         navigationController?.pushViewController(vc, animated: true)
-    
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -144,7 +165,20 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             tableView.beginUpdates()
-            try! realm.write{ realm.delete(models[indexPath.row])}
+            //try! realm.write{ realm.delete(models[indexPath.row])}
+            //implement deleting in firebase
+            
+            let name = safeEmail + "-projects"
+            db.child(name).observeSingleEvent(of: .value, with: { snapshot in
+                if var usersCollection = snapshot.value as? [[String: Any]]{
+                    usersCollection.remove(at: indexPath.row)
+                    self.db.child(name).setValue(usersCollection, withCompletionBlock: {error, _ in
+                        guard error == nil else{
+                            return
+                        }
+                    })
+                }
+            })
             models.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             tableView.endUpdates()
@@ -154,13 +188,13 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 }
 
 extension ListViewController: ListViewCellDelegate{
-
-    func didTapShare(with item: SavedItem) {
-        if item.project.isEmpty {
+    
+    func didTapShare(with item: Project) {
+        if item.Image.isEmpty {
             print("something went wrong")
         }
         else{
-            UserDefaults.standard.set(item.project, forKey: "share_item")
+            UserDefaults.standard.set(item.Image, forKey: "share_item")
             guard let vc = storyboard?.instantiateViewController(identifier: "share") as? ShareViewController else {
                 return
             }

@@ -11,10 +11,13 @@ import FirebaseDatabase
 import SDWebImage
 
 class SMViewController: UIViewController,UITableViewDataSource, UITableViewDelegate {
+    
+    
     private var collectionView: UICollectionView?
     @IBOutlet var table: UITableView!
     private let db = Database.database().reference()
     var models = [CreationPost]()
+    var refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         
@@ -26,8 +29,19 @@ class SMViewController: UIViewController,UITableViewDataSource, UITableViewDeleg
         //fake data need be replaced
         
         fetchpostings()
+        refreshControl.attributedTitle = NSAttributedString(string: "refreshing")
+        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        table.addSubview(refreshControl)
         
-        
+    }
+    @objc func refresh(_ sender: AnyObject) {
+        self.models = [CreationPost]()
+        fetchpostings()
+        table.reloadData()
+        DispatchQueue.main.async {
+            self.refreshControl.endRefreshing()
+        }
+      
     }
     
     func fetchpostings(){
@@ -71,6 +85,7 @@ class SMViewController: UIViewController,UITableViewDataSource, UITableViewDeleg
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         
     }
+    
 }
 
 extension SMViewController: PostTableViewCellDelegate{
@@ -90,6 +105,8 @@ extension SMViewController: PostTableViewCellDelegate{
     func didTapButton(with title: String) {
         print("\(title)")
     }
-    
-    
+    func didTapCollab(with email: String){
+        //if email is in the collebrate list, clone the project into my project page
+        
+    }
 }

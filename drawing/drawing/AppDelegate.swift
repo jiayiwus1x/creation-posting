@@ -19,17 +19,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
-        let configuration = Realm.Configuration(
-           schemaVersion: 2,
-           migrationBlock: { migration, oldSchemaVersion in
-           if oldSchemaVersion < 1 {
-
-                   // if you added a new property or removed a property you don't
-                   // have to do anything because Realm automatically detects that
-               }
-           }
-       )
-        Realm.Configuration.defaultConfiguration = configuration
+        Database.database().isPersistenceEnabled = true
+        let all = Database.database().reference(withPath:"all")
+        all.keepSynced(true)
+//        let configuration = Realm.Configuration(
+//           schemaVersion: 2,
+//           migrationBlock: { migration, oldSchemaVersion in
+//           if oldSchemaVersion < 1 {
+//
+//                   // if you added a new property or removed a property you don't
+//                   // have to do anything because Realm automatically detects that
+//               }
+//           }
+//       )
+//        Realm.Configuration.defaultConfiguration = configuration
         //let realm = try! Realm()
         // opening the Realm file now makes sure that the migration is performed
         

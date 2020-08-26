@@ -18,13 +18,13 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         self.title = "Creation Sharing"
-        setUpElements()
+        //setUpElements()
     }
 
-    func setUpElements() {
-        Utilities.styleFilledButton(signUpButton)
-        Utilities.styleHollowButton(loginButton)
-    }
+//    func setUpElements() {
+//        Utilities.styleFilledButton(signUpButton)
+//        Utilities.styleHollowButton(loginButton)
+//    }
     
 
 }

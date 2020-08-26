@@ -7,19 +7,19 @@
 //
 
 import UIKit
-import RealmSwift
+
+import FirebaseAuth
+import FirebaseStorage
+import FirebaseDatabase
 
 class NoteViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
-    public var item: SavedItem?
+    public var item: Project?
     public var deletionHandler: (() -> Void)?
-
+    private let db = Database.database().reference()
     @IBOutlet var project: UIImage!
-    lazy var realm:Realm = {
-        return try! Realm()
-    }()
-    //private let realm = try! Realm()
-    
+
+    private let storage = Storage.storage().reference()
 
     static let dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
@@ -44,7 +44,7 @@ class NoteViewController: UIViewController, UICollectionViewDelegate, UICollecti
 
         collectionView.delegate = self
         collectionView.dataSource = self
-        if let imageData = item?.project, !imageData.isEmpty{
+        if let imageData = item?.Image, !imageData.isEmpty{
         project = UIImage(data: imageData)
 
         var lines = [TouchPointsAndColor]()
@@ -57,7 +57,6 @@ class NoteViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 firstind += item?.ind[i-1] ?? 0
             }
             secondind = firstind + (item?.ind[i])!
-            print(firstind, secondind )
             for j in Range(uncheckedBounds: (firstind , secondind)){
                 points.append(NSCoder.cgPoint(for: (item?.pos[j])!))
             }
@@ -127,29 +126,47 @@ class NoteViewController: UIViewController, UICollectionViewDelegate, UICollecti
     @objc func didTapSaveButton() {
         if let project = canvasView.takeScreenshot().pngData(), !project.isEmpty {
             print("saving")
-            realm.beginWrite()
-            let newItem = SavedItem()
-            newItem.title = "New Project"
-            newItem.project = project
-            realm.add(newItem)
-            //let linewidth = List<Float>()
-            //let lineop = List<Float>()
-            
+
+            var linecolor = [String]()
+            var linewidth = [Float]()
+            var lineop = [Float]()
+            var pos = [String]()
+            var ind = [Int]()
             for line in canvasView.lines {
-                newItem.linecolor.append(line.color!.codedString!)
-                newItem.linewidth.append(Float(line.width!))
-                newItem.lineop.append(Float(line.opacity!))
+                linecolor.append(line.color!.codedString!)
+                linewidth.append(Float(line.width!))
+                lineop.append(Float(line.opacity!))
                 for (_, position) in (line.points?.enumerated())! {
-                    newItem.pos.append(NSCoder.string(for: position))
+                    pos.append(NSCoder.string(for: position))
                    
                 }
-                newItem.ind.append(line.points!.count)
+                ind.append(line.points!.count)
             }
-            realm.delete(self.item!)
-            try! realm.commitWrite()
-
+            let user = Auth.auth().currentUser
+            let safeEmail = DatabaseManager.safeEmail(emailAddress: user?.email ?? "No_email")
+            
+            let path = self.item!.imageurl
+            
+            storage.child(path).putData(project,
+                                        metadata: nil,
+                                        completion: { _, error in
+                                            guard error == nil else {
+                                                print("Failed to Upload")
+                                                return
+                                            }
+                                            self.storage.child(path).downloadURL(completion: {url, erro in guard let url = url, error == nil else{
+                                                return
+                                                }
+                                                
+                                                let urlString = url.absoluteString
+                                                self.editproject(ID: self.item!.Id, Imageurl: urlString, linecolor: linecolor, lineop: lineop, linewidth: linewidth, pos: pos, ind: ind, safeEmail: safeEmail, colindex: self.item!.colind)
+                                                
+                                            })
+                                            
+            })
             completionHandler?()
             let listViewController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.listViewController ) as! ListViewController
+          
             self.navigationController?.pushViewController(listViewController, animated: true)}
                 //navigationController?.popToRootViewController(animated: true)}
         else {
@@ -175,6 +192,45 @@ class NoteViewController: UIViewController, UICollectionViewDelegate, UICollecti
            let color = colorsArray[indexPath.row]
            canvasView.strokeColor = color
        }
-
+    @objc private func editproject(ID: String, Imageurl: String, linecolor: [String], lineop: [Float], linewidth: [Float], pos: [String], ind: [Int], safeEmail: String, colindex: Int){
+           let now = Date()
+           let formatter = DateFormatter()
+           formatter.dateStyle = .short
+           formatter.timeStyle = .short
+           let name = safeEmail + "-projects"
+           
+           let obj: [String: Any] = [
+               "ID" : ID,
+               "last modified": formatter.string(from: now),
+               "linecolor": linecolor,
+               "lineop": lineop,
+               "linewidth": linewidth,
+               "pos": pos,
+               "ind": ind,
+               "imageurl": Imageurl
+           ]
+           //db.child("latest_obj").setValue(obj)
+           db.child(name).observeSingleEvent(of: .value, with: { snapshot in
+               if var usersCollection = snapshot.value as? [[String: Any]]{
+                usersCollection.remove(at: colindex)
+                usersCollection.append(obj)
+                self.db.child(name).setValue(usersCollection, withCompletionBlock: {error, _ in
+                       guard error == nil else{
+                           return
+                       }
+                   })
+               }
+               else{
+                   let newCollection: [[String: Any]] = [
+                       obj] as [[String : Any]]
+                   
+                   self.db.child(name).setValue(newCollection, withCompletionBlock: {error, _ in
+                       guard error == nil else{
+                           return
+                       }
+                   })
+               }
+           })
+       }
 
 }

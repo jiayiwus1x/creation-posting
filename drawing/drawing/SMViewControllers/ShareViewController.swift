@@ -24,7 +24,7 @@ class ShareViewController: UIViewController {
     private let db = Database.database().reference()
     
     
-    private var models = [SavedItem]()
+    private var models = [Project]()
     
     lazy var realm:Realm = {
         return try! Realm()
@@ -32,10 +32,10 @@ class ShareViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        models = realm.objects(SavedItem.self).map({ $0 })
-        let model = UserDefaults.standard.value(forKey:"share_item") as?    Data ?? models.last!.project
+        //models = realm.objects(Project.self).map({ $0 })
+        let model = UserDefaults.standard.value(forKey:"share_item") as? Data
         
-        sharingImage.image = UIImage(data: model)
+        sharingImage.image = UIImage(data: model!)
         // Do any additional setup after loading the view.
     }
     
@@ -68,6 +68,7 @@ class ShareViewController: UIViewController {
                                     
         })
         let smViewController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.smViewController ) as! SMViewController
+
         self.navigationController?.pushViewController(smViewController, animated: true)
         
     }
@@ -80,13 +81,15 @@ class ShareViewController: UIViewController {
         formatter.timeStyle = .short
         
         let object: [String: Any] = [
+            "ID": "",
             "email": UserDefaults.standard.value(forKey:"email") as? String ?? "No email",
             "userID": UserDefaults.standard.value(forKey:"name") as? String ?? "No Name",
             "ImageURL": urlString,
             "Description": text,
             "Time": formatter.string(from: now),
             "numberOfRecreate": 0,
-            "order": order
+            "order": order,
+            
             
         ]
 

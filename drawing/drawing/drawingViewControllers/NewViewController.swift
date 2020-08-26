@@ -68,12 +68,7 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
     @objc func didTapSaveButton() {
         if let project = canvasView.takeScreenshot().pngData(), !project.isEmpty {
             print("saving")
-            realm.beginWrite()
-            let newItem = SavedItem()
-            newItem.title = "New Project"
-            newItem.project = project
             
-            realm.add(newItem)
             var linecolor = [String]()
             var linewidth = [Float]()
             var lineop = [Float]()
@@ -85,14 +80,12 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
                 linewidth.append(Float(line.width!))
                 lineop.append(Float(line.opacity!))
                 
-                newItem.linecolor.append(line.color!.codedString!)
-                newItem.linewidth.append(Float(line.width!))
-                newItem.lineop.append(Float(line.opacity!))
+                
                 for (_, position) in (line.points?.enumerated())! {
-                    newItem.pos.append(NSCoder.string(for: position))
+                    
                     pos.append(NSCoder.string(for: position))
                 }
-                newItem.ind.append(line.points!.count)
+                
                 ind.append(line.points!.count)
             }
             let user = Auth.auth().currentUser
@@ -118,8 +111,6 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
                                             })
                                             
             })
-            
-            try! realm.commitWrite()
             
             
             completionHandler?()
@@ -189,13 +180,14 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
         let name = safeEmail + "-projects"
         
         let obj: [String: Any] = [
+            "ID": UUID().uuidString,
             "last modified": formatter.string(from: now),
             "linecolor": linecolor,
             "lineop": lineop,
             "linewidth": linewidth,
             "pos": pos,
-            "ind": ind
-            
+            "ind": ind,
+            "imageurl": Imageurl
         ]
         //db.child("latest_obj").setValue(obj)
         db.child(name).observeSingleEvent(of: .value, with: { snapshot in

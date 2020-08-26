@@ -19,10 +19,10 @@ final class DatabaseManager{
         return safeEmail
     }
     static func GetImgPath(email: String) -> String{
-           let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
-           let path = "images/profileImg/" + safeEmail + "_profile_pic"
-           return path
-       }
+        let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
+        let path = "images/profileImg/" + safeEmail + "_profile_pic"
+        return path
+    }
 }
 
 // Mark: - Account Management
@@ -135,7 +135,7 @@ extension DatabaseManager {
             completion(.success(value as! [[String : String]]))
         })
     }
-   
+    
 }
 
 
@@ -159,12 +159,15 @@ struct UserDescription{
 }
 
 struct Project{
+    let Id: String
     let Image: Data
     let linecolor: [String]
     let lineop: [Float]
     let linewidth: [Float]
     let pos: [String]
     let ind: [Int]
+    let colind: Int
+    let imageurl: String
     
 }
 
@@ -185,3 +188,17 @@ struct SearchResult {
     let name: String
     let email: String
 }
+
+//class SavedItem: Object {
+//    @objc dynamic var title: String = ""
+//    @objc dynamic var project: Data = Data()
+//
+//    let linecolor = List<String>()
+//    let linewidth = List<Float>()
+//    let lineop = List<Float>()
+//    let pos = List<String>()
+//    let ind = List<Int>()
+//
+//    //@objc dynamic var lines: Data = Data()
+//    //@objc dynamic var lines: AnyClass = [TouchPointsAndColor]()
+//}

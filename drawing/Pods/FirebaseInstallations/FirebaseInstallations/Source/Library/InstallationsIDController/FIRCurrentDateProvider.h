@@ -1,11 +1,11 @@
 /*
- * Copyright 2019 Google
+ * Copyright 2020 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE2.0
+ *      http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,27 +14,14 @@
  * limitations under the License.
  */
 
-#import <TargetConditionals.h>
-#if TARGET_OS_IOS
-
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-/** @class FIRMultiFactorAssertion
-    @brief The base class for asserting ownership of a second factor. This is equivalent to the
-   AuthCredential class.
-*/
-NS_SWIFT_NAME(MultiFactorAssertion)
-@interface FIRMultiFactorAssertion : NSObject
+/** A block returning current date. */
+typedef NSDate *_Nonnull (^FIRCurrentDateProvider)(void);
 
-/**
-   @brief The second factor identifier for this opaque object asserting a second factor.
-*/
-@property(nonatomic, readonly, nonnull) NSString *factorID;
-
-@end
+/** The function returns a `FIRCurrentDateProvider` block that returns a real current date. */
+FIRCurrentDateProvider FIRRealCurrentDateProvider(void);
 
 NS_ASSUME_NONNULL_END
-
-#endif

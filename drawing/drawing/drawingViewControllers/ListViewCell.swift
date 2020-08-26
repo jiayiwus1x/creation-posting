@@ -8,13 +8,13 @@
 
 import UIKit
 protocol ListViewCellDelegate: AnyObject {
-    func didTapShare (with item: SavedItem)
+    func didTapShare (with item: Project)
 }
 
 class ListViewCell: UITableViewCell {
     static let identifier = "ListViewCell"
     weak var delegate: ListViewCellDelegate?
-    var model = SavedItem()
+    var model: Project!
     @IBOutlet weak var ImageView: UIImageView!
     @IBOutlet weak var share: UIButton!
     @IBOutlet weak var addcollebrators: UIButton!
@@ -27,12 +27,12 @@ class ListViewCell: UITableViewCell {
         
     }
 
-    func configure(with model: SavedItem){
+    func configure(with model: Project){
         
-        if model.project.isEmpty{
+        if model.Image.isEmpty{
         return
         } else{
-            self.ImageView.image = UIImage(data: model.project)!
+            self.ImageView.image = UIImage(data: model.Image)!
             self.model = model
         }
     }
