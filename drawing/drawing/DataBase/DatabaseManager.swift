@@ -166,7 +166,6 @@ struct Project{
     let linewidth: [Float]
     let pos: [String]
     let ind: [Int]
-    let colind: Int
     let imageurl: String
     
 }

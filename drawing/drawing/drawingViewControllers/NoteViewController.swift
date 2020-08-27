@@ -13,14 +13,14 @@ import FirebaseStorage
 import FirebaseDatabase
 
 class NoteViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
-
+    
     public var item: Project?
     public var deletionHandler: (() -> Void)?
     private let db = Database.database().reference()
     @IBOutlet var project: UIImage!
-
+    
     private let storage = Storage.storage().reference()
-
+    
     static let dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
@@ -41,36 +41,36 @@ class NoteViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         collectionView.delegate = self
         collectionView.dataSource = self
         if let imageData = item?.Image, !imageData.isEmpty{
-        project = UIImage(data: imageData)
-
-        var lines = [TouchPointsAndColor]()
-
-        var firstind = Int(0)
-        var secondind = Int(0)
-        for (i, _) in (item?.linewidth.enumerated())! {
-            var points = Array<CGPoint>()
-            if i > 0{
-                firstind += item?.ind[i-1] ?? 0
-            }
-            secondind = firstind + (item?.ind[i])!
-            for j in Range(uncheckedBounds: (firstind , secondind)){
-                points.append(NSCoder.cgPoint(for: (item?.pos[j])!))
-            }
+            project = UIImage(data: imageData)
             
-            var line = TouchPointsAndColor(color: UIColor.color(withCodedString: (item?.linecolor[i])!)!, points: points)
+            var lines = [TouchPointsAndColor]()
+            
+            var firstind = Int(0)
+            var secondind = Int(0)
+            for (i, _) in (item?.linewidth.enumerated())! {
+                var points = Array<CGPoint>()
+                if i > 0{
+                    firstind += item?.ind[i-1] ?? 0
+                }
+                secondind = firstind + (item?.ind[i])!
+                for j in Range(uncheckedBounds: (firstind , secondind)){
+                    points.append(NSCoder.cgPoint(for: (item?.pos[j])!))
+                }
                 
-            line.width = CGFloat((item?.linewidth[i])!)
-            line.opacity = CGFloat((item?.lineop[i])!)
-            lines.append(line)
-        }
-        canvasView.lines = lines
+                var line = TouchPointsAndColor(color: UIColor.color(withCodedString: (item?.linecolor[i])!)!, points: points)
+                
+                line.width = CGFloat((item?.linewidth[i])!)
+                line.opacity = CGFloat((item?.lineop[i])!)
+                lines.append(line)
+            }
+            canvasView.lines = lines
             
         }
-
+        
         opacitySlider.tintColor = .red
         featureView.transform = CGAffineTransform(translationX: 0, y: kHeight - (kHeight - 80))
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(didTapSaveButton))
@@ -91,22 +91,22 @@ class NoteViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 self.featureView.transform = CGAffineTransform.identity
             }
         }
-
+        
     }
     @IBAction func onClickBrushWidth(_ sender: UISlider) {
         canvasView.strokeWidth = CGFloat(sender.value)
     }
     @IBAction func onClickOpacity(_ sender: UISlider) {
-       canvasView.strokeOpacity = CGFloat(sender.value)
-       }
+        canvasView.strokeOpacity = CGFloat(sender.value)
+    }
     @IBAction func onClickClear(_ sender: Any) {
         canvasView.clearCanvasView()
     }
     @IBAction func onClickUndo(_ sender: Any) {
-           canvasView.undoDraw()
-       }
+        canvasView.undoDraw()
+    }
     @IBAction func onClickSave(_ sender: Any) {
-       let image = canvasView.takeScreenshot()
+        let image = canvasView.takeScreenshot()
         UIImageWriteToSavedPhotosAlbum(image, self, #selector(imageSaved(_:didFinishSavingWithError:contextType:)), nil)
     }
     
@@ -126,7 +126,7 @@ class NoteViewController: UIViewController, UICollectionViewDelegate, UICollecti
     @objc func didTapSaveButton() {
         if let project = canvasView.takeScreenshot().pngData(), !project.isEmpty {
             print("saving")
-
+            
             var linecolor = [String]()
             var linewidth = [Float]()
             var lineop = [Float]()
@@ -138,7 +138,7 @@ class NoteViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 lineop.append(Float(line.opacity!))
                 for (_, position) in (line.points?.enumerated())! {
                     pos.append(NSCoder.string(for: position))
-                   
+                    
                 }
                 ind.append(line.points!.count)
             }
@@ -159,16 +159,16 @@ class NoteViewController: UIViewController, UICollectionViewDelegate, UICollecti
                                                 }
                                                 
                                                 let urlString = url.absoluteString
-                                                self.editproject(ID: self.item!.Id, Imageurl: urlString, linecolor: linecolor, lineop: lineop, linewidth: linewidth, pos: pos, ind: ind, safeEmail: safeEmail, colindex: self.item!.colind)
+                                                self.editproject(ID: self.item!.Id, Imageurl: urlString, linecolor: linecolor, lineop: lineop, linewidth: linewidth, pos: pos, ind: ind, safeEmail: safeEmail)
                                                 
                                             })
                                             
             })
             completionHandler?()
             let listViewController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.listViewController ) as! ListViewController
-          
+            
             self.navigationController?.pushViewController(listViewController, animated: true)}
-                //navigationController?.popToRootViewController(animated: true)}
+            //navigationController?.popToRootViewController(animated: true)}
         else {
             print("Add something")
         }
@@ -176,61 +176,62 @@ class NoteViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-           return colorsArray.count
-       }
-       
-       func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-           let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-           if let view = cell.viewWithTag(111) {
-               view.layer.cornerRadius = 3
-               view.backgroundColor = colorsArray[indexPath.row]
-           }
-           return cell
-       }
-       
-       func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-           let color = colorsArray[indexPath.row]
-           canvasView.strokeColor = color
-       }
-    @objc private func editproject(ID: String, Imageurl: String, linecolor: [String], lineop: [Float], linewidth: [Float], pos: [String], ind: [Int], safeEmail: String, colindex: Int){
-           let now = Date()
-           let formatter = DateFormatter()
-           formatter.dateStyle = .short
-           formatter.timeStyle = .short
-           let name = safeEmail + "-projects"
-           
-           let obj: [String: Any] = [
-               "ID" : ID,
-               "last modified": formatter.string(from: now),
-               "linecolor": linecolor,
-               "lineop": lineop,
-               "linewidth": linewidth,
-               "pos": pos,
-               "ind": ind,
-               "imageurl": Imageurl
-           ]
-           //db.child("latest_obj").setValue(obj)
-           db.child(name).observeSingleEvent(of: .value, with: { snapshot in
-               if var usersCollection = snapshot.value as? [[String: Any]]{
-                usersCollection.remove(at: colindex)
+        return colorsArray.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+        if let view = cell.viewWithTag(111) {
+            view.layer.cornerRadius = 3
+            view.backgroundColor = colorsArray[indexPath.row]
+        }
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let color = colorsArray[indexPath.row]
+        canvasView.strokeColor = color
+    }
+    @objc private func editproject(ID: String, Imageurl: String, linecolor: [String], lineop: [Float], linewidth: [Float], pos: [String], ind: [Int], safeEmail: String){
+        let now = Date()
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.timeStyle = .short
+        let name = safeEmail + "-projects"
+        let order = 0 - Int(now.timeIntervalSince1970)
+        
+        let obj: [String: Any] = [
+            "ID" : ID,
+            "last modified": formatter.string(from: now),
+            "linecolor": linecolor,
+            "lineop": lineop,
+            "linewidth": linewidth,
+            "pos": pos,
+            "ind": ind,
+            "imageurl": Imageurl,
+            "order": order
+        ]
+        //db.child("latest_obj").setValue(obj)
+        db.child(name).observeSingleEvent(of: .value, with: { snapshot in
+            if var usersCollection = snapshot.value as? [[String: Any]]{
+                for (i,arr) in usersCollection.enumerated(){
+                    if arr["ID"] as? String == ID{
+                        usersCollection.remove(at: i)
+                        print("reomoved one entry, ", i)
+                        break
+                    }
+                }
                 usersCollection.append(obj)
                 self.db.child(name).setValue(usersCollection, withCompletionBlock: {error, _ in
-                       guard error == nil else{
-                           return
-                       }
-                   })
-               }
-               else{
-                   let newCollection: [[String: Any]] = [
-                       obj] as [[String : Any]]
-                   
-                   self.db.child(name).setValue(newCollection, withCompletionBlock: {error, _ in
-                       guard error == nil else{
-                           return
-                       }
-                   })
-               }
-           })
-       }
-
+                    guard error == nil else{
+                        return
+                    }
+                })
+            }
+            else{ print("something went wrong")
+             
+            }
+        })
+    }
+    
 }

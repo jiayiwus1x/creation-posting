@@ -59,8 +59,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func fetchprojects(safe_email: String){
         print("fetching", safe_email + "-projects")
-        var index = 0
-        db.child(safe_email + "-projects").queryOrdered(byChild: "last modified").observe(.childAdded, with: {
+       
+        db.child(safe_email + "-projects").queryOrdered(byChild: "order").observe(.childAdded, with: {
             (snapshot) in guard let
                 value = snapshot.value as? [String: Any] else {
                     print("value not exists")
@@ -75,8 +75,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             let data = try? Data(contentsOf: url)
             let id = value["ID"] ?? UUID().uuidString
             print(id)
-            let model = Project(Id: id as! String, Image: data!, linecolor: value["linecolor"] as! [String], lineop: value["lineop"] as! [Float], linewidth: value["linewidth"] as! [Float], pos: value["pos"] as! [String], ind: value["ind"] as! [Int], colind: index, imageurl: value["imageurl"] as! String)
-            index += 1
+            let model = Project(Id: id as! String, Image: data!, linecolor: value["linecolor"] as! [String], lineop: value["lineop"] as! [Float], linewidth: value["linewidth"] as! [Float], pos: value["pos"] as! [String], ind: value["ind"] as! [Int], imageurl: value["imageurl"] as! String)
+         
             self.models.append(model)
             DispatchQueue.main.async {
                 self.table.reloadData()
@@ -165,13 +165,23 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             tableView.beginUpdates()
-            //try! realm.write{ realm.delete(models[indexPath.row])}
+            
             //implement deleting in firebase
             
             let name = safeEmail + "-projects"
+            let id = models[indexPath.row].Id
+            
+            
             db.child(name).observeSingleEvent(of: .value, with: { snapshot in
                 if var usersCollection = snapshot.value as? [[String: Any]]{
-                    usersCollection.remove(at: indexPath.row)
+                    for (i,arr) in usersCollection.enumerated(){
+                        if arr["ID"] as? String == id{
+                            usersCollection.remove(at: i)
+                            print("reomoved one entry, ", i)
+                            break
+                        }
+                    }
+                    
                     self.db.child(name).setValue(usersCollection, withCompletionBlock: {error, _ in
                         guard error == nil else{
                             return
@@ -195,6 +205,7 @@ extension ListViewController: ListViewCellDelegate{
         }
         else{
             UserDefaults.standard.set(item.Image, forKey: "share_item")
+            UserDefaults.standard.set(item.Id, forKey: "share_id")
             guard let vc = storyboard?.instantiateViewController(identifier: "share") as? ShareViewController else {
                 return
             }

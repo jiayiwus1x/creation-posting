@@ -178,7 +178,7 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
         formatter.dateStyle = .short
         formatter.timeStyle = .short
         let name = safeEmail + "-projects"
-        
+        let order = 0 - Int(now.timeIntervalSince1970)
         let obj: [String: Any] = [
             "ID": UUID().uuidString,
             "last modified": formatter.string(from: now),
@@ -187,7 +187,8 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
             "linewidth": linewidth,
             "pos": pos,
             "ind": ind,
-            "imageurl": Imageurl
+            "imageurl": Imageurl,
+            "order": order
         ]
         //db.child("latest_obj").setValue(obj)
         db.child(name).observeSingleEvent(of: .value, with: { snapshot in

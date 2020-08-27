@@ -33,9 +33,9 @@ class ShareViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //models = realm.objects(Project.self).map({ $0 })
-        let model = UserDefaults.standard.value(forKey:"share_item") as? Data
+        let data = UserDefaults.standard.value(forKey:"share_item") as? Data
         
-        sharingImage.image = UIImage(data: model!)
+        sharingImage.image = UIImage(data: data!)
         // Do any additional setup after loading the view.
     }
     
@@ -79,9 +79,9 @@ class ShareViewController: UIViewController {
         let formatter = DateFormatter()
         formatter.dateStyle = .short
         formatter.timeStyle = .short
-        
+        let id = UserDefaults.standard.value(forKey:"share_id") as? String
         let object: [String: Any] = [
-            "ID": "",
+            "ID": id ?? "No share id",
             "email": UserDefaults.standard.value(forKey:"email") as? String ?? "No email",
             "userID": UserDefaults.standard.value(forKey:"name") as? String ?? "No Name",
             "ImageURL": urlString,
