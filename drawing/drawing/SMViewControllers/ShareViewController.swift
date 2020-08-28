@@ -22,7 +22,7 @@ class ShareViewController: UIViewController {
     
     private let storage = Storage.storage().reference()
     private let db = Database.database().reference()
-    
+    var coll_flag = true
     
     private var models = [Project]()
     
@@ -79,20 +79,20 @@ class ShareViewController: UIViewController {
         let formatter = DateFormatter()
         formatter.dateStyle = .short
         formatter.timeStyle = .short
+        let email = UserDefaults.standard.value(forKey:"email") as? String ?? "No email"
         let id = UserDefaults.standard.value(forKey:"share_id") as? String
         let object: [String: Any] = [
             "ID": id ?? "No share id",
-            "email": UserDefaults.standard.value(forKey:"email") as? String ?? "No email",
+            "email": email,
             "userID": UserDefaults.standard.value(forKey:"name") as? String ?? "No Name",
             "ImageURL": urlString,
             "Description": text,
             "Time": formatter.string(from: now),
             "numberOfRecreate": 0,
-            "order": order,
-            
+            "order": order
             
         ]
-
+        
         db.child("postings").observeSingleEvent(of: .value, with: { snapshot in
             if var usersCollection = snapshot.value as? [[String: Any]]{
                 

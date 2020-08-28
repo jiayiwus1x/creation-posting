@@ -135,6 +135,18 @@ extension DatabaseManager {
             completion(.success(value as! [[String : String]]))
         })
     }
+    public func getAProject(postingModel: CreationPost, completion: @escaping (Result<[String: Any], Error>) -> Void) {
+        
+        let postingSafeEmail = DatabaseManager.safeEmail(emailAddress: postingModel.email)
+        database.child(postingSafeEmail + "-projects").queryOrdered(byChild: "ID").queryEqual(toValue: postingModel.Id).observeSingleEvent(of: .value, with: {snapshot in
+            guard let value = snapshot.value as? [String: Any] else{
+                completion(.failure(DatabaseError.failedToFetch))
+                return
+            }
+            completion(.success(value))
+        })
+        
+    }
     
 }
 
@@ -171,6 +183,7 @@ struct Project{
 }
 
 struct CreationPost {
+    let Id: String
     let numberOfRecreate: Int
     let username: String
     let email: String

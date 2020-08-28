@@ -9,6 +9,7 @@ import UIKit
 import FirebaseStorage
 import FirebaseDatabase
 import SDWebImage
+import FirebaseAuth
 
 class SMViewController: UIViewController,UITableViewDataSource, UITableViewDelegate {
     
@@ -18,6 +19,7 @@ class SMViewController: UIViewController,UITableViewDataSource, UITableViewDeleg
     private let db = Database.database().reference()
     var models = [CreationPost]()
     var refreshControl = UIRefreshControl()
+    var obj : [String: Any]!
     
     override func viewDidLoad() {
         
@@ -56,8 +58,8 @@ class SMViewController: UIViewController,UITableViewDataSource, UITableViewDeleg
             }
             let data = try? Data(contentsOf: url)
             let image = UIImage(data: data!)!
-            
-            let model = CreationPost(numberOfRecreate: 0, username: value["userID"] as! String, email: value["email"] as! String, postImage: image, descriptiontext: value["Description"] as! String, timestamp: value["Time"] as! String)
+            let Id = value["ID"] ?? "None"
+            let model = CreationPost(Id: Id as! String,numberOfRecreate: 0, username: value["userID"] as! String, email: value["email"] as! String, postImage: image, descriptiontext: value["Description"] as! String, timestamp: value["Time"] as! String)
             self.models.append(model)
             self.table.reloadData()
         })
@@ -85,6 +87,7 @@ class SMViewController: UIViewController,UITableViewDataSource, UITableViewDeleg
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         
     }
+   
     
 }
 
@@ -105,8 +108,70 @@ extension SMViewController: PostTableViewCellDelegate{
     func didTapButton(with title: String) {
         print("\(title)")
     }
-    func didTapCollab(with email: String){
+    func didTapCollab(with postingModel: CreationPost){
         //if email is in the collebrate list, clone the project into my project page
+        if postingModel.Id == "None"{
+            print("not supporting collabration")
+        }
+        else{
+            print("collabrate on this!")
+            
+            DatabaseManager.shared.getAProject(postingModel: postingModel, completion: {
+                [weak self] result in
+                switch result {
+                case .success(let obj):
+                    
+                    self?.clonePorject(object: obj)
+                    
+                case .failure(let error):
+                    print("\(error)")
+                }
+            })
+            
+            
+        }
+    }
+    func clonePorject(object: [String: Any]){
+     
+        for i in object{
+            self.obj = i.value as? [String: Any]
+        }
+       
+        if self.obj["placeholder"] == nil {
+            self.obj["placeholder"] = [(self.obj["ind"] as! [Int]).count ]
+            self.obj["IDList"] = [self.obj["ID"]]
+            
+        }else{
+            self.obj["placeholder"] = (self.obj["placeholder"] as! [Int]) + [(self.obj["ind"] as! [Int]).count ]
+            self.obj["IDList"] = (self.obj["IDList"] as! [String]) + [self.obj["ID"]]
+        }
+      
+        let user = Auth.auth().currentUser
+        let safeEmail = DatabaseManager.safeEmail(emailAddress: user?.email ?? "No_email")
+        let name = safeEmail + "-projects"
+             
+        db.child(name).observeSingleEvent(of: .value, with: { snapshot in
+            if var usersCollection = snapshot.value as? [[String: Any]]{
+                
+                usersCollection.append(self.obj)
+                self.db.child(name).setValue(usersCollection, withCompletionBlock: {error, _ in
+                    guard error == nil else{
+                        return
+                    }
+                })
+            }
+            else{
+                let newCollection: [[String: Any]] = [
+                    object] as [[String : Any]]
+                
+                self.db.child(name).setValue(newCollection, withCompletionBlock: {error, _ in
+                    guard error == nil else{
+                        return
+                    }
+                })
+            }
+        })
         
     }
+    
 }

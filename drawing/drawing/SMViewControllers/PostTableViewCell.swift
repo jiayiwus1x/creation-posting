@@ -10,6 +10,7 @@ import UIKit
 protocol PostTableViewCellDelegate: AnyObject {
     func didTapButton (with title: String)
     func didTapProfile(with item: String)
+    func didTapCollab(with postingModel: CreationPost)
 }
 class PostTableViewCell: UITableViewCell {
     
@@ -34,6 +35,9 @@ class PostTableViewCell: UITableViewCell {
         userImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.didTapProfile)))
     }
 
+    @IBAction func didTapColla(_ sender: Any) {
+        delegate?.didTapCollab(with: self.model)
+    }
     @IBAction func didTapButton(_ sender: Any) {
         delegate?.didTapButton(with: "it works!")
     }
@@ -60,8 +64,15 @@ class PostTableViewCell: UITableViewCell {
                    }
         })
         self.model = model
+        if model.Id == "None"{
+            collButton?.isHidden = true
+        }
+        else{
+            collButton?.isHidden = false
+        }
     }
     @objc func didTapProfile(){
         delegate?.didTapProfile(with: self.model.email)
        }
+    
 }

@@ -77,7 +77,7 @@ class OthersFeedViewController: UIViewController,  UIImagePickerControllerDelega
             let data = try? Data(contentsOf: url)
             let image = UIImage(data: data!)!
             
-            let model = CreationPost(numberOfRecreate: 0, username: value["userID"] as! String, email: value["email"] as! String, postImage: image, descriptiontext: value["Description"] as! String, timestamp: value["Time"] as! String)
+            let model = CreationPost(Id: value["ID"] as! String, numberOfRecreate: 0, username: value["userID"] as! String, email: value["email"] as! String, postImage: image, descriptiontext: value["Description"] as! String, timestamp: value["Time"] as! String)
             self.models.append(model)
             self.my_feed.reloadData()
             self.creato.setTitle("creato \(self.models.count)", for: .normal)

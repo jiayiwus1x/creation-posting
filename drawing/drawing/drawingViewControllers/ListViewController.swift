@@ -74,7 +74,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             let data = try? Data(contentsOf: url)
             let id = value["ID"] ?? UUID().uuidString
-            print(id)
+
             let model = Project(Id: id as! String, Image: data!, linecolor: value["linecolor"] as! [String], lineop: value["lineop"] as! [Float], linewidth: value["linewidth"] as! [Float], pos: value["pos"] as! [String], ind: value["ind"] as! [Int], imageurl: value["imageurl"] as! String)
          
             self.models.append(model)

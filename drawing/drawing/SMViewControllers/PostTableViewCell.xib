@@ -98,6 +98,9 @@
                                         </constraints>
                                         <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" image="hand.draw" catalog="system"/>
+                                        <connections>
+                                            <action selector="didTapColla:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Pzs-pk-a3I"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -176,6 +179,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="collButton" destination="fL7-mf-RfI" id="7Bc-fs-8iU"/>
                 <outlet property="descriptiontext" destination="4TS-de-Vnl" id="cBd-5G-Qcd"/>
                 <outlet property="likesLabel" destination="lHh-WY-5kp" id="ePI-jR-Ppo"/>
                 <outlet property="postImageView" destination="rCy-zK-dEw" id="i4E-BY-hKv"/>
