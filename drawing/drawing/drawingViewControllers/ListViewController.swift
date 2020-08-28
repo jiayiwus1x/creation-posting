@@ -66,21 +66,23 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                     print("value not exists")
                     return
             }
-            
+            print(value)
+
             guard let urlString = value["imageurl"]  as? String, let url = URL(string: urlString) else{
                 print("image url not exist")
                 return
             }
-            
+
             let data = try? Data(contentsOf: url)
+
             let id = value["ID"] ?? UUID().uuidString
 
             let model = Project(Id: id as! String, Image: data!, linecolor: value["linecolor"] as! [String], lineop: value["lineop"] as! [Float], linewidth: value["linewidth"] as! [Float], pos: value["pos"] as! [String], ind: value["ind"] as! [Int], imageurl: value["imageurl"] as! String)
-         
+
             self.models.append(model)
             DispatchQueue.main.async {
                 self.table.reloadData()
-                
+
             }
         })
         

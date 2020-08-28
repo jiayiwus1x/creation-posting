@@ -117,9 +117,11 @@ class ProfileViewController: UIViewController,  UIImagePickerControllerDelegate,
                 return
             }
             let data = try? Data(contentsOf: url)
-            let image = UIImage(data: data!)!
+            guard let image = UIImage(data: (data)!) else{
+                return
+            }
             
-            let model = CreationPost(Id: value["id"] as! String, numberOfRecreate: 0, username: value["userID"] as! String, email: value["email"] as! String, postImage: image, descriptiontext: value["Description"] as! String, timestamp: value["Time"] as! String)
+            let model = CreationPost(Id: value["ID"] as! String, numberOfRecreate: 0, username: value["userID"] as! String, email: value["email"] as! String, postImage: image, descriptiontext: value["Description"] as! String, timestamp: value["Time"] as! String)
             self.models.append(model)
             self.my_feed.reloadData()
             self.creato.setTitle("creato \(self.models.count)", for: .normal)
