@@ -59,31 +59,30 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func fetchprojects(safe_email: String){
         print("fetching", safe_email + "-projects")
-       
+        
         db.child(safe_email + "-projects").queryOrdered(byChild: "order").observe(.childAdded, with: {
             (snapshot) in guard let
                 value = snapshot.value as? [String: Any] else {
                     print("value not exists")
                     return
             }
-            print(value)
-
+            
             guard let urlString = value["imageurl"]  as? String, let url = URL(string: urlString) else{
                 print("image url not exist")
                 return
             }
-
+            
             let data = try? Data(contentsOf: url)
-
+            
             let id = value["ID"] ?? UUID().uuidString
-
-            let model = Project(Id: id as! String, Image: data!, linecolor: value["linecolor"] as! [String], lineop: value["lineop"] as! [Float], linewidth: value["linewidth"] as! [Float], pos: value["pos"] as! [String], ind: value["ind"] as! [Int], imageurl: value["imageurl"] as! String)
-
-            self.models.append(model)
-            DispatchQueue.main.async {
-                self.table.reloadData()
-
-            }
+            if data != nil{
+                let model = Project(Id: id as! String, Image: data!, linecolor: value["linecolor"] as! [String], lineop: value["lineop"] as! [Float], linewidth: value["linewidth"] as! [Float], pos: value["pos"] as! [String], ind: value["ind"] as! [Int], imageurl: value["imageurl"] as! String)
+                
+                self.models.append(model)
+                DispatchQueue.main.async {
+                    self.table.reloadData()
+                    
+                }}
         })
         
     }
@@ -215,6 +214,7 @@ extension ListViewController: ListViewCellDelegate{
                 self?.refresh()
             }
             vc.title = "Sharing"
+            vc.model = item
             vc.navigationItem.largeTitleDisplayMode = .never
             navigationController?.pushViewController(vc, animated: true)
             

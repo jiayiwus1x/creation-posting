@@ -43,7 +43,7 @@ class SMViewController: UIViewController,UITableViewDataSource, UITableViewDeleg
         DispatchQueue.main.async {
             self.refreshControl.endRefreshing()
         }
-      
+        
     }
     
     func fetchpostings(){
@@ -87,7 +87,7 @@ class SMViewController: UIViewController,UITableViewDataSource, UITableViewDeleg
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         
     }
-   
+    
     
 }
 
@@ -122,55 +122,44 @@ extension SMViewController: PostTableViewCellDelegate{
                 case .success(let obj):
                     
                     self?.clonePorject(object: obj)
-                    
+                    self?.switchController(identifierName: "listVC")
                 case .failure(let error):
                     print("\(error)")
                 }
             })
-            
-            
         }
+        
     }
     func clonePorject(object: [String: Any]){
-     
-        for i in object{
-            self.obj = i.value as? [String: Any]
-        }
-       
-        if self.obj["placeholder"] == nil {
-            self.obj["placeholder"] = [(self.obj["ind"] as! [Int]).count ]
-            self.obj["IDList"] = [self.obj["ID"]]
-            
-        }else{
-            self.obj["placeholder"] = (self.obj["placeholder"] as! [Int]) + [(self.obj["ind"] as! [Int]).count ]
-            self.obj["IDList"] = (self.obj["IDList"] as! [String]) + [self.obj["ID"]]
-        }
-      
+        self.obj = object
+        self.obj["ID"] = UUID().uuidString
         let user = Auth.auth().currentUser
         let safeEmail = DatabaseManager.safeEmail(emailAddress: user?.email ?? "No_email")
         let name = safeEmail + "-projects"
-             
-        db.child(name).observeSingleEvent(of: .value, with: { snapshot in
-            if var usersCollection = snapshot.value as? [[String: Any]]{
-                
-                usersCollection.append(self.obj)
-                self.db.child(name).setValue(usersCollection, withCompletionBlock: {error, _ in
-                    guard error == nil else{
-                        return
-                    }
-                })
+        DatabaseManager.shared.addCollection(obj: self.obj, collectionName: name)
+    }
+    
+    
+    func switchController(identifierName: String){
+        print(identifierName)
+        if identifierName == "OthersFeed"{
+            guard let vc = self.storyboard?.instantiateViewController(identifier: identifierName) as? OthersFeedViewController else {
+                return
             }
-            else{
-                let newCollection: [[String: Any]] = [
-                    object] as [[String : Any]]
-                
-                self.db.child(name).setValue(newCollection, withCompletionBlock: {error, _ in
-                    guard error == nil else{
-                        return
-                    }
-                })
+            vc.navigationItem.largeTitleDisplayMode = .never
+            navigationController?.pushViewController(vc, animated: true)
+            
+        }
+        if identifierName == "listVC"{
+            print("hello")
+            guard let vc = self.storyboard?.instantiateViewController(identifier: identifierName) as? ListViewController else {
+                return
             }
-        })
+            vc.navigationItem.largeTitleDisplayMode = .never
+            navigationController?.pushViewController(vc, animated: true)
+        }
+        
+        
         
     }
     

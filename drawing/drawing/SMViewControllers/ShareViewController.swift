@@ -19,12 +19,10 @@ class ShareViewController: UIViewController {
     @IBOutlet var sharingImage: UIImageView!
     @IBOutlet var PostButton: UIButton!
     @IBOutlet var textfield: UITextView!
-    
+    var model: Project!
     private let storage = Storage.storage().reference()
     private let db = Database.database().reference()
     var coll_flag = true
-    
-    private var models = [Project]()
     
     lazy var realm:Realm = {
         return try! Realm()
@@ -32,7 +30,7 @@ class ShareViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //models = realm.objects(Project.self).map({ $0 })
+        
         let data = UserDefaults.standard.value(forKey:"share_item") as? Data
         
         sharingImage.image = UIImage(data: data!)
@@ -46,39 +44,38 @@ class ShareViewController: UIViewController {
         let textdata = textfield.text!
         let user = Auth.auth().currentUser
         let safeEmail = DatabaseManager.safeEmail(emailAddress: user?.email ?? "No_email")
-        let filename = safeEmail + "_post_pic" + String(Int.random(in: 0..<10000))
-
+        let filename = safeEmail + "_post_pic" + self.model.Id
+        
         let path = "images/post_images/"+filename
         
         storage.child(path).putData(imageData,
-                                                 metadata: nil,
-                                                 completion: { _, error in
-                                                    guard error == nil else {
-                                                        print("Failed to Upload")
-                                                        return
-                                                    }
-                                                    self.storage.child(path).downloadURL(completion: {url, erro in guard let url = url, error == nil else{
-                                                        return
-                                                        }
-                                                        
-                                                        let urlString = url.absoluteString
-                                                        self.addposting(urlString: urlString, text: textdata)
-                                                        
-                                                        })
-                                    
+                                    metadata: nil,
+                                    completion: { _, error in
+                                        guard error == nil else {
+                                            print("Failed to Upload")
+                                            return
+                                        }
+                                        self.storage.child(path).downloadURL(completion: {url, erro in guard let url = url, error == nil else{
+                                            return
+                                            }
+                                            
+                                            let urlString = url.absoluteString
+                                            self.addposting(urlString: urlString, text: textdata)
+                                            self.addProjShare(ImageURL: urlString)
+                                            
+                                        })
+                                        
         })
         let smViewController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.smViewController ) as! SMViewController
-
+        
         self.navigationController?.pushViewController(smViewController, animated: true)
         
     }
     
     @objc private func addposting(urlString: String, text: String){
-        let now = Date()
+        let (now, timestring) = DatabaseManager.get_Date()
         let order = 0 - Int(now.timeIntervalSince1970)
-        let formatter = DateFormatter()
-        formatter.dateStyle = .short
-        formatter.timeStyle = .short
+        
         let email = UserDefaults.standard.value(forKey:"email") as? String ?? "No email"
         let id = UserDefaults.standard.value(forKey:"share_id") as? String
         let object: [String: Any] = [
@@ -87,34 +84,38 @@ class ShareViewController: UIViewController {
             "userID": UserDefaults.standard.value(forKey:"name") as? String ?? "No Name",
             "ImageURL": urlString,
             "Description": text,
-            "Time": formatter.string(from: now),
+            "Time": timestring,
             "numberOfRecreate": 0,
             "order": order
             
         ]
+        DatabaseManager.shared.addCollection(obj: object, collectionName: "postings")
         
-        db.child("postings").observeSingleEvent(of: .value, with: { snapshot in
-            if var usersCollection = snapshot.value as? [[String: Any]]{
+    }
+    @objc func addProjShare(ImageURL: String){
+        if self.model != nil{
+            let email = UserDefaults.standard.value(forKey:"email") as? String ?? "No email"
+            
+            let (now, timestring) = DatabaseManager.get_Date()
+            let order = 0 - Int(now.timeIntervalSince1970)
+            let obj: [String: Any] = [
+                "ID": self.model.Id,
+                "last modified": timestring,
+                "linecolor": self.model.linecolor,
+                "lineop": self.model.lineop,
+                "linewidth": self.model.linewidth,
+                "pos": self.model.pos,
+                "ind": self.model.ind,
+                "imageurl": ImageURL,
+                "order": order,
+                "IDList": [self.model.Id],
+                "emailList": [email],
+                "placeholder":[self.model.ind.count]
                 
-                usersCollection.append(object)
-                self.db.child("postings").setValue(usersCollection, withCompletionBlock: {error, _ in
-                    guard error == nil else{
-                        return
-                    }
-                })
-            }
-            else{
-                print("database not exists!")
-                let newCollection: [[String: Any]] = [
-                    object] as [[String : Any]]
-                
-                self.db.child("postings").setValue(newCollection, withCompletionBlock: {error, _ in
-                    guard error == nil else{
-                        return
-                    }
-                })
-            }
-        })
+            ]
+            DatabaseManager.shared.addCollection(obj: obj, collectionName: "SharedProjects")
+        }
+        
     }
 }
 

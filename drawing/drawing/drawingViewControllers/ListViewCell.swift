@@ -18,6 +18,8 @@ class ListViewCell: UITableViewCell {
     @IBOutlet weak var ImageView: UIImageView!
     @IBOutlet weak var share: UIButton!
     @IBOutlet weak var addcollebrators: UIButton!
+    
+    @IBOutlet weak var collab_Img: UIImageView!
     static func nib() -> UINib {
         return UINib(nibName: "ListViewCell", bundle: nil)
     }
@@ -35,6 +37,7 @@ class ListViewCell: UITableViewCell {
             self.ImageView.image = UIImage(data: model.Image)!
             self.model = model
         }
+        
     }
     @IBAction func didTapShare(_ sender: Any) {
         delegate?.didTapShare(with: self.model)

@@ -90,8 +90,8 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
             }
             let user = Auth.auth().currentUser
             let safeEmail = DatabaseManager.safeEmail(emailAddress: user?.email ?? "No_email")
-            
-            let filename = safeEmail + "_project_pic" + String(Int.random(in: 0..<10000))
+            let ID = UUID().uuidString
+            let filename = safeEmail + "_project_pic" + ID
             
             let path = "images/proj_images/"+filename
             storage.child(path).putData(project,
@@ -106,7 +106,7 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
                                                 }
                                                 
                                                 let urlString = url.absoluteString
-                                                self.addproject(Imageurl: urlString, linecolor: linecolor, lineop: lineop, linewidth: linewidth, pos: pos, ind: ind, safeEmail: safeEmail)
+                                                self.addproject(ID:ID, Imageurl: urlString, linecolor: linecolor, lineop: lineop, linewidth: linewidth, pos: pos, ind: ind, safeEmail: safeEmail)
                                                 
                                             })
                                             
@@ -172,7 +172,7 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
         canvasView.strokeColor = color
     }
     
-    @objc private func addproject(Imageurl: String, linecolor: [String], lineop: [Float], linewidth: [Float], pos: [String], ind: [Int], safeEmail: String){
+    @objc private func addproject(ID: String, Imageurl: String, linecolor: [String], lineop: [Float], linewidth: [Float], pos: [String], ind: [Int], safeEmail: String){
         let now = Date()
         let formatter = DateFormatter()
         formatter.dateStyle = .short
@@ -180,7 +180,7 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
         let name = safeEmail + "-projects"
         let order = 0 - Int(now.timeIntervalSince1970)
         let obj: [String: Any] = [
-            "ID": UUID().uuidString,
+            "ID":ID,
             "last modified": formatter.string(from: now),
             "linecolor": linecolor,
             "lineop": lineop,
@@ -190,28 +190,8 @@ class NewViewController: UIViewController, UICollectionViewDelegate, UICollectio
             "imageurl": Imageurl,
             "order": order
         ]
-        //db.child("latest_obj").setValue(obj)
-        db.child(name).observeSingleEvent(of: .value, with: { snapshot in
-            if var usersCollection = snapshot.value as? [[String: Any]]{
-                
-                usersCollection.append(obj)
-                self.db.child(name).setValue(usersCollection, withCompletionBlock: {error, _ in
-                    guard error == nil else{
-                        return
-                    }
-                })
-            }
-            else{
-                let newCollection: [[String: Any]] = [
-                    obj] as [[String : Any]]
-                
-                self.db.child(name).setValue(newCollection, withCompletionBlock: {error, _ in
-                    guard error == nil else{
-                        return
-                    }
-                })
-            }
-        })
+        DatabaseManager.shared.addCollection(obj: obj, collectionName: name)
+        
     }
     
 }

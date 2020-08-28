@@ -23,6 +23,13 @@ final class DatabaseManager{
         let path = "images/profileImg/" + safeEmail + "_profile_pic"
         return path
     }
+    static func get_Date()-> (Date, String){
+           let now = Date()
+           let formatter = DateFormatter()
+           formatter.dateStyle = .short
+           formatter.timeStyle = .short
+        return (now, formatter.string(from: now))
+       }
 }
 
 // Mark: - Account Management
@@ -139,18 +146,55 @@ extension DatabaseManager {
     public func getAProject(postingModel: CreationPost, completion: @escaping (Result<[String: Any], Error>) -> Void) {
         
         let postingSafeEmail = DatabaseManager.safeEmail(emailAddress: postingModel.email)
-        database.child(postingSafeEmail + "-projects").queryOrdered(byChild: "ID").queryEqual(toValue: postingModel.Id).observeSingleEvent(of: .value, with: {snapshot in
-            guard let value = snapshot.value as? [String: Any] else{
-                //print(snapshot.value ?? "nil")
+        
+        database.child("SharedProjects").queryOrdered(byChild: "ID").queryEqual(toValue: postingModel.Id).observeSingleEvent(of: .value, with: {snapshot in
+            guard let value = snapshot.value as? NSArray else{
+                
                 completion(.failure(DatabaseError.failedToFetch))
                 return
             }
-            completion(.success(value))
+            
+            guard let obj = value.lastObject as? [String: Any] else{
+          
+                completion(.failure(DatabaseError.failedToFetch))
+                return
+            }
+            completion(.success(obj))
         })
         
     }
-    
+    public func addCollection(obj: [String: Any], collectionName: String){
+        database.child(collectionName).observeSingleEvent(of: .value, with: { snapshot in
+            if var usersCollection = snapshot.value as? [[String: Any]]{
+                
+                usersCollection.append(obj)
+                
+                self.database.child(collectionName).setValue(usersCollection, withCompletionBlock: {error, _ in
+                    guard error == nil else{
+                        return
+                    }
+                })
+            }
+            else{
+                print("database not exists!")
+                let newCollection: [[String: Any]] = [
+                    obj] as [[String : Any]]
+                
+                self.database.child(collectionName).setValue(newCollection, withCompletionBlock: {error, _ in
+                    guard error == nil else{
+                        return
+                    }
+                })
+            }
+        })
+    }
+    public func ImgToCloud(path: String, imageData: Data, completion: @escaping (Result<Any, Error>) -> Void){
+        
+    }
+   
 }
+
+
 
 
 //data objects for profile/postings/projects/
@@ -181,6 +225,7 @@ struct Project{
     let pos: [String]
     let ind: [Int]
     let imageurl: String
+    //let IdList: [String]
     
 }
 
