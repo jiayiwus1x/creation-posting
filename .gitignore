@@ -101,6 +101,7 @@ playground.xcworkspace
 
 # CocoaPods - Refactored to standalone file
 */Pods
+Pods/
 /drawing/Pods
 # Carthage - Refactored to standalone file
 
