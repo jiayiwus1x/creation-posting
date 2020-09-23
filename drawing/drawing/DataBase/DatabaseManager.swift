@@ -24,12 +24,12 @@ final class DatabaseManager{
         return path
     }
     static func get_Date()-> (Date, String){
-           let now = Date()
-           let formatter = DateFormatter()
-           formatter.dateStyle = .short
-           formatter.timeStyle = .short
+        let now = Date()
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.timeStyle = .short
         return (now, formatter.string(from: now))
-       }
+    }
 }
 
 // Mark: - Account Management
@@ -145,21 +145,19 @@ extension DatabaseManager {
     
     public func getAProject(postingModel: CreationPost, completion: @escaping (Result<[String: Any], Error>) -> Void) {
         
-        let postingSafeEmail = DatabaseManager.safeEmail(emailAddress: postingModel.email)
         
-        database.child("SharedProjects").queryOrdered(byChild: "ID").queryEqual(toValue: postingModel.Id).observeSingleEvent(of: .value, with: {snapshot in
-            guard let value = snapshot.value as? NSArray else{
-                
-                completion(.failure(DatabaseError.failedToFetch))
-                return
+        database.child("SharedProjects").queryOrdered(byChild: "ID").queryEqual(toValue: postingModel.Id).observeSingleEvent(of: .value, with: {(snapshot) in
+            
+            for snap in snapshot.children {
+                let userSnap = snap as! DataSnapshot
+                guard let obj = userSnap.value as? [String: Any] else{
+                    completion(.failure(DatabaseError.failedToFetch))
+                    return
+                }
+                completion(.success(obj))
             }
             
-            guard let obj = value.lastObject as? [String: Any] else{
-          
-                completion(.failure(DatabaseError.failedToFetch))
-                return
-            }
-            completion(.success(obj))
+            
         })
         
     }
@@ -191,7 +189,7 @@ extension DatabaseManager {
     public func ImgToCloud(path: String, imageData: Data, completion: @escaping (Result<Any, Error>) -> Void){
         
     }
-   
+    
 }
 
 
@@ -225,7 +223,9 @@ struct Project{
     let pos: [String]
     let ind: [Int]
     let imageurl: String
-    //let IdList: [String]
+    let collabFlag: Bool
+    let IdList: [String]
+    let userList: [String]
     
 }
 

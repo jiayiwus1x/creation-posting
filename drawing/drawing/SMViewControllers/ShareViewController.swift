@@ -93,9 +93,8 @@ class ShareViewController: UIViewController {
         
     }
     @objc func addProjShare(ImageURL: String){
-        if self.model != nil{
+        if self.model != nil {
             let email = UserDefaults.standard.value(forKey:"email") as? String ?? "No email"
-            
             let (now, timestring) = DatabaseManager.get_Date()
             let order = 0 - Int(now.timeIntervalSince1970)
             let obj: [String: Any] = [
@@ -108,8 +107,8 @@ class ShareViewController: UIViewController {
                 "ind": self.model.ind,
                 "imageurl": ImageURL,
                 "order": order,
-                "IDList": [self.model.Id],
                 "emailList": [email],
+                "IDList": [self.model.Id],
                 "placeholder":[self.model.ind.count]
                 
             ]

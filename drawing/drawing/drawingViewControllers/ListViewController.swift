@@ -75,8 +75,19 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             let data = try? Data(contentsOf: url)
             
             let id = value["ID"] ?? UUID().uuidString
+            var flag: Bool
+            var IdList = [String]()
+            var userList = [String]()
+            if value["IDList"] != nil{
+                flag = true
+                IdList = value["IDList"] as! [String]
+                userList = value["emailList"] as! [String]
+                
+            }else{
+                flag = false
+            }
             if data != nil{
-                let model = Project(Id: id as! String, Image: data!, linecolor: value["linecolor"] as! [String], lineop: value["lineop"] as! [Float], linewidth: value["linewidth"] as! [Float], pos: value["pos"] as! [String], ind: value["ind"] as! [Int], imageurl: value["imageurl"] as! String)
+                let model = Project(Id: id as! String, Image: data!, linecolor: value["linecolor"] as! [String], lineop: value["lineop"] as! [Float], linewidth: value["linewidth"] as! [Float], pos: value["pos"] as! [String], ind: value["ind"] as! [Int], imageurl: value["imageurl"] as! String, collabFlag: flag, IdList: IdList, userList: userList)
                 
                 self.models.append(model)
                 DispatchQueue.main.async {

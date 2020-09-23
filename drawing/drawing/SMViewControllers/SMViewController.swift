@@ -28,7 +28,7 @@ class SMViewController: UIViewController,UITableViewDataSource, UITableViewDeleg
         table.register(PostTableViewCell.nib(), forCellReuseIdentifier: PostTableViewCell.identifier)
         table.delegate = self
         table.dataSource = self
-        //fake data need be replaced
+        //fetching data
         
         fetchpostings()
         refreshControl.attributedTitle = NSAttributedString(string: "refreshing")
@@ -84,10 +84,10 @@ class SMViewController: UIViewController,UITableViewDataSource, UITableViewDeleg
         cell.delegate = self
         return cell
     }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
-        
-    }
-    
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
+//
+//    }
+//
     
 }
 

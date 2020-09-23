@@ -17,17 +17,17 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ly3-Fu-2mT">
-                        <rect key="frame" x="0.0" y="41" width="403" height="500"/>
+                        <rect key="frame" x="0.0" y="57" width="403" height="500"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="500" id="1B9-eC-zJC"/>
                         </constraints>
                     </imageView>
                     <view contentMode="scaleToFill" id="yNt-1w-AY4">
-                        <rect key="frame" x="-3" y="0.0" width="409" height="41"/>
+                        <rect key="frame" x="-3" y="0.0" width="406" height="57"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aDq-jm-FfA">
-                                <rect key="frame" x="357" y="8" width="22" height="22"/>
+                                <rect key="frame" x="354" y="8" width="22" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="22" id="3Ra-KI-a6u"/>
                                     <constraint firstAttribute="width" constant="22" id="xlk-q6-S26"/>
@@ -35,7 +35,7 @@
                                 <state key="normal" title="Button" image="plus" catalog="system"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zlB-pm-4qD">
-                                <rect key="frame" x="325" y="8" width="22" height="22"/>
+                                <rect key="frame" x="322" y="8" width="22" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="22" id="15T-CK-NkI"/>
                                     <constraint firstAttribute="height" constant="22" id="hso-Tm-tY7"/>
@@ -45,22 +45,35 @@
                                     <action selector="didTapShare:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="E6b-gs-xhl"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LfY-xi-3WN" userLabel="Colla image">
-                                <rect key="frame" x="10" y="3" width="36" height="35"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="collabrators" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kUS-V7-IMz">
+                                <rect key="frame" x="5" y="18" width="91" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LfY-xi-3WN" userLabel="Colla image">
+                                <rect key="frame" x="106" y="0.0" width="57" height="57"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="LfY-xi-3WN" secondAttribute="height" multiplier="42:41" id="l16-eg-AAR"/>
+                                    <constraint firstAttribute="width" constant="57" id="C4G-to-cyU"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="30"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="LfY-xi-3WN" firstAttribute="leading" secondItem="K3S-qg-OHZ" secondAttribute="leading" constant="10" id="4Q2-no-bPk"/>
+                            <constraint firstItem="LfY-xi-3WN" firstAttribute="leading" secondItem="kUS-V7-IMz" secondAttribute="trailing" constant="10" id="4Q2-no-bPk"/>
                             <constraint firstItem="zlB-pm-4qD" firstAttribute="top" secondItem="K3S-qg-OHZ" secondAttribute="top" constant="8" id="4c2-Mz-rhd"/>
                             <constraint firstItem="aDq-jm-FfA" firstAttribute="leading" secondItem="zlB-pm-4qD" secondAttribute="trailing" constant="10" id="5td-cv-0WM"/>
-                            <constraint firstItem="K3S-qg-OHZ" firstAttribute="bottom" secondItem="LfY-xi-3WN" secondAttribute="bottom" constant="3" id="FlT-5N-4ej"/>
+                            <constraint firstItem="K3S-qg-OHZ" firstAttribute="bottom" secondItem="LfY-xi-3WN" secondAttribute="bottom" id="Ixe-Nf-WCg"/>
                             <constraint firstItem="K3S-qg-OHZ" firstAttribute="trailing" secondItem="aDq-jm-FfA" secondAttribute="trailing" constant="30" id="aea-cg-Nen"/>
                             <constraint firstItem="aDq-jm-FfA" firstAttribute="top" secondItem="K3S-qg-OHZ" secondAttribute="top" constant="8" id="ega-9F-wBY"/>
                             <constraint firstItem="LfY-xi-3WN" firstAttribute="centerY" secondItem="yNt-1w-AY4" secondAttribute="centerY" id="kab-Eg-9YR"/>
+                            <constraint firstItem="kUS-V7-IMz" firstAttribute="leading" secondItem="K3S-qg-OHZ" secondAttribute="leading" constant="5" id="rJJ-zU-2Md"/>
+                            <constraint firstItem="kUS-V7-IMz" firstAttribute="centerY" secondItem="yNt-1w-AY4" secondAttribute="centerY" id="y1T-8T-xUu"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="K3S-qg-OHZ"/>
                     </view>
@@ -75,6 +88,7 @@
             <connections>
                 <outlet property="ImageView" destination="ly3-Fu-2mT" id="tUj-dQ-Xs9"/>
                 <outlet property="addcollebrators" destination="aDq-jm-FfA" id="Kc9-hG-7hx"/>
+                <outlet property="coll_label" destination="kUS-V7-IMz" id="ynD-59-524"/>
                 <outlet property="collab_Img" destination="LfY-xi-3WN" id="kQt-RR-O3d"/>
                 <outlet property="share" destination="zlB-pm-4qD" id="QoH-ie-mqF"/>
             </connections>
