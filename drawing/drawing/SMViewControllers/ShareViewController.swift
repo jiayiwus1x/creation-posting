@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import RealmSwift
 import FirebaseStorage
 import FirebaseDatabase
 import FirebaseAuth
@@ -23,10 +22,6 @@ class ShareViewController: UIViewController {
     private let storage = Storage.storage().reference()
     private let db = Database.database().reference()
     var coll_flag = true
-    
-    lazy var realm:Realm = {
-        return try! Realm()
-    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()

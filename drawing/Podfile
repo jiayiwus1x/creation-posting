@@ -5,7 +5,6 @@ target 'drawing' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-	pod 'RealmSwift'
   # Pods for firebase-app-tutorial
   # add pods for desired Firebase products
   # https://firebase.google.com/docs/ios/setup#available-pods

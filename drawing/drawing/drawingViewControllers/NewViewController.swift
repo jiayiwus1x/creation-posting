@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import RealmSwift
+
 import FirebaseStorage
 import FirebaseDatabase
 import FirebaseAuth
@@ -15,10 +15,6 @@ import FirebaseAuth
 class NewViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource{
     
     // saving
-    
-    lazy var realm:Realm = {
-        return try! Realm()
-    }()
     public var completionHandler: (() -> Void)?
     private let db = Database.database().reference()
     private let storage = Storage.storage().reference()
