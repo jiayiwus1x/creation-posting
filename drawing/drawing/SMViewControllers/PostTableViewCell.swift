@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import FirebaseAuth
+
 protocol PostTableViewCellDelegate: AnyObject {
     func didTapButton (with title: String)
     func didTapProfile(with item: String)
@@ -64,7 +66,8 @@ class PostTableViewCell: UITableViewCell {
                    }
         })
         self.model = model
-        if model.Id == "None"{
+        let user = Auth.auth().currentUser
+        if (model.Id == "None" || model.email == user?.email) {
             collButton?.isHidden = true
         }
         else{

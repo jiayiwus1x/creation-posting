@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseDatabase
+import FirebaseAuth
 
 class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     private let database = Database.database().reference()

@@ -54,7 +54,6 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.present(nav, animated: true, completion: nil)
             
         }
-        
     }
     
     func fetchprojects(safe_email: String){
@@ -62,38 +61,38 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         db.child(safe_email + "-projects").queryOrdered(byChild: "order").observe(.childAdded, with: {
             (snapshot) in guard let
-                value = snapshot.value as? [String: Any] else {
-                    print("value not exists")
-                    return
-            }
-            
-            guard let urlString = value["imageurl"]  as? String, let url = URL(string: urlString) else{
-                print("image url not exist")
+                                    value = snapshot.value as? [String: Any] else {
+                print("value not exists")
                 return
             }
+        
+        guard let urlString = value["imageurl"]  as? String, let url = URL(string: urlString) else{
+            print("image url not exist")
+            return
+        }
+        
+        let data = try? Data(contentsOf: url)
+        
+        let id = value["ID"] ?? UUID().uuidString
+        var flag: Bool
+        var IdList = [String]()
+        var userList = [String]()
+        if value["IDList"] != nil{
+            flag = true
+            IdList = value["IDList"] as! [String]
+            userList = value["emailList"] as! [String]
             
-            let data = try? Data(contentsOf: url)
+        }else{
+            flag = false
+        }
+        if data != nil{
+            let model = Project(Id: id as! String, Image: data!, linecolor: value["linecolor"] as! [String], lineop: value["lineop"] as! [Float], linewidth: value["linewidth"] as! [Float], pos: value["pos"] as! [String], ind: value["ind"] as! [Int], imageurl: value["imageurl"] as! String, collabFlag: flag, IdList: IdList, userList: userList)
             
-            let id = value["ID"] ?? UUID().uuidString
-            var flag: Bool
-            var IdList = [String]()
-            var userList = [String]()
-            if value["IDList"] != nil{
-                flag = true
-                IdList = value["IDList"] as! [String]
-                userList = value["emailList"] as! [String]
+            self.models.append(model)
+            DispatchQueue.main.async {
+                self.table.reloadData()
                 
-            }else{
-                flag = false
-            }
-            if data != nil{
-                let model = Project(Id: id as! String, Image: data!, linecolor: value["linecolor"] as! [String], lineop: value["lineop"] as! [Float], linewidth: value["linewidth"] as! [Float], pos: value["pos"] as! [String], ind: value["ind"] as! [Int], imageurl: value["imageurl"] as! String, collabFlag: flag, IdList: IdList, userList: userList)
-                
-                self.models.append(model)
-                DispatchQueue.main.async {
-                    self.table.reloadData()
-                    
-                }}
+            }}
         })
         
     }
