@@ -159,7 +159,7 @@ class NoteViewController: UIViewController, UICollectionViewDelegate, UICollecti
                                                 }
                                                 
                                                 let urlString = url.absoluteString
-                                                self.editproject(ID: self.item!.Id, Imageurl: urlString, linecolor: linecolor, lineop: lineop, linewidth: linewidth, pos: pos, ind: ind, safeEmail: safeEmail)
+                                            self.editproject(Imageurl: urlString, linecolor: linecolor, lineop: lineop, linewidth: linewidth, pos: pos, ind: ind, safeEmail: safeEmail)
                                                 
                                             })
                                             
@@ -192,16 +192,16 @@ class NoteViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let color = colorsArray[indexPath.row]
         canvasView.strokeColor = color
     }
-    @objc private func editproject(ID: String, Imageurl: String, linecolor: [String], lineop: [Float], linewidth: [Float], pos: [String], ind: [Int], safeEmail: String){
+    @objc private func editproject(Imageurl: String, linecolor: [String], lineop: [Float], linewidth: [Float], pos: [String], ind: [Int], safeEmail: String){
         let now = Date()
         let formatter = DateFormatter()
         formatter.dateStyle = .short
         formatter.timeStyle = .short
         let name = safeEmail + "-projects"
         let order = 0 - Int(now.timeIntervalSince1970)
-        
+       
         let obj: [String: Any] = [
-            "ID" : ID,
+            "ID" : self.item!.Id,
             "last modified": formatter.string(from: now),
             "linecolor": linecolor,
             "lineop": lineop,
@@ -209,13 +209,16 @@ class NoteViewController: UIViewController, UICollectionViewDelegate, UICollecti
             "pos": pos,
             "ind": ind,
             "imageurl": Imageurl,
-            "order": order
+            "order": order,
+            "emailList": self.item!.userList,
+            "IDList": self.item!.IdList,
+            "holderindex":self.item!.holderindex
         ]
         //db.child("latest_obj").setValue(obj)
         db.child(name).observeSingleEvent(of: .value, with: { snapshot in
             if var usersCollection = snapshot.value as? [[String: Any]]{
                 for (i,arr) in usersCollection.enumerated(){
-                    if arr["ID"] as? String == ID{
+                    if arr["ID"] as? String == self.item!.Id{
                         usersCollection.remove(at: i)
                         print("reomoved one entry, ", i)
                         break

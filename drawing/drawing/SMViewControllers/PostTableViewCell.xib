@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -64,7 +66,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IUG-GU-r2C">
                                 <rect key="frame" x="8" y="8" width="417" height="40"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m0U-il-q0h">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m0U-il-q0h">
                                         <rect key="frame" x="5" y="11.5" width="25" height="19.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="25" id="Zkd-jJ-QeJ"/>
@@ -75,23 +77,23 @@
                                             <action selector="didTapButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="afe-JX-A7d"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kZ7-y9-Okt">
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kZ7-y9-Okt">
                                         <rect key="frame" x="40" y="10" width="40" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="Azu-Um-Gxd"/>
                                         </constraints>
                                         <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" image="ellipses.bubble" catalog="system"/>
+                                        <state key="normal" image="ellipsis.bubble" catalog="system"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Bc-HL-CJ1">
-                                        <rect key="frame" x="90" y="8" width="20" height="23.5"/>
+                                        <rect key="frame" x="90" y="8.5" width="20" height="23"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="20" id="0Xh-Wi-PGt"/>
                                         </constraints>
                                         <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" backgroundImage="doc.on.doc" catalog="system"/>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fL7-mf-RfI">
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fL7-mf-RfI">
                                         <rect key="frame" x="128" y="10" width="28" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="28" id="3Cy-Cv-2eo"/>
@@ -102,6 +104,17 @@
                                             <action selector="didTapColla:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Pzs-pk-a3I"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fqP-Yg-Mn1">
+                                        <rect key="frame" x="174" y="10" width="27" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="27" id="jnm-J5-dh1"/>
+                                        </constraints>
+                                        <color key="tintColor" systemColor="labelColor"/>
+                                        <state key="normal" title="Button" image="video" catalog="system"/>
+                                        <connections>
+                                            <action selector="didTapVideo:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="JwC-D9-Ilf"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="9nK-gx-d9l"/>
@@ -110,10 +123,13 @@
                                     <constraint firstItem="1Bc-HL-CJ1" firstAttribute="top" secondItem="IUG-GU-r2C" secondAttribute="top" constant="10" id="LBL-BG-BjQ"/>
                                     <constraint firstAttribute="bottom" secondItem="1Bc-HL-CJ1" secondAttribute="bottom" constant="10" id="LT6-PU-Y0F"/>
                                     <constraint firstItem="kZ7-y9-Okt" firstAttribute="top" secondItem="IUG-GU-r2C" secondAttribute="top" constant="10" id="MXm-HQ-6iZ"/>
+                                    <constraint firstAttribute="bottom" secondItem="fqP-Yg-Mn1" secondAttribute="bottom" constant="10" id="MmW-jG-1qz"/>
                                     <constraint firstItem="m0U-il-q0h" firstAttribute="top" secondItem="IUG-GU-r2C" secondAttribute="top" constant="10" id="WpS-56-YuO"/>
+                                    <constraint firstItem="fqP-Yg-Mn1" firstAttribute="top" secondItem="IUG-GU-r2C" secondAttribute="top" constant="10" id="ZtT-AL-IJL"/>
                                     <constraint firstAttribute="bottom" secondItem="m0U-il-q0h" secondAttribute="bottom" constant="8" id="es7-IY-MWl"/>
                                     <constraint firstItem="fL7-mf-RfI" firstAttribute="leading" secondItem="1Bc-HL-CJ1" secondAttribute="trailing" constant="18" id="fOF-qd-db7"/>
                                     <constraint firstItem="fL7-mf-RfI" firstAttribute="top" secondItem="IUG-GU-r2C" secondAttribute="top" constant="10" id="hyT-xG-C4Z"/>
+                                    <constraint firstItem="fqP-Yg-Mn1" firstAttribute="leading" secondItem="fL7-mf-RfI" secondAttribute="trailing" constant="18" id="tvf-Z1-dUC"/>
                                     <constraint firstItem="m0U-il-q0h" firstAttribute="leading" secondItem="IUG-GU-r2C" secondAttribute="leading" constant="5" id="uUE-n1-B6D"/>
                                     <constraint firstAttribute="bottom" secondItem="kZ7-y9-Okt" secondAttribute="bottom" constant="5" id="wg6-RP-mIu"/>
                                 </constraints>
@@ -126,8 +142,8 @@
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="oOx-Tb-red">
                                 <rect key="frame" x="0.0" y="61" width="579" height="79"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -148,11 +164,11 @@
                     </view>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="4TS-de-Vnl">
                         <rect key="frame" x="0.0" y="795" width="579" height="69"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="69" id="OSB-Gt-sUw"/>
                         </constraints>
-                        <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" systemColor="labelColor"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
@@ -191,10 +207,17 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="doc.on.doc" catalog="system" width="117" height="128"/>
-        <image name="ellipses.bubble" catalog="system" width="128" height="110"/>
-        <image name="hand.draw" catalog="system" width="128" height="108"/>
+        <image name="doc.on.doc" catalog="system" width="116" height="128"/>
+        <image name="ellipsis.bubble" catalog="system" width="128" height="110"/>
+        <image name="hand.draw" catalog="system" width="128" height="113"/>
         <image name="head_1" width="276" height="183"/>
         <image name="heart" catalog="system" width="128" height="109"/>
+        <image name="video" catalog="system" width="128" height="83"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

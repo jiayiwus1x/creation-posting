@@ -218,14 +218,18 @@ struct Project{
     let Id: String
     let Image: Data
     let linecolor: [String]
-    let lineop: [Float]
-    let linewidth: [Float]
-    let pos: [String]
-    let ind: [Int]
+    var lineop: [Float]
+    var linewidth: [Float]
+    var pos: [String]
+    var ind: [Int]
     let imageurl: String
     let collabFlag: Bool
     let IdList: [String]
     let userList: [String]
+    let holderindex: [Int]
+    let last_modify: String
+    let order: Int
+    
     
 }
 

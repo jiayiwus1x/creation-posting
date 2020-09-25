@@ -58,41 +58,46 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func fetchprojects(safe_email: String){
         print("fetching", safe_email + "-projects")
-        
+        //childAdded to get postings one by one
         db.child(safe_email + "-projects").queryOrdered(byChild: "order").observe(.childAdded, with: {
-            (snapshot) in guard let
-                                    value = snapshot.value as? [String: Any] else {
-                print("value not exists")
+                                    (snapshot) in guard let
+                                    value = snapshot.value as? [String: Any]
+                                    else {
+                                            print("value not exists")
+                                            return
+                                        }
+        
+            guard let urlString = value["imageurl"]  as? String, let url = URL(string: urlString) else{
+                print("image url not exist")
                 return
             }
-        
-        guard let urlString = value["imageurl"]  as? String, let url = URL(string: urlString) else{
-            print("image url not exist")
-            return
-        }
-        
-        let data = try? Data(contentsOf: url)
-        
-        let id = value["ID"] ?? UUID().uuidString
-        var flag: Bool
-        var IdList = [String]()
-        var userList = [String]()
-        if value["IDList"] != nil{
-            flag = true
-            IdList = value["IDList"] as! [String]
-            userList = value["emailList"] as! [String]
             
-        }else{
-            flag = false
-        }
-        if data != nil{
-            let model = Project(Id: id as! String, Image: data!, linecolor: value["linecolor"] as! [String], lineop: value["lineop"] as! [Float], linewidth: value["linewidth"] as! [Float], pos: value["pos"] as! [String], ind: value["ind"] as! [Int], imageurl: value["imageurl"] as! String, collabFlag: flag, IdList: IdList, userList: userList)
+            let data = try? Data(contentsOf: url)
             
-            self.models.append(model)
-            DispatchQueue.main.async {
-                self.table.reloadData()
+            let id = value["ID"] ?? UUID().uuidString
+            var flag: Bool
+            var IdList = [String]()
+            var userList = [String]()
+            var holderindex = [Int]()
+            if value["IDList"] != nil{
+                flag = true
+                IdList = value["IDList"] as! [String]
+                userList = value["emailList"] as! [String]
+                if value["holderindex"] != nil{
+                    holderindex = value["holderindex"] as! [Int]
+                }
                 
-            }}
+            }else{
+                flag = false
+            }
+            if data != nil{
+                let model = Project(Id: id as! String, Image: data!, linecolor: value["linecolor"] as! [String], lineop: value["lineop"] as! [Float], linewidth: value["linewidth"] as! [Float], pos: value["pos"] as! [String], ind: value["ind"] as! [Int], imageurl: value["imageurl"] as! String, collabFlag: flag, IdList: IdList, userList: userList, holderindex: holderindex, last_modify: value["last modified"] as! String, order: value["order"] as! Int)
+                
+                self.models.append(model)
+                DispatchQueue.main.async {
+                    self.table.reloadData()
+                    
+                }}
         })
         
     }

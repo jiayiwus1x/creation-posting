@@ -30,6 +30,8 @@ class ShareViewController: UIViewController {
         
         sharingImage.image = UIImage(data: data!)
         // Do any additional setup after loading the view.
+        initializeHideKeyboard()
+        
     }
     
     @IBAction func didTapShare(){
@@ -52,15 +54,15 @@ class ShareViewController: UIViewController {
                                         }
                                         self.storage.child(path).downloadURL(completion: {url, erro in guard let url = url, error == nil else{
                                             return
-                                            }
-                                            
-                                            let urlString = url.absoluteString
-                                            self.addposting(urlString: urlString, text: textdata)
-                                            self.addProjShare(ImageURL: urlString)
-                                            
+                                        }
+                                        
+                                        let urlString = url.absoluteString
+                                        self.addposting(urlString: urlString, text: textdata)
+                                        self.addProjShare(ImageURL: urlString)
+                                        
                                         })
                                         
-        })
+                                    })
         let smViewController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.smViewController ) as! SMViewController
         
         self.navigationController?.pushViewController(smViewController, animated: true)
@@ -89,9 +91,11 @@ class ShareViewController: UIViewController {
     }
     @objc func addProjShare(ImageURL: String){
         if self.model != nil {
+            print(self.model.collabFlag)
             let email = UserDefaults.standard.value(forKey:"email") as? String ?? "No email"
             let (now, timestring) = DatabaseManager.get_Date()
             let order = 0 - Int(now.timeIntervalSince1970)
+            
             let obj: [String: Any] = [
                 "ID": self.model.Id,
                 "last modified": timestring,
@@ -102,14 +106,32 @@ class ShareViewController: UIViewController {
                 "ind": self.model.ind,
                 "imageurl": ImageURL,
                 "order": order,
-                "emailList": [email],
-                "IDList": [self.model.Id],
-                "placeholder":[self.model.ind.count]
+                "emailList": self.model.userList + [email],
+                "IDList": self.model.IdList + [self.model.Id],
+                "holderindex":self.model.holderindex + [self.model.ind.count]
                 
             ]
             DatabaseManager.shared.addCollection(obj: obj, collectionName: "SharedProjects")
+                    
+            
         }
         
+    }
+}
+
+extension ShareViewController{
+    func initializeHideKeyboard(){
+        //Declare a Tap Gesture Recognizer which will trigger our dismissMyKeyboard() function
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(dismissMyKeyboard))
+        //Add this tap gesture recognizer to the parent view
+        view.addGestureRecognizer(tap)
+    }
+    @objc func dismissMyKeyboard(){
+        //endEditing causes the view (or one of its embedded text fields) to resign the first responder status.
+        //In short- Dismiss the active keyboard.
+        view.endEditing(true)
     }
 }
 

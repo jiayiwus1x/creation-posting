@@ -58,8 +58,9 @@ class SMViewController: UIViewController,UITableViewDataSource, UITableViewDeleg
             }
             let data = try? Data(contentsOf: url)
             let image = UIImage(data: data!)!
+      
             let Id = value["ID"] ?? "None"
-            let model = CreationPost(Id: Id as! String,numberOfRecreate: 0, username: value["userID"] as! String, email: value["email"] as! String, postImage: image, descriptiontext: value["Description"] as! String, timestamp: value["Time"] as! String)
+            let model = CreationPost(Id: Id as! String, numberOfRecreate: value["numberOfRecreate"] as! Int, username: value["userID"] as! String, email: value["email"] as! String, postImage: image, descriptiontext: value["Description"] as! String, timestamp: value["Time"] as! String)
             self.models.append(model)
             self.table.reloadData()
         })
@@ -108,6 +109,30 @@ extension SMViewController: PostTableViewCellDelegate{
     func didTapButton(with title: String) {
         print("\(title)")
     }
+    
+    func didTapVideo(with postingModel: CreationPost){
+        //if email is in the collebrate list, clone the project into my project page
+        if postingModel.Id == "None"{
+            print("not supporting collabration")
+        }
+        else{
+            print("collabrate on this!")
+            
+            DatabaseManager.shared.getAProject(postingModel: postingModel, completion: {
+                [weak self] result in
+                switch result {
+                case .success(let obj):
+                    
+                    print(obj["linecolor"] as! [String])
+                    
+                case .failure(let error):
+                    print("\(error)")
+                }
+            })
+        }
+    }
+        
+        
     func didTapCollab(with postingModel: CreationPost){
         //if email is in the collebrate list, clone the project into my project page
         if postingModel.Id == "None"{

@@ -13,6 +13,8 @@ protocol PostTableViewCellDelegate: AnyObject {
     func didTapButton (with title: String)
     func didTapProfile(with item: String)
     func didTapCollab(with postingModel: CreationPost)
+    func didTapVideo(with postingModel: CreationPost)
+
 }
 class PostTableViewCell: UITableViewCell {
     
@@ -37,6 +39,9 @@ class PostTableViewCell: UITableViewCell {
         userImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.didTapProfile)))
     }
 
+    @IBAction func didTapVideo(_ sender: Any) {
+        delegate?.didTapVideo(with: self.model)
+    }
     @IBAction func didTapColla(_ sender: Any) {
         delegate?.didTapCollab(with: self.model)
     }
