@@ -83,7 +83,7 @@
                                             <constraint firstAttribute="width" constant="40" id="Azu-Um-Gxd"/>
                                         </constraints>
                                         <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" image="ellipsis.bubble" catalog="system"/>
+                                        <state key="normal" image="text.bubble.rtl" catalog="system"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Bc-HL-CJ1">
                                         <rect key="frame" x="90" y="8.5" width="20" height="23"/>
@@ -208,10 +208,10 @@
     </objects>
     <resources>
         <image name="doc.on.doc" catalog="system" width="116" height="128"/>
-        <image name="ellipsis.bubble" catalog="system" width="128" height="110"/>
         <image name="hand.draw" catalog="system" width="128" height="113"/>
         <image name="head_1" width="276" height="183"/>
         <image name="heart" catalog="system" width="128" height="109"/>
+        <image name="text.bubble.rtl" catalog="system" width="128" height="110"/>
         <image name="video" catalog="system" width="128" height="83"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

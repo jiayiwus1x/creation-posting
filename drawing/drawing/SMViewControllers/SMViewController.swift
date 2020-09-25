@@ -122,8 +122,13 @@ extension SMViewController: PostTableViewCellDelegate{
                 [weak self] result in
                 switch result {
                 case .success(let obj):
-                    
-                    print(obj["linecolor"] as! [String])
+                    guard let vc = self?.storyboard?.instantiateViewController(identifier: "videoVC") as? VideoViewController else {
+                        return
+                    }
+                    vc.title = "Animation"
+                    vc.obj = obj
+                    vc.navigationItem.largeTitleDisplayMode = .never
+                    self?.navigationController?.pushViewController(vc, animated: true)
                     
                 case .failure(let error):
                     print("\(error)")
