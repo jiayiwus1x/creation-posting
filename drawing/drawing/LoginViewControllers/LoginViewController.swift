@@ -8,7 +8,7 @@
 
 import UIKit
 import FirebaseAuth
-
+import GoogleSignIn
 class LoginViewController: UIViewController {
     
     @IBOutlet weak var emailTextField: UITextField!
@@ -17,11 +17,12 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
     
     @IBOutlet weak var errorLabel: UILabel!
-    
+    @IBOutlet weak var GIDsignInButton: GIDSignInButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Login"
+        GIDSignIn.sharedInstance()?.presentingViewController = self
         // Do any additional setup after loading the view.
         setUpElements()
     }
@@ -32,10 +33,10 @@ class LoginViewController: UIViewController {
         errorLabel.alpha = 0
         
         // Style the elements
-        Utilities.styleTextField(emailTextField)
-        Utilities.styleTextField(passwordTextField)
-        Utilities.styleFilledButton(loginButton)
-        
+//        Utilities.styleTextField(emailTextField)
+//        Utilities.styleTextField(passwordTextField)
+//        Utilities.styleFilledButton(loginButton)
+//        
     }
     
     

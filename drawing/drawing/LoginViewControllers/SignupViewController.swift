@@ -10,6 +10,7 @@ import UIKit
 import FirebaseAuth
 import Firebase
 
+
 class SignupViewController: UIViewController {
     
     @IBOutlet weak var firstNameTextField: UITextField!
@@ -37,11 +38,11 @@ class SignupViewController: UIViewController {
         // hide error label
         errorLabel.alpha = 0
         // Style elements
-        Utilities.styleTextField(firstNameTextField)
-        Utilities.styleTextField(lastNameTextField)
-        Utilities.styleTextField(emailTextField)
-        Utilities.styleTextField(passwordTextField)
-        Utilities.styleFilledButton(signUpButton)
+//        Utilities.styleTextField(firstNameTextField)
+//        Utilities.styleTextField(lastNameTextField)
+//        Utilities.styleTextField(emailTextField)
+//        Utilities.styleTextField(passwordTextField)
+//        Utilities.styleFilledButton(signUpButton)
         
     }
     

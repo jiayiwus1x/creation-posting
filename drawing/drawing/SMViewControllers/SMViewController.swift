@@ -83,6 +83,7 @@ class SMViewController: UIViewController,UITableViewDataSource, UITableViewDeleg
         
         cell.configure(with: models[indexPath.row])
         cell.delegate = self
+        cell.selectionStyle = .none
         return cell
     }
 //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -41,6 +41,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
+                        <accessibility key="accessibilityConfiguration">
+                            <accessibilityTraits key="traits" notEnabled="YES"/>
+                        </accessibility>
                         <constraints>
                             <constraint firstItem="6Rp-lP-f6r" firstAttribute="top" secondItem="bLd-Ve-r9M" secondAttribute="top" constant="15" id="Ahd-8z-Hdu"/>
                             <constraint firstItem="6Rp-lP-f6r" firstAttribute="leading" secondItem="bLd-Ve-r9M" secondAttribute="leading" constant="5" id="HIa-Gd-0Jg"/>
@@ -50,8 +53,11 @@
                             <constraint firstItem="Tzg-GE-dRW" firstAttribute="leading" secondItem="6Rp-lP-f6r" secondAttribute="trailing" constant="10" id="biP-73-qsG"/>
                         </constraints>
                     </view>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rCy-zK-dEw">
+                    <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" highlighted="YES" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rCy-zK-dEw">
                         <rect key="frame" x="0.0" y="110" width="579" height="685"/>
+                        <accessibility key="accessibilityConfiguration">
+                            <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
+                        </accessibility>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="@Jiayi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ydb-vz-GZY">
                         <rect key="frame" x="95" y="32" width="412" height="20.5"/>
@@ -83,7 +89,7 @@
                                             <constraint firstAttribute="width" constant="40" id="Azu-Um-Gxd"/>
                                         </constraints>
                                         <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" image="text.bubble.rtl" catalog="system"/>
+                                        <state key="normal" image="text.bubble" catalog="system"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Bc-HL-CJ1">
                                         <rect key="frame" x="90" y="8.5" width="20" height="23"/>
@@ -116,6 +122,9 @@
                                         </connections>
                                     </button>
                                 </subviews>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" notEnabled="YES"/>
+                                </accessibility>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="9nK-gx-d9l"/>
                                     <constraint firstItem="kZ7-y9-Okt" firstAttribute="leading" secondItem="m0U-il-q0h" secondAttribute="trailing" constant="10" id="FG7-vw-i4W"/>
@@ -165,6 +174,10 @@
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="4TS-de-Vnl">
                         <rect key="frame" x="0.0" y="795" width="579" height="69"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <accessibility key="accessibilityConfiguration">
+                            <accessibilityTraits key="traits" notEnabled="YES"/>
+                            <bool key="isElement" value="NO"/>
+                        </accessibility>
                         <constraints>
                             <constraint firstAttribute="height" constant="69" id="OSB-Gt-sUw"/>
                         </constraints>
@@ -211,7 +224,7 @@
         <image name="hand.draw" catalog="system" width="128" height="113"/>
         <image name="head_1" width="276" height="183"/>
         <image name="heart" catalog="system" width="128" height="109"/>
-        <image name="text.bubble.rtl" catalog="system" width="128" height="110"/>
+        <image name="text.bubble" catalog="system" width="128" height="110"/>
         <image name="video" catalog="system" width="128" height="83"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

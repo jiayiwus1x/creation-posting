@@ -237,6 +237,7 @@
 				ADA6DC2F24C6115D003E4FD8 /* Frameworks */,
 				ADA6DC3024C6115D003E4FD8 /* Resources */,
 				37531C80E3E3886A658655B1 /* [CP] Embed Pods Frameworks */,
+				CCF76F4C8F42F7DE561C51E2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -313,6 +314,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-drawing/Pods-drawing-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CCF76F4C8F42F7DE561C51E2 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-drawing/Pods-drawing-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-drawing/Pods-drawing-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-drawing/Pods-drawing-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E599496C7D385A6EF0109014 /* [CP] Check Pods Manifest.lock */ = {

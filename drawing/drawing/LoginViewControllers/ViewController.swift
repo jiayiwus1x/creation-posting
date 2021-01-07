@@ -12,12 +12,14 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var signUpButton: UIButton!
     
+    @IBOutlet weak var ImageView: UIImageView!
     @IBOutlet weak var loginButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         self.title = "Creation Sharing"
+        ImageView.image =  UIImage(named: "logo")
         //setUpElements()
     }
 

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="ipad12_9rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -29,7 +29,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aDq-jm-FfA">
-                                <rect key="frame" x="354" y="8" width="22" height="22"/>
+                                <rect key="frame" x="374" y="8" width="22" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="22" id="3Ra-KI-a6u"/>
                                     <constraint firstAttribute="width" constant="22" id="xlk-q6-S26"/>
@@ -37,7 +37,7 @@
                                 <state key="normal" title="Button" image="plus" catalog="system"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zlB-pm-4qD">
-                                <rect key="frame" x="322" y="8" width="22" height="22"/>
+                                <rect key="frame" x="342" y="8" width="22" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="22" id="15T-CK-NkI"/>
                                     <constraint firstAttribute="height" constant="22" id="hso-Tm-tY7"/>
@@ -47,14 +47,14 @@
                                     <action selector="didTapShare:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="E6b-gs-xhl"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="collabrators" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kUS-V7-IMz">
-                                <rect key="frame" x="5" y="18" width="90" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kUS-V7-IMz">
+                                <rect key="frame" x="5" y="18" width="4.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LfY-xi-3WN" userLabel="Colla image">
-                                <rect key="frame" x="105" y="0.0" width="57" height="57"/>
+                                <rect key="frame" x="19.5" y="0.0" width="57" height="57"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="57" id="C4G-to-cyU"/>
                                 </constraints>
@@ -72,7 +72,7 @@
                             <constraint firstItem="zlB-pm-4qD" firstAttribute="top" secondItem="K3S-qg-OHZ" secondAttribute="top" constant="8" id="4c2-Mz-rhd"/>
                             <constraint firstItem="aDq-jm-FfA" firstAttribute="leading" secondItem="zlB-pm-4qD" secondAttribute="trailing" constant="10" id="5td-cv-0WM"/>
                             <constraint firstItem="K3S-qg-OHZ" firstAttribute="bottom" secondItem="LfY-xi-3WN" secondAttribute="bottom" id="Ixe-Nf-WCg"/>
-                            <constraint firstItem="K3S-qg-OHZ" firstAttribute="trailing" secondItem="aDq-jm-FfA" secondAttribute="trailing" constant="30" id="aea-cg-Nen"/>
+                            <constraint firstAttribute="trailing" secondItem="aDq-jm-FfA" secondAttribute="trailing" constant="10" id="aea-cg-Nen"/>
                             <constraint firstItem="aDq-jm-FfA" firstAttribute="top" secondItem="K3S-qg-OHZ" secondAttribute="top" constant="8" id="ega-9F-wBY"/>
                             <constraint firstItem="LfY-xi-3WN" firstAttribute="centerY" secondItem="yNt-1w-AY4" secondAttribute="centerY" id="kab-Eg-9YR"/>
                             <constraint firstItem="kUS-V7-IMz" firstAttribute="leading" secondItem="K3S-qg-OHZ" secondAttribute="leading" constant="5" id="rJJ-zU-2Md"/>
